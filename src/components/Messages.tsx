@@ -1,3 +1,4 @@
+import { useI18n, characterName } from '../i18n';
 import clsx from 'clsx';
 import { Doc, Id } from '../../convex/_generated/dataModel';
 import { useQuery } from 'convex/react';
@@ -24,6 +25,7 @@ export function Messages({
   humanPlayer?: Player;
   scrollViewRef: React.RefObject<HTMLDivElement>;
 }) {
+  const { t, locale } = useI18n();
   const humanPlayerId = humanPlayer?.id;
   const descriptions = useQuery(api.world.gameDescriptions, { worldId });
   const messages = useQuery(api.messages.listMessages, {
@@ -72,9 +74,9 @@ export function Messages({
     const node = (
       <div key={`text-${m._id}`} className="leading-tight mb-6">
         <div className="flex gap-4">
-          <span className="uppercase flex-grow">{m.authorName}</span>
+          <span className="uppercase flex-grow">{characterName(m.authorName, locale)}</span>
           <time dateTime={m._creationTime.toString()}>
-            {new Date(m._creationTime).toLocaleString()}
+            {new Date(m._creationTime).toLocaleString(locale)}
           </time>
         </div>
         <div className={clsx('bubble', m.author === humanPlayerId && 'bubble-mine')}>
@@ -89,8 +91,9 @@ export function Messages({
   const membershipNodes: typeof messageNodes = [];
   if (conversation.kind === 'active') {
     for (const [playerId, m] of conversation.doc.participants) {
-      const playerName = descriptions?.playerDescriptions.find((p) => p.playerId === playerId)
-        ?.name;
+      const playerName = descriptions?.playerDescriptions.find(
+        (p) => p.playerId === playerId,
+      )?.name;
       let started;
       if (m.status.kind === 'participating') {
         started = m.status.started;
@@ -99,7 +102,9 @@ export function Messages({
         membershipNodes.push({
           node: (
             <div key={`joined-${playerId}`} className="leading-tight mb-6">
-              <p className="text-brown-700 text-center">{playerName} joined the conversation.</p>
+              <p className="text-brown-700 text-center">
+                {t('{name} joined the conversation.', { name: characterName(playerName, locale) })}
+              </p>
             </div>
           ),
           time: started,
@@ -108,13 +113,16 @@ export function Messages({
     }
   } else {
     for (const playerId of conversation.doc.participants) {
-      const playerName = descriptions?.playerDescriptions.find((p) => p.playerId === playerId)
-        ?.name;
+      const playerName = descriptions?.playerDescriptions.find(
+        (p) => p.playerId === playerId,
+      )?.name;
       const started = conversation.doc.created;
       membershipNodes.push({
         node: (
           <div key={`joined-${playerId}`} className="leading-tight mb-6">
-            <p className="text-brown-700 text-center">{playerName} joined the conversation.</p>
+            <p className="text-brown-700 text-center">
+              {t('{name} joined the conversation.', { name: characterName(playerName, locale) })}
+            </p>
           </div>
         ),
         time: started,
@@ -123,7 +131,9 @@ export function Messages({
       membershipNodes.push({
         node: (
           <div key={`left-${playerId}`} className="leading-tight mb-6">
-            <p className="text-brown-700 text-center">{playerName} left the conversation.</p>
+            <p className="text-brown-700 text-center">
+              {t('{name} left the conversation.', { name: characterName(playerName, locale) })}
+            </p>
           </div>
         ),
         // Always sort all "left" messages after the last message.
@@ -136,19 +146,24 @@ export function Messages({
   nodes.sort((a, b) => a.time - b.time);
   return (
     <div className="chats text-base sm:text-sm">
+      <p className="text-xs mb-3">
+        {t('Historical messages are shown in their original language.')}
+      </p>
       <div className="bg-brown-200 text-black p-2">
         {nodes.length > 0 && nodes.map((n) => n.node)}
         {currentlyTyping && currentlyTyping.playerId !== humanPlayerId && (
           <div key="typing" className="leading-tight mb-6">
             <div className="flex gap-4">
-              <span className="uppercase flex-grow">{currentlyTypingName}</span>
+              <span className="uppercase flex-grow">
+                {characterName(currentlyTypingName, locale)}
+              </span>
               <time dateTime={currentlyTyping.since.toString()}>
-                {new Date(currentlyTyping.since).toLocaleString()}
+                {new Date(currentlyTyping.since).toLocaleString(locale)}
               </time>
             </div>
             <div className={clsx('bubble')}>
               <p className="bg-white -mx-3 -my-1">
-                <i>typing...</i>
+                <i>{t('typing...')}</i>
               </p>
             </div>
           </div>

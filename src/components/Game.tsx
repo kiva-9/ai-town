@@ -1,3 +1,4 @@
+import { useI18n } from '../i18n';
 import { useRef, useState } from 'react';
 import PixiGame from './PixiGame.tsx';
 
@@ -15,6 +16,7 @@ import { useServerGame } from '../hooks/serverGame.ts';
 export const SHOW_DEBUG_UI = !!import.meta.env.VITE_SHOW_DEBUG_UI;
 
 export default function Game() {
+  const { t } = useI18n();
   const convex = useConvex();
   const [selectedElement, setSelectedElement] = useState<{
     kind: 'player';
@@ -37,7 +39,11 @@ export default function Game() {
   const scrollViewRef = useRef<HTMLDivElement>(null);
 
   if (!worldId || !engineId || !game) {
-    return null;
+    return (
+      <p role="status" className="text-white">
+        {t('Loading town…')}
+      </p>
+    );
   }
   return (
     <>

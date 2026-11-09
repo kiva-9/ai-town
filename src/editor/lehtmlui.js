@@ -1,4 +1,5 @@
 import * as PIXI from 'pixi.js'
+import { t } from './i18n.js'
 import { g_ctx }  from './lecontext.js' // global context
 import * as CONFIG from './leconfig.js' 
 
@@ -121,7 +122,7 @@ export function initLevelLoader(callme) {
         reader.onload = function (evt) {
             if (evt.target.readyState != 2) return;
             if (evt.target.error) {
-                alert('Error while reading file');
+                alert(t('fileError'));
                 return;
             }
 

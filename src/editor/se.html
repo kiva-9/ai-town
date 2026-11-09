@@ -1,5 +1,9 @@
-<html>
+<!doctype html>
+<html lang="zh-CN">
 <head>
+<meta charset="UTF-8">
+<title data-i18n="spriteEditor">精灵编辑器</title>
+<link rel="stylesheet" href="./editor.css">
 <style>
     table, th, td {
         border: 1px solid black;
@@ -9,80 +13,89 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 </head>
 <body>
+<script src="./i18n.js" type="module"></script>
+<header>
+<h1 data-i18n="spriteEditor">精灵编辑器</h1>
+<label for="editor-language" data-i18n="language">界面语言</label>
+<select id="editor-language"><option value="zh-CN">简体中文</option><option value="en">English</option></select>
+</header>
+<details><summary data-i18n="help">操作说明与快捷键</summary>
+<p data-i18n="controls"></p><p data-i18n="shortcuts"></p><p data-i18n="formats"></p></details>
     <script src="se.js" type="module"></script>
 
     <div class="tab">
-        <button class="tablinks" onclick="onTab(event, 'edit')">edit</button>
-        <button class="tablinks" onclick="onTab(event, 'map')">map</button>
-        <button class="tablinks" onclick="onTab(event, 'config')">config</button>
+        <button class="tablinks" onclick="onTab(event, 'edit')" data-i18n="edit">编辑</button>
+        <button class="tablinks" onclick="onTab(event, 'map')" data-i18n="map">地图预览</button>
+        <button class="tablinks" onclick="onTab(event, 'config')" data-i18n="config">配置</button>
       </div>
 
 <div id="edit" class="tabcontent">
     <TABLE WIDTH="100%"><TR>
         <TD ALIGN="center"> <!-- first layer of map tiles -->
           <div ID="layer0pane" style="max-height: 480px;max-width:640px;overflow: scroll;">
-          <canvas ID="level0" height="1600px" width="1600px" ></canvas> </div>   
+          <canvas id="level0" role="img" data-i18n-label="background" height="1600px" width="1600px" ></canvas> </div>
         </TD>
         <TD ALIGN="center"> <!-- tile set-->
             <div ID="tilesetpane" style="max-height: 600;max-width:800;overflow: scroll;">
-            <CANVAS ID="tileset" width="5632px" height="8672px" STYLE="border: 1px dotted white;"></CANVAS> </div>   
+            <CANVAS id="tileset" role="img" data-i18n-label="tileset" width="5632px" height="8672px" STYLE="border: 1px dotted white;"></CANVAS> </div>
          </TD>
          </TR>
 
         <tr>
         <TD ALIGN="center"> <!-- second layer of map tiles -->
         <div ID="layer1pane" style="max-height: 480px;max-width:640px;overflow: scroll;">
-            <canvas ID="level1" height="1600px" width="1600px" ></canvas>
+            <canvas id="level1" role="img" data-i18n-label="objects" height="1600px" width="1600px" ></canvas>
         </div></TD>
         <TD ALIGN="center"> <!-- aggregate map view -->
         <div ID="compositepane" style="max-height: 480px;max-width:640px;overflow: scroll;">
-            <canvas ID="composite" height="1600px" width="1600px" ></canvas>
+            <canvas id="composite" role="img" data-i18n-label="composite" height="1600px" width="1600px" ></canvas>
         </div></TD>
         </tr>
 
         <tr>
         <TD ALIGN="center"> <!-- object layer of map -->
         <div ID="layer2pane" style="max-height: 480px;max-width:640px;overflow: scroll;">
-            <canvas ID="level3" height="1600px" width="1600px" ></canvas>
+            <canvas id="level3" role="img" data-i18n-label="layerThree" height="1600px" width="1600px" ></canvas>
         </div></TD>
         <TD ALIGN="center"> <!-- object layer of map -->
         <div ID="layer3pane" style="max-height: 480px;max-width:640px;overflow: scroll;">
-            <canvas ID="level4" height="1600px" width="1600px" ></canvas>
+            <canvas id="level4" role="img" data-i18n-label="layerFour" height="1600px" width="1600px" ></canvas>
         </div></TD>
         </tr>
     </TABLE>
 </div>
 
 <div id="map" class="tabcontent">
-        <canvas id="mapcanvas" height="1600px" width="1600px" ></canvas>
+        <canvas id="mapcanvas" role="img" data-i18n-label="map" height="1600px" width="1600px" ></canvas>
 </div>
 
 <div id="config" class="tabcontent">
             <table><tr>
                 <td></td>
-                <td>level</td>
-                <td>Composite</td>
+                <td data-i18n="loadLevel">加载地图（.js）</td>
+                <td data-i18n="loadComposite">加载合成图（PNG）</td>
                 <td></td>
             </tr>
             <tr>
             <td>
-            <button onclick = "saveCompositeAsImage()" > Save Composite </button>
+            <button onclick = "saveCompositeAsImage()" data-i18n="saveComposite">保存合成图</button>
             </td><td>
-            <input type="file" multiple id="levelfile">
+            <input type="file" multiple id="levelfile" data-i18n-label="loadLevel">
             </td><td>
-            <input type="file" multiple id="compositepng">
+            <input type="file" multiple id="compositepng" data-i18n-label="loadComposite">
             </td><td>
-            <form name="myForm">
+            <form name="myForm" data-i18n-label="tileSize">
+                <span data-i18n="tileSize">图块大小（像素）</span>
                 16 <input type="radio" name="radioTiledim"  value="16" />
                 32 <input type="radio" name="radioTiledim"  value="32" checked />
               </form>
               </td>
             </tr>
             <tr>
-                <td>Load Tileset</td>
+                <td data-i18n="loadTileset">加载图块集</td>
             </tr>
             <tr>
-                <td> <input type="file" multiple id="tilesetfile"> </td>
+                <td> <input type="file" multiple id="tilesetfile" data-i18n-label="loadTileset"> </td>
             </tr>
             </table>
 </div>

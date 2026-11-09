@@ -28,6 +28,7 @@
 // --
 
 import * as PIXI from 'pixi.js'
+import { t } from './i18n.js'
 import { g_ctx }  from './secontext.js' // global context
 import * as CONFIG from './seconfig.js' 
 import * as UNDO from './undo.js'
@@ -489,6 +490,7 @@ window.addEventListener(
     });
 window.addEventListener(
     "keydown", (event) => {
+        if (event.isComposing || event.target.closest?.('input, select, textarea, [contenteditable="true"]')) return;
 
         if (event.code == "KeyD"){
             g_ctx.dkey = true;
@@ -1084,7 +1086,7 @@ function initLevelLoader() {
         reader.onload = function (evt) {
             if (evt.target.readyState != 2) return;
             if (evt.target.error) {
-                alert('Error while reading file');
+                alert(t('fileError'));
                 return;
             }
 

@@ -539,6 +539,7 @@ window.addEventListener(
     });
 window.addEventListener(
     "keydown", (event) => {
+        if (event.isComposing || event.target.closest?.('input, select, textarea, [contenteditable="true"]')) return;
 
         if (event.code == "KeyD"){
             g_ctx.dkey = true;
