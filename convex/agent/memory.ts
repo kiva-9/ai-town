@@ -1,4 +1,4 @@
-import { languageInstruction, localizedName, npcLanguage } from '../npc/language';
+import { languageInstruction, localizedName, readNpcLanguage } from '../npc/language';
 import { v } from 'convex/values';
 import { ActionCtx, DatabaseReader, internalMutation, internalQuery } from '../_generated/server';
 import { Doc, Id } from '../_generated/dataModel';
@@ -40,7 +40,7 @@ export async function rememberConversation(
     return;
   }
 
-  const language = npcLanguage(process.env.NPC_LANGUAGE);
+  const { language } = data;
   const llmMessages: LLMMessage[] = [
     { role: 'system', content: languageInstruction(language) },
     {
@@ -97,6 +97,7 @@ export const loadConversation = internalQuery({
     conversationId,
   },
   handler: async (ctx, args) => {
+    const language = await readNpcLanguage(ctx.db, process.env.NPC_LANGUAGE);
     const world = await ctx.db.get(args.worldId);
     if (!world) {
       throw new Error(`World ${args.worldId} not found`);
@@ -153,14 +154,15 @@ export const loadConversation = internalQuery({
       throw new Error(`Player description for ${otherPlayerId} not found`);
     }
     return {
+      language,
       player: {
         ...player,
-        name: localizedName(playerDescription.name, npcLanguage(process.env.NPC_LANGUAGE)),
+        name: localizedName(playerDescription.name, language),
       },
       conversation,
       otherPlayer: {
         ...otherPlayer,
-        name: localizedName(otherPlayerDescription.name, npcLanguage(process.env.NPC_LANGUAGE)),
+        name: localizedName(otherPlayerDescription.name, language),
       },
     };
   },
@@ -338,7 +340,7 @@ async function reflectOnMemories(
   worldId: Id<'worlds'>,
   playerId: GameId<'players'>,
 ) {
-  const { memories, lastReflectionTs, name } = await ctx.runQuery(
+  const { memories, lastReflectionTs, name, language } = await ctx.runQuery(
     internal.agent.memory.getReflectionMemories,
     {
       worldId,
@@ -372,7 +374,7 @@ async function reflectOnMemories(
 
   const { content: reflection } = await chatCompletion({
     messages: [
-      { role: 'system', content: languageInstruction(npcLanguage(process.env.NPC_LANGUAGE)) },
+      { role: 'system', content: languageInstruction(language) },
       {
         role: 'user',
         content: prompt.join('\n'),
@@ -410,6 +412,7 @@ async function reflectOnMemories(
 export const getReflectionMemories = internalQuery({
   args: { worldId: v.id('worlds'), playerId, numberOfItems: v.number() },
   handler: async (ctx, args) => {
+    const language = await readNpcLanguage(ctx.db, process.env.NPC_LANGUAGE);
     const world = await ctx.db.get(args.worldId);
     if (!world) {
       throw new Error(`World ${args.worldId} not found`);
@@ -440,7 +443,8 @@ export const getReflectionMemories = internalQuery({
       .first();
 
     return {
-      name: localizedName(playerDescription.name, npcLanguage(process.env.NPC_LANGUAGE)),
+      language,
+      name: localizedName(playerDescription.name, language),
       memories,
       lastReflectionTs: lastReflection?._creationTime,
     };

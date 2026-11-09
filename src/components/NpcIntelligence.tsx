@@ -1,4 +1,4 @@
-import { useI18n, getLocale, label, errorMessage, diagnosticMessage } from '../i18n';
+import { useI18n, getLocale, label, errorMessage, diagnosticMessage, recordedText } from '../i18n';
 import { useId, useState } from 'react';
 import { useMutation, useQuery } from 'convex/react';
 import { api } from '../../convex/_generated/api';
@@ -21,6 +21,21 @@ const timestamp = (value: number) =>
     minute: '2-digit',
     second: '2-digit',
   });
+
+function RecordedText({ value }: { value: string }) {
+  const { t, locale } = useI18n();
+  const content = recordedText(value, locale);
+  return (
+    <span className="npc-recorded-text">
+      {content.text}
+      {content.original && (
+        <small className="npc-original-label">
+          {t('Original record, not automatically translated')}
+        </small>
+      )}
+    </span>
+  );
+}
 
 function Meter({ name, value }: { name: string; value: number }) {
   useI18n();
@@ -48,6 +63,9 @@ export default function NpcIntelligence({
   const inspection = useQuery(api.npc.service.inspect, { worldId, playerId });
   const overview = useQuery(api.npc.service.overview, { worldId });
   const setMode = useMutation(api.npc.service.setMode);
+  const setNpcLanguage = useMutation(api.npc.service.setLanguage);
+  const [savingLanguage, setSavingLanguage] = useState(false);
+  const [languageSaved, setLanguageSaved] = useState(false);
   const [saving, setSaving] = useState(false);
   const [error, setError] = useState<string>();
   const id = useId();
@@ -73,6 +91,20 @@ export default function NpcIntelligence({
       setError(errorMessage(cause));
     } finally {
       setSaving(false);
+    }
+  };
+
+  const changeLanguage = async (language: 'zh-CN' | 'en') => {
+    setSavingLanguage(true);
+    setLanguageSaved(false);
+    setError(undefined);
+    try {
+      await setNpcLanguage({ language });
+      setLanguageSaved(true);
+    } catch (cause) {
+      setError(errorMessage(cause));
+    } finally {
+      setSavingLanguage(false);
     }
   };
 
@@ -114,6 +146,26 @@ export default function NpcIntelligence({
                       'Read-only. Mode changes must be enabled by the server operator in a trusted deployment.',
                     )}
             </p>
+            <div className="npc-mode">
+              <label htmlFor={`${id}-language`}>{t('NPC generation language')}</label>
+              <select
+                id={`${id}-language`}
+                value={overview.language}
+                disabled={!overview.controlAllowed || savingLanguage}
+                aria-describedby={`${id}-language-help`}
+                onChange={(event) => void changeLanguage(event.target.value as 'zh-CN' | 'en')}
+              >
+                <option value="zh-CN">{t('Simplified Chinese')}</option>
+                <option value="en">{t('English')}</option>
+              </select>
+            </div>
+            <p id={`${id}-language-help`} className="npc-muted">
+              {t(
+                'Changes new dialogue and memories for the entire town, not history. Separate from this browser’s interface language.',
+              )}
+            </p>
+            {savingLanguage && <p role="status">{t('Updating NPC language…')}</p>}
+            {languageSaved && <p role="status">{t('NPC language updated.')}</p>}
             {saving && <p role="status">{t('Updating policy\u2026')}</p>}
             {error && (
               <p role="alert" className="npc-error">
@@ -192,7 +244,7 @@ export default function NpcIntelligence({
                       <Meter name="Conflict" value={relationship.conflict} />
                       {relationship.promises.map((promise) => (
                         <p key={promise.id}>
-                          {label(promise.description, locale)} · {label(promise.status)}
+                          <RecordedText value={promise.description} /> · {label(promise.status)}
                         </p>
                       ))}
                     </div>
@@ -214,7 +266,11 @@ export default function NpcIntelligence({
                           </time>{' '}
                           · {label(memory.kind)}
                           {memory.targetId && <> → {person(memory.targetId)}</>}
-                          {memory.summary && <p>{label(memory.summary, locale)}</p>}
+                          {memory.summary && (
+                            <p>
+                              <RecordedText value={memory.summary} />
+                            </p>
+                          )}
                         </li>
                       ))}
                   </ol>
@@ -260,7 +316,11 @@ export default function NpcIntelligence({
                       <dt>{t('Event')}</dt>
                       <dd>
                         {text(event.kind)}
-                        {typeof event.summary === 'string' && <p>{label(event.summary, locale)}</p>}
+                        {typeof event.summary === 'string' && (
+                          <p>
+                            <RecordedText value={event.summary} />
+                          </p>
+                        )}
                       </dd>
                       <dt>{t('Source')}</dt>
                       <dd>{job.source === 'decisions' ? t('Decisions API') : text(job.source)}</dd>
@@ -358,7 +418,9 @@ export default function NpcIntelligence({
                               </>
                             )}
                             {typeof candidate.reason === 'string' && (
-                              <p className="npc-muted">{label(candidate.reason, locale)}</p>
+                              <p className="npc-muted">
+                                <RecordedText value={candidate.reason} />
+                              </p>
                             )}
                           </li>
                         );

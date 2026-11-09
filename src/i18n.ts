@@ -1,7 +1,22 @@
 import { useSyncExternalStore } from 'react';
 import { Descriptions } from '../data/characters';
+import { DEFAULT_NAME } from '../convex/constants';
 export type Locale = 'zh-CN' | 'en';
 export const messages = {
+  input_budget: '输入内容超出预算，已使用本地策略',
+  'Original record, not automatically translated': '原始记录，未自动翻译',
+  'Human player': '真人玩家',
+  Me: '我',
+  'Interface language': '界面语言',
+  'NPC language: {language}': 'NPC 生成语言：{language}',
+  'Simplified Chinese': '简体中文',
+  English: '英语',
+  'NPC generation language': 'NPC 生成语言',
+  'Changes new dialogue and memories for the entire town, not history. Separate from this browser\u2019s interface language.':
+    '影响整个小镇的新对话与记忆，不改写历史；与仅本浏览器的界面语言分开。',
+  'Updating NPC language\u2026': '正在更新 NPC 生成语言…',
+  'NPC language updated.': 'NPC 生成语言已更新。',
+
   cache: '缓存',
   budget_fallback: '预算不足，使用回退策略',
   lease_expired: '任务执行期限已过',
@@ -316,6 +331,7 @@ export function label(value: string, language: Locale = locale): string {
 }
 export function characterName(name: string | undefined, language: Locale = locale): string {
   if (!name) return translate('Unknown resident', language);
+  if (name === DEFAULT_NAME) return translate('Me', language);
   const description = Descriptions.find((item) => item.name === name);
   return language === 'zh-CN' ? (description?.nameZh ?? name) : name;
 }
@@ -324,10 +340,20 @@ export function characterDescription(
   original: string | undefined,
   language: Locale = locale,
 ): string {
+  if (name === DEFAULT_NAME && original === `${DEFAULT_NAME} is a human player`)
+    return translate('Human player', language);
   const description = Descriptions.find((item) => item.name === name);
   return language === 'zh-CN' && description && original === description.identity
     ? description.identityZh
     : (original ?? '');
+}
+/** Free-form stored text must not be humanized as if it were a protocol enum. */
+export function recordedText(
+  value: string,
+  language: Locale = locale,
+): { text: string; original: boolean } {
+  const known = Object.prototype.hasOwnProperty.call(messages, value);
+  return { text: known ? translate(value as MessageKey, language) : value, original: !known };
 }
 export function diagnosticMessage(code: string, language: Locale = locale): string {
   return Object.prototype.hasOwnProperty.call(messages, code)

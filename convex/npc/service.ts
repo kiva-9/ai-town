@@ -19,7 +19,8 @@ import {
   chooseMock,
   DecisionContext,
 } from './core';
-import { modeValidator } from './schema';
+import { modeValidator, languageValidator } from './schema';
+import { npcLanguage, readNpcLanguage } from './language';
 
 const numberEnv = (key: string, fallback: number) => {
   const n = Number(process.env[key]);
@@ -461,6 +462,7 @@ export const inspect = query({
       npc,
       jobs,
       mode: effectiveMode(config?.mode),
+      language: config?.language ?? npcLanguage(process.env.NPC_LANGUAGE),
       disabled: process.env.NPC_DECISION_ENABLED === 'false',
       disabledReason:
         process.env.NPC_DECISION_ENABLED === 'false'
@@ -491,6 +493,7 @@ export const overview = query({
       .take(64);
     return {
       mode: effectiveMode(config?.mode),
+      language: config?.language ?? npcLanguage(process.env.NPC_LANGUAGE),
       disabled: process.env.NPC_DECISION_ENABLED === 'false',
       disabledReason:
         process.env.NPC_DECISION_ENABLED === 'false'
@@ -508,6 +511,31 @@ export const overview = query({
     };
   },
 });
+/** Interface language is visitor-local; this explicit setting is shared by all NPCs. */
+export const languageSettings = query({
+  args: {},
+  handler: async (ctx) => ({
+    language: await readNpcLanguage(ctx.db, process.env.NPC_LANGUAGE),
+    controlAllowed: process.env.NPC_ALLOW_MODE_CONTROL === 'true',
+  }),
+});
+
+export const setLanguage = mutation({
+  args: { language: languageValidator },
+  handler: async (ctx, { language }) => {
+    if (process.env.NPC_ALLOW_MODE_CONTROL !== 'true') {
+      throw new Error(
+        'Language controls are disabled. Enable NPC_ALLOW_MODE_CONTROL only in a trusted local deployment.',
+      );
+    }
+    const config = await control(ctx);
+    // New generation operations read this value. Existing messages/memories remain untouched;
+    // in-flight generations may still finish in the language they started with.
+    await ctx.db.patch(config._id, { language });
+    return { language };
+  },
+});
+
 export const setMode = mutation({
   args: { mode: modeValidator },
   handler: async (ctx, { mode }) => {

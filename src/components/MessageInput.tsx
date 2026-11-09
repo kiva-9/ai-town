@@ -1,5 +1,5 @@
 import { toast } from 'react-toastify';
-import { useI18n, errorMessage } from '../i18n';
+import { useI18n, errorMessage, characterName } from '../i18n';
 import clsx from 'clsx';
 import { useMutation, useQuery } from 'convex/react';
 import { KeyboardEvent, useRef } from 'react';
@@ -86,7 +86,7 @@ export function MessageInput({
   return (
     <div className="leading-tight mb-6">
       <div className="flex gap-4">
-        <span className="uppercase flex-grow">{humanName}</span>
+        <span className="uppercase flex-grow">{characterName(humanName)}</span>
       </div>
       <p className="text-xs mb-1">{t('Type here')}</p>
       <div className={clsx('bubble', 'bubble-mine')}>

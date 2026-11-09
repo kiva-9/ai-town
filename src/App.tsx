@@ -10,6 +10,8 @@ import helpImg from '../assets/help.svg';
 // import { Authenticated, Unauthenticated } from 'convex/react';
 // import LoginButton from './components/buttons/LoginButton.tsx';
 import { useState } from 'react';
+import { useQuery } from 'convex/react';
+import { api } from '../convex/_generated/api';
 import ReactModal from 'react-modal';
 import MusicButton from './components/buttons/MusicButton.tsx';
 import Button from './components/buttons/Button.tsx';
@@ -20,6 +22,7 @@ import PoweredByConvex from './components/PoweredByConvex.tsx';
 
 export default function Home() {
   const { t, locale, setLocale } = useI18n();
+  const npcLanguage = useQuery(api.npc.service.languageSettings);
   const [helpModalOpen, setHelpModalOpen] = useState(false);
   return (
     <main className="relative flex min-h-screen flex-col items-center justify-between font-body game-background">
@@ -95,9 +98,9 @@ export default function Home() {
         </div>
 
         <label className="mx-auto mb-3 text-white flex items-center gap-2">
-          {t('Language')}
+          {t('Interface language')}
           <select
-            aria-label={t('Language')}
+            aria-label={t('Interface language')}
             value={locale}
             onChange={(event) => setLocale(event.target.value as 'zh-CN' | 'en')}
             className="bg-brown-800 border-2 border-brown-600 px-3 py-1"
@@ -106,10 +109,17 @@ export default function Home() {
             <option value="en">English</option>
           </select>
         </label>
+        {npcLanguage && (
+          <p className="mx-auto mb-3 px-3 text-center text-sm text-white">
+            {t('NPC language: {language}', {
+              language: npcLanguage.language === 'zh-CN' ? t('Simplified Chinese') : t('English'),
+            })}
+          </p>
+        )}
         <Game />
 
         <footer className="justify-end bottom-0 left-0 w-full flex items-center mt-4 gap-3 p-6 flex-wrap pointer-events-none">
-          <div className="flex gap-4 flex-grow pointer-events-none">
+          <div className="flex flex-wrap gap-2 sm:gap-4 flex-grow justify-center md:justify-start pointer-events-none">
             <FreezeButton />
             <MusicButton />
             <Button href="https://github.com/a16z-infra/ai-town" imgUrl={starImg}>

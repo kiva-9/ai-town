@@ -122,3 +122,39 @@
 .npc-intelligence .npc-error {
   color: #ffb6a6;
 }
+
+/* Keep the original pixel palette while allowing long Chinese/English labels to wrap. */
+.npc-intelligence,
+.npc-intelligence .npc-facts > *,
+.npc-intelligence .npc-meter > * {
+  min-width: 0;
+}
+.npc-intelligence .npc-mode,
+.npc-intelligence .npc-status {
+  flex-wrap: wrap;
+}
+.npc-intelligence select {
+  max-width: 100%;
+}
+.npc-intelligence .npc-original-label {
+  display: block;
+  color: #c0cbdc;
+  font-size: 12px;
+}
+.npc-intelligence .npc-recorded-text {
+  white-space: pre-wrap;
+}
+@media (max-width: 380px) {
+  .npc-intelligence {
+    padding: 0.5rem;
+  }
+  .npc-intelligence .npc-facts {
+    grid-template-columns: minmax(0, 1fr);
+  }
+  .npc-intelligence .npc-facts dd {
+    margin-bottom: 0.45rem;
+  }
+  .npc-intelligence .npc-meter {
+    grid-template-columns: minmax(64px, 1fr) minmax(24px, 1fr) 3.1em;
+  }
+}

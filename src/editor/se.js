@@ -27,6 +27,8 @@
 //  - if deleting a tile while filter is on, filter isn't refreshed so need to toggle with "m"
 // --
 
+// Register the official Canvas renderer when WebGL is unavailable.
+import 'pixi.js-legacy';
 import * as PIXI from 'pixi.js'
 import { t } from './i18n.js'
 import { g_ctx }  from './secontext.js' // global context
@@ -1176,17 +1178,24 @@ function initTiles() {
     const bt = PIXI.BaseTexture.from(g_ctx.tilesetpath, {
         scaleMode: PIXI.SCALE_MODES.NEAREST,
     });
-    for (let x = 0; x < CONFIG.tilesettilewidth; x++) {
-        for (let y = 0; y < CONFIG.tilesettileheight; y++) {
-            g_ctx.tiles32[x + y * CONFIG.tilesettilewidth] = new PIXI.Texture(
+    // Cache sizes depend on the loaded image, not the current editing tile size.
+    const columns32 = Math.floor(g_ctx.tilesetpxw / 32);
+    const rows32 = Math.floor(g_ctx.tilesetpxh / 32);
+    const columns16 = Math.floor(g_ctx.tilesetpxw / 16);
+    const rows16 = Math.floor(g_ctx.tilesetpxh / 16);
+    g_ctx.tiles32 = [];
+    g_ctx.tiles16 = [];
+    for (let x = 0; x < columns32; x++) {
+        for (let y = 0; y < rows32; y++) {
+            g_ctx.tiles32[x + y * columns32] = new PIXI.Texture(
                 bt,
                 new PIXI.Rectangle(x * 32, y * 32, 32, 32),
             );
         }
     }
-    for (let x = 0; x < CONFIG.tilesettilewidth * 2; x++) {
-        for (let y = 0; y < CONFIG.tilesettileheight * 2; y++) {
-            g_ctx.tiles16[x + y * CONFIG.tilesettilewidth * 2] = new PIXI.Texture(
+    for (let x = 0; x < columns16; x++) {
+        for (let y = 0; y < rows16; y++) {
+            g_ctx.tiles16[x + y * columns16] = new PIXI.Texture(
                 bt,
                 new PIXI.Rectangle(x * 16, y * 16, 16, 16),
             );

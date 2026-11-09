@@ -1,3 +1,4 @@
+import type { DatabaseReader } from '../_generated/server';
 import { Descriptions } from '../../data/characters';
 
 export type NpcLanguage = 'zh-CN' | 'en';
@@ -5,6 +6,18 @@ export type NpcLanguage = 'zh-CN' | 'en';
 // Pure helpers: callers supply configuration; importing this module never reads env.
 export function npcLanguage(configured?: string): NpcLanguage {
   return configured?.trim().toLowerCase() === 'en' ? 'en' : 'zh-CN';
+}
+
+/** Read the shared override without creating or modifying a control row. */
+export async function readNpcLanguage(
+  db: DatabaseReader,
+  configured?: string,
+): Promise<NpcLanguage> {
+  const control = await db
+    .query('npcControl')
+    .withIndex('key', (q) => q.eq('key', 'global'))
+    .unique();
+  return control?.language ?? npcLanguage(configured);
 }
 
 export function localizedName(name: string, language: NpcLanguage = 'zh-CN'): string {

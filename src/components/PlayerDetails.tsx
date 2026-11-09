@@ -142,17 +142,19 @@ export default function PlayerDetails({
             {characterName(playerDescription?.name, locale)}
           </h2>
         </div>
-        <a
+        <button
+          type="button"
           className="button text-white shadow-solid text-2xl cursor-pointer pointer-events-auto"
           onClick={() => setSelectedElement(undefined)}
         >
           <h2 className="h-full bg-clay-700">
             <img className="w-4 h-4 sm:w-5 sm:h-5" src={closeImg} alt={t('Close')} />
           </h2>
-        </a>
+        </button>
       </div>
       {canInvite && (
-        <a
+        <button
+          type="button"
           className={
             'mt-6 button text-white shadow-solid text-xl cursor-pointer pointer-events-auto' +
             pendingSuffix('startConversation')
@@ -162,24 +164,33 @@ export default function PlayerDetails({
           <div className="h-full bg-clay-700 text-center">
             <span>{t('Start conversation')}</span>
           </div>
-        </a>
+        </button>
       )}
       {waitingForAccept && (
-        <a className="mt-6 button text-white shadow-solid text-xl cursor-pointer pointer-events-auto opacity-50">
+        <button
+          type="button"
+          disabled
+          className="mt-6 button text-white shadow-solid text-xl cursor-pointer pointer-events-auto opacity-50"
+        >
           <div className="h-full bg-clay-700 text-center">
             <span>{t('Waiting for accept...')}</span>
           </div>
-        </a>
+        </button>
       )}
       {waitingForNearby && (
-        <a className="mt-6 button text-white shadow-solid text-xl cursor-pointer pointer-events-auto opacity-50">
+        <button
+          type="button"
+          disabled
+          className="mt-6 button text-white shadow-solid text-xl cursor-pointer pointer-events-auto opacity-50"
+        >
           <div className="h-full bg-clay-700 text-center">
             <span>{t('Walking over...')}</span>
           </div>
-        </a>
+        </button>
       )}
       {inConversationWithMe && (
-        <a
+        <button
+          type="button"
           className={
             'mt-6 button text-white shadow-solid text-xl cursor-pointer pointer-events-auto' +
             pendingSuffix('leaveConversation')
@@ -189,11 +200,12 @@ export default function PlayerDetails({
           <div className="h-full bg-clay-700 text-center">
             <span>{t('Leave conversation')}</span>
           </div>
-        </a>
+        </button>
       )}
       {haveInvite && (
         <>
-          <a
+          <button
+            type="button"
             className={
               'mt-6 button text-white shadow-solid text-xl cursor-pointer pointer-events-auto' +
               pendingSuffix('acceptInvite')
@@ -203,8 +215,9 @@ export default function PlayerDetails({
             <div className="h-full bg-clay-700 text-center">
               <span>{t('Accept')}</span>
             </div>
-          </a>
-          <a
+          </button>
+          <button
+            type="button"
             className={
               'mt-6 button text-white shadow-solid text-xl cursor-pointer pointer-events-auto' +
               pendingSuffix('rejectInvite')
@@ -214,7 +227,7 @@ export default function PlayerDetails({
             <div className="h-full bg-clay-700 text-center">
               <span>{t('Reject')}</span>
             </div>
-          </a>
+          </button>
         </>
       )}
       {!playerConversation && player.activity && player.activity.until > Date.now() && (

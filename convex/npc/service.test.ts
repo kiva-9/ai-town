@@ -4,6 +4,8 @@ import {
   recordEvent,
   actionCompleted,
   setMode,
+  setLanguage,
+  languageSettings,
   limits,
   defaultMode,
   pump,
@@ -104,6 +106,7 @@ beforeEach(() => {
   delete process.env.NPC_DECISION_ENABLED;
   process.env.NPC_DECISION_MODE = 'hybrid';
   delete process.env.NPC_ALLOW_MODE_CONTROL;
+  delete process.env.NPC_LANGUAGE;
 });
 describe('durable NPC service (mock database, no network)', () => {
   test('no key uses mock without reservations and writes state before decision input', async () => {
@@ -291,5 +294,77 @@ describe('durable NPC service (mock database, no network)', () => {
     expect(defaultMode()).toBe('classic');
     expect(limits().queue).toBe(64);
     expect(limits().concurrency).toBeLessThanOrEqual(8);
+  });
+});
+
+describe('shared NPC language controls', () => {
+  test('read-only settings default to Chinese without creating control state', async () => {
+    const { rows, ctx } = fixture();
+    const before = JSON.stringify(rows);
+    expect(await invoke(languageSettings, ctx, {})).toEqual({
+      language: 'zh-CN',
+      controlAllowed: false,
+    });
+    expect(JSON.stringify(rows)).toBe(before);
+    process.env.NPC_LANGUAGE = 'en';
+    expect((await invoke(languageSettings, ctx, {})).language).toBe('en');
+  });
+
+  test('rejects writes unless trusted local controls are explicitly enabled', async () => {
+    const { rows, ctx } = fixture();
+    const before = JSON.stringify(rows);
+    await expect(invoke(setLanguage, ctx, { language: 'en' })).rejects.toThrow(
+      'Language controls are disabled',
+    );
+    process.env.NPC_ALLOW_MODE_CONTROL = 'false';
+    await expect(invoke(setLanguage, ctx, { language: 'en' })).rejects.toThrow(
+      'Language controls are disabled',
+    );
+    expect(JSON.stringify(rows)).toBe(before);
+  });
+
+  test('explicit setting overrides env and is reported consistently without changing history', async () => {
+    process.env.NPC_ALLOW_MODE_CONTROL = 'true';
+    process.env.NPC_LANGUAGE = 'en';
+    const { rows, ctx } = fixture();
+    rows.push({ _id: 'memory', _table: 'memories', description: 'My original English memory.' });
+    rows.push({ _id: 'message', _table: 'messages', text: '我的原始中文对话。' });
+    rows.push({
+      _id: 'profile',
+      _table: 'playerDescriptions',
+      name: 'Custom',
+      description: 'A custom profile.',
+    });
+    const before = JSON.stringify(rows);
+    expect(await invoke(setLanguage, ctx, { language: 'zh-CN' })).toEqual({ language: 'zh-CN' });
+    expect(await invoke(languageSettings, ctx, {})).toEqual({
+      language: 'zh-CN',
+      controlAllowed: true,
+    });
+    expect((await invoke(overview, ctx, { worldId: 'world' })).language).toBe('zh-CN');
+    expect(JSON.stringify(rows.filter((row) => row._table !== 'npcControl'))).toBe(before);
+    const config = rows.find((row) => row._table === 'npcControl')!;
+    expect(config.mode).toBe('hybrid');
+    expect(config.epoch).toBe(0);
+    expect(config.requests).toBe(0);
+    expect(ctx.scheduler.runAfter).not.toHaveBeenCalled();
+    await invoke(setLanguage, ctx, { language: 'en' });
+    expect((await invoke(languageSettings, ctx, {})).language).toBe('en');
+  });
+
+  test('legacy control rows fall back to env; disabling controls retains saved language', async () => {
+    const { rows, ctx } = fixture();
+    await invoke(enqueue, ctx, args);
+    const config = rows.find((row) => row._table === 'npcControl')!;
+    expect(config.language).toBeUndefined();
+    process.env.NPC_LANGUAGE = 'en';
+    expect((await invoke(languageSettings, ctx, {})).language).toBe('en');
+    process.env.NPC_ALLOW_MODE_CONTROL = 'true';
+    await invoke(setLanguage, ctx, { language: 'zh-CN' });
+    delete process.env.NPC_ALLOW_MODE_CONTROL;
+    expect(await invoke(languageSettings, ctx, {})).toEqual({
+      language: 'zh-CN',
+      controlAllowed: false,
+    });
   });
 });

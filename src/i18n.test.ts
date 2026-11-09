@@ -1,3 +1,4 @@
+import { readFileSync } from 'node:fs';
 import {
   characterDescription,
   characterName,
@@ -6,6 +7,7 @@ import {
   LOCALE_STORAGE_KEY,
   messages,
   readLocale,
+  recordedText,
   setLocale,
   translate,
 } from './i18n';
@@ -46,6 +48,7 @@ describe('Chinese and English UI', () => {
   });
   test('model diagnostics and execution statuses are translated', () => {
     for (const code of [
+      'input_budget',
       'cache',
       'budget_fallback',
       'lease_expired',
@@ -72,6 +75,41 @@ describe('Chinese and English UI', () => {
       'Completed a shared conversation. This records contact, not inferred sentiment.',
     ])
       expect(label(code, 'zh-CN')).not.toBe(code);
+  });
+  test('current protocol enums and execution outcomes have explicit dictionary entries', () => {
+    const core = readFileSync('convex/npc/core.ts', 'utf8');
+    const transport = readFileSync('convex/npc/decisionsClient.ts', 'utf8');
+    for (const [source, type] of [
+      [core, 'NpcAction'],
+      [core, 'GoalKind'],
+      [core, 'SocialEventKind'],
+      [transport, 'DecisionFallbackReason'],
+    ]) {
+      const declaration = source.match(new RegExp(`export type ${type} =\\s*([\\s\\S]*?);`))?.[1];
+      expect(declaration).toBeDefined();
+      for (const match of declaration!.matchAll(/'([^']+)'/g))
+        expect(Object.prototype.hasOwnProperty.call(messages, match[1])).toBe(true);
+    }
+    const execution = readFileSync('convex/aiTown/agentInputs.ts', 'utf8');
+    for (const match of execution.matchAll(/ack\('([^']+)'\)/g))
+      expect(Object.prototype.hasOwnProperty.call(messages, match[1])).toBe(true);
+  });
+  test('default human text translates exactly and custom text is preserved', () => {
+    expect(characterName('Me', 'zh-CN')).toBe('我');
+    expect(characterDescription('Me', 'Me is a human player', 'zh-CN')).toBe('真人玩家');
+    expect(characterDescription('Me', 'Me is a human player who writes novels', 'zh-CN')).toBe(
+      'Me is a human player who writes novels',
+    );
+  });
+  test('free-form records remain verbatim and are marked as original', () => {
+    expect(recordedText('myCamelCase_private note', 'zh-CN')).toEqual({
+      text: 'myCamelCase_private note',
+      original: true,
+    });
+    expect(recordedText('A conversation invitation was declined.', 'zh-CN')).toEqual({
+      text: '一次对话邀请被拒绝了。',
+      original: false,
+    });
   });
   test('all original residents have translations without changing canonical identities', () => {
     expect(Descriptions).toHaveLength(12);

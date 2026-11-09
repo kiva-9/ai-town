@@ -1,10 +1,12 @@
 import { defineTable } from 'convex/server';
 import { v } from 'convex/values';
 export const modeValidator = v.union(v.literal('classic'), v.literal('hybrid'), v.literal('mock'));
+export const languageValidator = v.union(v.literal('zh-CN'), v.literal('en'));
 export const npcTables = {
   npcControl: defineTable({
     key: v.string(),
     mode: modeValidator,
+    language: v.optional(languageValidator),
     epoch: v.number(),
     day: v.string(),
     requests: v.number(),

@@ -1,4 +1,4 @@
-import { mockDialogue, npcLanguage } from '../npc/language';
+import { mockDialogue } from '../npc/language';
 import { v } from 'convex/values';
 import { internalAction } from '../_generated/server';
 import { WorldMap, serializedWorldMap } from './worldMap';
@@ -75,7 +75,10 @@ export const agentGenerateMessage = internalAction({
     // The original model/vector-memory path remains unchanged when this flag is off.
     const text =
       process.env.NPC_DIALOGUE_MOCK === 'true'
-        ? mockDialogue(args.type, npcLanguage(process.env.NPC_LANGUAGE))
+        ? mockDialogue(
+            args.type,
+            (await ctx.runQuery(api.npc.service.languageSettings, {})).language,
+          )
         : await completionFn(
             ctx,
             args.worldId,

@@ -32,9 +32,13 @@ npm run dev:frontend
 
 Open the URL Vite prints, normally **http://localhost:5173/ai-town/**. Select a resident to see the expandable NPC Intelligence panel. The map and conversation controls are the original game. Mock dialogue is visibly prefixed `【模拟对话】` by default (`[Mock dialogue]` with `NPC_LANGUAGE=en`); it is intentionally a fixture, not an LLM simulation.
 
-`NPC_ALLOW_MODE_CONTROL=true` allows anyone with access to that deployment to switch its global policy. Use it only on a trusted local deployment. Turn it off on public deployments unless you add owner-only authentication. Classic retains original behavior, but dialogue fixtures are controlled independently by `NPC_DIALOGUE_MOCK`.
+`NPC_ALLOW_MODE_CONTROL=true` allows anyone with access to that deployment to switch its global policy and NPC generation language. Use it only on a trusted local deployment. Turn it off on public deployments unless you add owner-only authentication. Classic retains original behavior, but dialogue fixtures are controlled independently by `NPC_DIALOGUE_MOCK`.
 
 The frontend needs `VITE_CONVEX_URL`. The Convex setup normally writes it to `.env.local`; if using self-hosted Convex, set it to your backend URL. Never put API keys in any `VITE_` variable.
+
+### Interface and shared NPC language
+
+The interface defaults to Simplified Chinese and stores its selection in the browser. The top of the page shows the actual NPC language separately. In a trusted local deployment, expand NPC Intelligence to change the shared NPC generation language. That saved choice overrides `NPC_LANGUAGE`; it affects future dialogue, summaries and reflections, not existing history or customized profiles. An operation already in flight may finish in its original language. Changing only the interface does not change every resident's generation language.
 
 ### Alternative backend
 

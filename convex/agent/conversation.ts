@@ -2,7 +2,8 @@ import {
   languageInstruction,
   localizeCharacterText,
   localizedName,
-  npcLanguage,
+  readNpcLanguage,
+  NpcLanguage,
 } from '../npc/language';
 import { v } from 'convex/values';
 import { Id } from '../_generated/dataModel';
@@ -23,7 +24,7 @@ export async function startConversationMessage(
   playerId: GameId<'players'>,
   otherPlayerId: GameId<'players'>,
 ): Promise<string> {
-  const { player, otherPlayer, agent, otherAgent, lastConversation } = await ctx.runQuery(
+  const { player, otherPlayer, agent, otherAgent, lastConversation, language } = await ctx.runQuery(
     selfInternal.queryPromptData,
     {
       worldId,
@@ -34,7 +35,7 @@ export async function startConversationMessage(
   );
   const embedding = await embeddingsCache.fetch(
     ctx,
-    npcLanguage(process.env.NPC_LANGUAGE) === 'zh-CN'
+    language === 'zh-CN'
       ? `${localizedName(player.name)}正在和${localizedName(otherPlayer.name)}聊天`
       : `${player.name} is talking to ${otherPlayer.name}`,
   );
@@ -52,7 +53,7 @@ export async function startConversationMessage(
   const prompt = [
     `You are ${player.name}, and you just started a conversation with ${otherPlayer.name}.`,
   ];
-  prompt.push(...agentPrompts(otherPlayer, agent, otherAgent ?? null));
+  prompt.push(...agentPrompts(otherPlayer, agent, otherAgent ?? null, language));
   prompt.push(...previousConversationPrompt(otherPlayer, lastConversation));
   prompt.push(...untrustedMemoryInstructions(memories));
   if (memoryWithOtherPlayer) {
@@ -92,7 +93,7 @@ export async function continueConversationMessage(
   playerId: GameId<'players'>,
   otherPlayerId: GameId<'players'>,
 ): Promise<string> {
-  const { player, otherPlayer, conversation, agent, otherAgent } = await ctx.runQuery(
+  const { player, otherPlayer, conversation, agent, otherAgent, language } = await ctx.runQuery(
     selfInternal.queryPromptData,
     {
       worldId,
@@ -105,7 +106,7 @@ export async function continueConversationMessage(
   const started = new Date(conversation.created);
   const embedding = await embeddingsCache.fetch(
     ctx,
-    npcLanguage(process.env.NPC_LANGUAGE) === 'zh-CN'
+    language === 'zh-CN'
       ? `你对${localizedName(otherPlayer.name)}有什么看法？`
       : `What do you think about ${otherPlayer.name}?`,
   );
@@ -114,7 +115,7 @@ export async function continueConversationMessage(
     `You are ${player.name}, and you're currently in a conversation with ${otherPlayer.name}.`,
     `The conversation started at ${started.toLocaleString()}. It's now ${now.toLocaleString()}.`,
   ];
-  prompt.push(...agentPrompts(otherPlayer, agent, otherAgent ?? null));
+  prompt.push(...agentPrompts(otherPlayer, agent, otherAgent ?? null, language));
   prompt.push(...untrustedMemoryInstructions(memories));
   prompt.push(
     `Below is the current chat history between you and ${otherPlayer.name}.`,
@@ -153,7 +154,7 @@ export async function leaveConversationMessage(
   playerId: GameId<'players'>,
   otherPlayerId: GameId<'players'>,
 ): Promise<string> {
-  const { player, otherPlayer, conversation, agent, otherAgent } = await ctx.runQuery(
+  const { player, otherPlayer, conversation, agent, otherAgent, language } = await ctx.runQuery(
     selfInternal.queryPromptData,
     {
       worldId,
@@ -166,7 +167,7 @@ export async function leaveConversationMessage(
     `You are ${player.name}, and you're currently in a conversation with ${otherPlayer.name}.`,
     `You've decided to leave the question and would like to politely tell them you're leaving the conversation.`,
   ];
-  prompt.push(...agentPrompts(otherPlayer, agent, otherAgent ?? null));
+  prompt.push(...agentPrompts(otherPlayer, agent, otherAgent ?? null, language));
   prompt.push(
     `Below is the current chat history between you and ${otherPlayer.name}.`,
     `How would you like to tell them that you're leaving? Your response should be brief and within 200 characters.`,
@@ -199,8 +200,8 @@ function agentPrompts(
   otherPlayer: { name: string },
   agent: { identity: string; plan: string } | null,
   otherAgent: { identity: string; plan: string } | null,
+  language: NpcLanguage,
 ): string[] {
-  const language = npcLanguage(process.env.NPC_LANGUAGE);
   const prompt = [languageInstruction(language)];
   if (agent) {
     prompt.push(`About you: ${localizeCharacterText(agent.identity, language)}`);
@@ -285,6 +286,7 @@ export const queryPromptData = internalQuery({
     conversationId,
   },
   handler: async (ctx, args) => {
+    const language = await readNpcLanguage(ctx.db, process.env.NPC_LANGUAGE);
     const world = await ctx.db.get(args.worldId);
     if (!world) {
       throw new Error(`World ${args.worldId} not found`);
@@ -363,11 +365,11 @@ export const queryPromptData = internalQuery({
     }
     return {
       player: {
-        name: localizedName(playerDescription.name, npcLanguage(process.env.NPC_LANGUAGE)),
+        name: localizedName(playerDescription.name, language),
         ...player,
       },
       otherPlayer: {
-        name: localizedName(otherPlayerDescription.name, npcLanguage(process.env.NPC_LANGUAGE)),
+        name: localizedName(otherPlayerDescription.name, language),
         ...otherPlayer,
       },
       conversation,
@@ -378,6 +380,7 @@ export const queryPromptData = internalQuery({
         ...otherAgent,
       },
       lastConversation,
+      language,
     };
   },
 });

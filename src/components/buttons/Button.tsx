@@ -9,24 +9,31 @@ export default function Button(props: {
   title?: string;
   children: ReactNode;
 }) {
+  const Element = props.href ? 'a' : 'button';
   return (
-    <a
+    <Element
       className={clsx(
-        'button text-white shadow-solid text-xl pointer-events-auto',
+        'button text-white shadow-solid text-xl pointer-events-auto whitespace-nowrap shrink-0',
         props.className,
       )}
       href={props.href}
+      type={props.href ? undefined : 'button'}
       title={props.title}
       onClick={props.onClick}
     >
-      <div className="inline-block bg-clay-700">
+      <span className="inline-block bg-clay-700">
         <span>
-          <div className="inline-flex h-full items-center gap-4">
-            <img className="w-4 h-4 sm:w-[30px] sm:h-[30px]" src={props.imgUrl} />
+          <span className="inline-flex h-full items-center gap-4">
+            <img
+              className="w-4 h-4 sm:w-[30px] sm:h-[30px]"
+              src={props.imgUrl}
+              alt=""
+              aria-hidden="true"
+            />
             {props.children}
-          </div>
+          </span>
         </span>
-      </div>
-    </a>
+      </span>
+    </Element>
   );
 }
