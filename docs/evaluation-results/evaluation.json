@@ -1,0 +1,3833 @@
+{
+  "schemaVersion": 1,
+  "seed": "ai-town-2026",
+  "steps": 80,
+  "initialState": {
+    "version": 0,
+    "personality": {
+      "sociability": 0.4,
+      "caution": 0.32,
+      "curiosity": 0.86,
+      "cooperation": 0.27,
+      "stability": 0.59,
+      "selfInterest": 0.59,
+      "loyalty": 0.19
+    },
+    "relationships": [],
+    "memories": [],
+    "energy": 0.85,
+    "stress": 0.1,
+    "goals": [
+      {
+        "id": "initial:evaluation:ai-town-2026",
+        "kind": "explore",
+        "priority": 0.55,
+        "progress": 0,
+        "inertia": 0.536,
+        "createdAt": 100000,
+        "expiresAt": 700000,
+        "status": "active"
+      }
+    ]
+  },
+  "events": [
+    {
+      "id": "fixture:0",
+      "at": 100000,
+      "kind": "encountered_stranger",
+      "targetId": "p:1",
+      "positive": true
+    },
+    {
+      "id": "fixture:1",
+      "at": 120000,
+      "kind": "invitation",
+      "targetId": "p:2",
+      "positive": true
+    },
+    {
+      "id": "fixture:2",
+      "at": 140000,
+      "kind": "conflict",
+      "targetId": "p:3",
+      "positive": true
+    },
+    {
+      "id": "fixture:3",
+      "at": 160000,
+      "kind": "rejected",
+      "targetId": "p:1",
+      "positive": true
+    },
+    {
+      "id": "fixture:4",
+      "at": 180000,
+      "kind": "promise_due",
+      "targetId": "p:2",
+      "positive": true,
+      "promise": {
+        "id": "promise:4",
+        "description": "Meet again",
+        "dueAt": 180000,
+        "status": "pending"
+      }
+    },
+    {
+      "id": "fixture:5",
+      "at": 200000,
+      "kind": "goal_stalled",
+      "targetId": "p:3",
+      "positive": true
+    },
+    {
+      "id": "fixture:6",
+      "at": 220000,
+      "kind": "relationship_changed",
+      "targetId": "p:1",
+      "positive": true
+    },
+    {
+      "id": "fixture:7",
+      "at": 240000,
+      "kind": "encountered_known",
+      "targetId": "p:2",
+      "positive": true
+    },
+    {
+      "id": "fixture:8",
+      "at": 260000,
+      "kind": "encountered_stranger",
+      "targetId": "p:3",
+      "positive": true
+    },
+    {
+      "id": "fixture:9",
+      "at": 280000,
+      "kind": "invitation",
+      "targetId": "p:1",
+      "positive": true
+    },
+    {
+      "id": "fixture:10",
+      "at": 300000,
+      "kind": "conflict",
+      "targetId": "p:2",
+      "positive": true
+    },
+    {
+      "id": "fixture:11",
+      "at": 320000,
+      "kind": "rejected",
+      "targetId": "p:3",
+      "positive": true
+    },
+    {
+      "id": "fixture:12",
+      "at": 340000,
+      "kind": "promise_due",
+      "targetId": "p:1",
+      "positive": true,
+      "promise": {
+        "id": "promise:12",
+        "description": "Meet again",
+        "dueAt": 340000,
+        "status": "pending"
+      }
+    },
+    {
+      "id": "fixture:13",
+      "at": 360000,
+      "kind": "goal_stalled",
+      "targetId": "p:2",
+      "positive": true
+    },
+    {
+      "id": "fixture:14",
+      "at": 380000,
+      "kind": "relationship_changed",
+      "targetId": "p:3",
+      "positive": true
+    },
+    {
+      "id": "fixture:15",
+      "at": 400000,
+      "kind": "encountered_known",
+      "targetId": "p:1",
+      "positive": true
+    },
+    {
+      "id": "fixture:16",
+      "at": 420000,
+      "kind": "encountered_stranger",
+      "targetId": "p:2",
+      "positive": true
+    },
+    {
+      "id": "fixture:17",
+      "at": 440000,
+      "kind": "invitation",
+      "targetId": "p:3",
+      "positive": true
+    },
+    {
+      "id": "fixture:18",
+      "at": 460000,
+      "kind": "conflict",
+      "targetId": "p:1",
+      "positive": true
+    },
+    {
+      "id": "fixture:19",
+      "at": 480000,
+      "kind": "rejected",
+      "targetId": "p:2",
+      "positive": true
+    },
+    {
+      "id": "fixture:20",
+      "at": 500000,
+      "kind": "promise_due",
+      "targetId": "p:3",
+      "positive": true,
+      "promise": {
+        "id": "promise:20",
+        "description": "Meet again",
+        "dueAt": 500000,
+        "status": "pending"
+      }
+    },
+    {
+      "id": "fixture:21",
+      "at": 520000,
+      "kind": "goal_stalled",
+      "targetId": "p:1",
+      "positive": true
+    },
+    {
+      "id": "fixture:22",
+      "at": 540000,
+      "kind": "relationship_changed",
+      "targetId": "p:2",
+      "positive": true
+    },
+    {
+      "id": "fixture:23",
+      "at": 560000,
+      "kind": "encountered_known",
+      "targetId": "p:3",
+      "positive": true
+    },
+    {
+      "id": "fixture:24",
+      "at": 580000,
+      "kind": "encountered_stranger",
+      "targetId": "p:1",
+      "positive": true
+    },
+    {
+      "id": "fixture:25",
+      "at": 600000,
+      "kind": "invitation",
+      "targetId": "p:2",
+      "positive": true
+    },
+    {
+      "id": "fixture:26",
+      "at": 620000,
+      "kind": "conflict",
+      "targetId": "p:3",
+      "positive": true
+    },
+    {
+      "id": "fixture:27",
+      "at": 640000,
+      "kind": "rejected",
+      "targetId": "p:1",
+      "positive": true
+    },
+    {
+      "id": "fixture:28",
+      "at": 660000,
+      "kind": "promise_due",
+      "targetId": "p:2",
+      "positive": true,
+      "promise": {
+        "id": "promise:28",
+        "description": "Meet again",
+        "dueAt": 660000,
+        "status": "pending"
+      }
+    },
+    {
+      "id": "fixture:29",
+      "at": 680000,
+      "kind": "goal_stalled",
+      "targetId": "p:3",
+      "positive": true
+    },
+    {
+      "id": "fixture:30",
+      "at": 700000,
+      "kind": "relationship_changed",
+      "targetId": "p:1",
+      "positive": true
+    },
+    {
+      "id": "fixture:31",
+      "at": 720000,
+      "kind": "encountered_known",
+      "targetId": "p:2",
+      "positive": true
+    },
+    {
+      "id": "fixture:32",
+      "at": 740000,
+      "kind": "encountered_stranger",
+      "targetId": "p:3",
+      "positive": true
+    },
+    {
+      "id": "fixture:33",
+      "at": 760000,
+      "kind": "invitation",
+      "targetId": "p:1",
+      "positive": true
+    },
+    {
+      "id": "fixture:34",
+      "at": 780000,
+      "kind": "conflict",
+      "targetId": "p:2",
+      "positive": true
+    },
+    {
+      "id": "fixture:35",
+      "at": 800000,
+      "kind": "rejected",
+      "targetId": "p:3",
+      "positive": true
+    },
+    {
+      "id": "fixture:36",
+      "at": 820000,
+      "kind": "promise_due",
+      "targetId": "p:1",
+      "positive": true,
+      "promise": {
+        "id": "promise:36",
+        "description": "Meet again",
+        "dueAt": 820000,
+        "status": "pending"
+      }
+    },
+    {
+      "id": "fixture:37",
+      "at": 840000,
+      "kind": "goal_stalled",
+      "targetId": "p:2",
+      "positive": true
+    },
+    {
+      "id": "fixture:38",
+      "at": 860000,
+      "kind": "relationship_changed",
+      "targetId": "p:3",
+      "positive": true
+    },
+    {
+      "id": "fixture:39",
+      "at": 880000,
+      "kind": "encountered_known",
+      "targetId": "p:1",
+      "positive": true
+    },
+    {
+      "id": "fixture:40",
+      "at": 900000,
+      "kind": "encountered_stranger",
+      "targetId": "p:2",
+      "positive": true
+    },
+    {
+      "id": "fixture:41",
+      "at": 920000,
+      "kind": "invitation",
+      "targetId": "p:3",
+      "positive": true
+    },
+    {
+      "id": "fixture:42",
+      "at": 940000,
+      "kind": "conflict",
+      "targetId": "p:1",
+      "positive": true
+    },
+    {
+      "id": "fixture:43",
+      "at": 960000,
+      "kind": "rejected",
+      "targetId": "p:2",
+      "positive": true
+    },
+    {
+      "id": "fixture:44",
+      "at": 980000,
+      "kind": "promise_due",
+      "targetId": "p:3",
+      "positive": true,
+      "promise": {
+        "id": "promise:44",
+        "description": "Meet again",
+        "dueAt": 980000,
+        "status": "pending"
+      }
+    },
+    {
+      "id": "fixture:45",
+      "at": 1000000,
+      "kind": "goal_stalled",
+      "targetId": "p:1",
+      "positive": true
+    },
+    {
+      "id": "fixture:46",
+      "at": 1020000,
+      "kind": "relationship_changed",
+      "targetId": "p:2",
+      "positive": true
+    },
+    {
+      "id": "fixture:47",
+      "at": 1040000,
+      "kind": "encountered_known",
+      "targetId": "p:3",
+      "positive": true
+    },
+    {
+      "id": "fixture:48",
+      "at": 1060000,
+      "kind": "encountered_stranger",
+      "targetId": "p:1",
+      "positive": true
+    },
+    {
+      "id": "fixture:49",
+      "at": 1080000,
+      "kind": "invitation",
+      "targetId": "p:2",
+      "positive": true
+    },
+    {
+      "id": "fixture:50",
+      "at": 1100000,
+      "kind": "conflict",
+      "targetId": "p:3",
+      "positive": true
+    },
+    {
+      "id": "fixture:51",
+      "at": 1120000,
+      "kind": "rejected",
+      "targetId": "p:1",
+      "positive": true
+    },
+    {
+      "id": "fixture:52",
+      "at": 1140000,
+      "kind": "promise_due",
+      "targetId": "p:2",
+      "positive": true,
+      "promise": {
+        "id": "promise:52",
+        "description": "Meet again",
+        "dueAt": 1140000,
+        "status": "pending"
+      }
+    },
+    {
+      "id": "fixture:53",
+      "at": 1160000,
+      "kind": "goal_stalled",
+      "targetId": "p:3",
+      "positive": true
+    },
+    {
+      "id": "fixture:54",
+      "at": 1180000,
+      "kind": "relationship_changed",
+      "targetId": "p:1",
+      "positive": true
+    },
+    {
+      "id": "fixture:55",
+      "at": 1200000,
+      "kind": "encountered_known",
+      "targetId": "p:2",
+      "positive": true
+    },
+    {
+      "id": "fixture:56",
+      "at": 1220000,
+      "kind": "encountered_stranger",
+      "targetId": "p:3",
+      "positive": true
+    },
+    {
+      "id": "fixture:57",
+      "at": 1240000,
+      "kind": "invitation",
+      "targetId": "p:1",
+      "positive": true
+    },
+    {
+      "id": "fixture:58",
+      "at": 1260000,
+      "kind": "conflict",
+      "targetId": "p:2",
+      "positive": true
+    },
+    {
+      "id": "fixture:59",
+      "at": 1280000,
+      "kind": "rejected",
+      "targetId": "p:3",
+      "positive": true
+    },
+    {
+      "id": "fixture:60",
+      "at": 1300000,
+      "kind": "promise_due",
+      "targetId": "p:1",
+      "positive": true,
+      "promise": {
+        "id": "promise:60",
+        "description": "Meet again",
+        "dueAt": 1300000,
+        "status": "pending"
+      }
+    },
+    {
+      "id": "fixture:61",
+      "at": 1320000,
+      "kind": "goal_stalled",
+      "targetId": "p:2",
+      "positive": true
+    },
+    {
+      "id": "fixture:62",
+      "at": 1340000,
+      "kind": "relationship_changed",
+      "targetId": "p:3",
+      "positive": true
+    },
+    {
+      "id": "fixture:63",
+      "at": 1360000,
+      "kind": "encountered_known",
+      "targetId": "p:1",
+      "positive": true
+    },
+    {
+      "id": "fixture:64",
+      "at": 1380000,
+      "kind": "encountered_stranger",
+      "targetId": "p:2",
+      "positive": true
+    },
+    {
+      "id": "fixture:65",
+      "at": 1400000,
+      "kind": "invitation",
+      "targetId": "p:3",
+      "positive": true
+    },
+    {
+      "id": "fixture:66",
+      "at": 1420000,
+      "kind": "conflict",
+      "targetId": "p:1",
+      "positive": true
+    },
+    {
+      "id": "fixture:67",
+      "at": 1440000,
+      "kind": "rejected",
+      "targetId": "p:2",
+      "positive": true
+    },
+    {
+      "id": "fixture:68",
+      "at": 1460000,
+      "kind": "promise_due",
+      "targetId": "p:3",
+      "positive": true,
+      "promise": {
+        "id": "promise:68",
+        "description": "Meet again",
+        "dueAt": 1460000,
+        "status": "pending"
+      }
+    },
+    {
+      "id": "fixture:69",
+      "at": 1480000,
+      "kind": "goal_stalled",
+      "targetId": "p:1",
+      "positive": true
+    },
+    {
+      "id": "fixture:70",
+      "at": 1500000,
+      "kind": "relationship_changed",
+      "targetId": "p:2",
+      "positive": true
+    },
+    {
+      "id": "fixture:71",
+      "at": 1520000,
+      "kind": "encountered_known",
+      "targetId": "p:3",
+      "positive": true
+    },
+    {
+      "id": "fixture:72",
+      "at": 1540000,
+      "kind": "encountered_stranger",
+      "targetId": "p:1",
+      "positive": true
+    },
+    {
+      "id": "fixture:73",
+      "at": 1560000,
+      "kind": "invitation",
+      "targetId": "p:2",
+      "positive": true
+    },
+    {
+      "id": "fixture:74",
+      "at": 1580000,
+      "kind": "conflict",
+      "targetId": "p:3",
+      "positive": true
+    },
+    {
+      "id": "fixture:75",
+      "at": 1600000,
+      "kind": "rejected",
+      "targetId": "p:1",
+      "positive": true
+    },
+    {
+      "id": "fixture:76",
+      "at": 1620000,
+      "kind": "promise_due",
+      "targetId": "p:2",
+      "positive": true,
+      "promise": {
+        "id": "promise:76",
+        "description": "Meet again",
+        "dueAt": 1620000,
+        "status": "pending"
+      }
+    },
+    {
+      "id": "fixture:77",
+      "at": 1640000,
+      "kind": "goal_stalled",
+      "targetId": "p:3",
+      "positive": true
+    },
+    {
+      "id": "fixture:78",
+      "at": 1660000,
+      "kind": "relationship_changed",
+      "targetId": "p:1",
+      "positive": true
+    },
+    {
+      "id": "fixture:79",
+      "at": 1680000,
+      "kind": "encountered_known",
+      "targetId": "p:2",
+      "positive": true
+    }
+  ],
+  "results": [
+    {
+      "mode": "classic",
+      "label": "Classic scripted adapter",
+      "metrics": {
+        "decisions": 80,
+        "actionDistribution": {
+          "rest": 24,
+          "accept_invite": 7,
+          "start_conversation": 23,
+          "wander": 23,
+          "reject_invite": 3
+        },
+        "consecutiveActionTargetRepeats": 0,
+        "goalSwitches": 17,
+        "pointlessGoalSwitches": 0,
+        "successfulInteractions": 22,
+        "completedGoals": 1,
+        "decisionSuccessRate": 1,
+        "relationshipChanges": [
+          {
+            "playerId": "p:2",
+            "trustDelta": -0.45,
+            "affinityDelta": -0.5,
+            "familiarityDelta": 0.9999999999999999,
+            "conflictDelta": 0.6000000000000001
+          },
+          {
+            "playerId": "p:1",
+            "trustDelta": -0.45,
+            "affinityDelta": -0.5,
+            "familiarityDelta": 1,
+            "conflictDelta": 0.6000000000000001
+          },
+          {
+            "playerId": "p:3",
+            "trustDelta": -0.5,
+            "affinityDelta": -0.5,
+            "familiarityDelta": 0.56,
+            "conflictDelta": 0.8
+          }
+        ],
+        "apiRequests": 0,
+        "apiCostUsd": 0,
+        "apiLatencyMs": null,
+        "invalidStateCount": 0
+      },
+      "trace": [
+        {
+          "step": 0,
+          "eventId": "fixture:0",
+          "action": "rest",
+          "targetId": null,
+          "legal": true,
+          "goalId": "initial:evaluation:ai-town-2026"
+        },
+        {
+          "step": 1,
+          "eventId": "fixture:1",
+          "action": "accept_invite",
+          "targetId": "p:2",
+          "legal": true,
+          "goalId": "initial:evaluation:ai-town-2026"
+        },
+        {
+          "step": 2,
+          "eventId": "fixture:2",
+          "action": "start_conversation",
+          "targetId": "p:1",
+          "legal": true,
+          "goalId": "event:fixture:2"
+        },
+        {
+          "step": 3,
+          "eventId": "fixture:3",
+          "action": "rest",
+          "targetId": null,
+          "legal": true,
+          "goalId": "event:fixture:2"
+        },
+        {
+          "step": 4,
+          "eventId": "fixture:4",
+          "action": "wander",
+          "targetId": null,
+          "legal": true,
+          "goalId": "event:fixture:4"
+        },
+        {
+          "step": 5,
+          "eventId": "fixture:5",
+          "action": "start_conversation",
+          "targetId": "p:1",
+          "legal": true,
+          "goalId": "event:fixture:2"
+        },
+        {
+          "step": 6,
+          "eventId": "fixture:6",
+          "action": "rest",
+          "targetId": null,
+          "legal": true,
+          "goalId": "event:fixture:2"
+        },
+        {
+          "step": 7,
+          "eventId": "fixture:7",
+          "action": "wander",
+          "targetId": null,
+          "legal": true,
+          "goalId": "event:fixture:2"
+        },
+        {
+          "step": 8,
+          "eventId": "fixture:8",
+          "action": "start_conversation",
+          "targetId": "p:1",
+          "legal": true,
+          "goalId": "event:fixture:2"
+        },
+        {
+          "step": 9,
+          "eventId": "fixture:9",
+          "action": "accept_invite",
+          "targetId": "p:1",
+          "legal": true,
+          "goalId": "event:fixture:2"
+        },
+        {
+          "step": 10,
+          "eventId": "fixture:10",
+          "action": "wander",
+          "targetId": null,
+          "legal": true,
+          "goalId": "event:fixture:2"
+        },
+        {
+          "step": 11,
+          "eventId": "fixture:11",
+          "action": "start_conversation",
+          "targetId": "p:1",
+          "legal": true,
+          "goalId": "event:fixture:2"
+        },
+        {
+          "step": 12,
+          "eventId": "fixture:12",
+          "action": "rest",
+          "targetId": null,
+          "legal": true,
+          "goalId": "event:fixture:12"
+        },
+        {
+          "step": 13,
+          "eventId": "fixture:13",
+          "action": "wander",
+          "targetId": null,
+          "legal": true,
+          "goalId": "event:fixture:2"
+        },
+        {
+          "step": 14,
+          "eventId": "fixture:14",
+          "action": "start_conversation",
+          "targetId": "p:2",
+          "legal": true,
+          "goalId": "event:fixture:2"
+        },
+        {
+          "step": 15,
+          "eventId": "fixture:15",
+          "action": "rest",
+          "targetId": null,
+          "legal": true,
+          "goalId": "event:fixture:2"
+        },
+        {
+          "step": 16,
+          "eventId": "fixture:16",
+          "action": "wander",
+          "targetId": null,
+          "legal": true,
+          "goalId": "event:fixture:2"
+        },
+        {
+          "step": 17,
+          "eventId": "fixture:17",
+          "action": "reject_invite",
+          "targetId": "p:3",
+          "legal": true,
+          "goalId": "event:fixture:2"
+        },
+        {
+          "step": 18,
+          "eventId": "fixture:18",
+          "action": "rest",
+          "targetId": null,
+          "legal": true,
+          "goalId": "event:fixture:2"
+        },
+        {
+          "step": 19,
+          "eventId": "fixture:19",
+          "action": "wander",
+          "targetId": null,
+          "legal": true,
+          "goalId": "event:fixture:2"
+        },
+        {
+          "step": 20,
+          "eventId": "fixture:20",
+          "action": "start_conversation",
+          "targetId": "p:1",
+          "legal": true,
+          "goalId": "event:fixture:20"
+        },
+        {
+          "step": 21,
+          "eventId": "fixture:21",
+          "action": "rest",
+          "targetId": null,
+          "legal": true,
+          "goalId": "event:fixture:2"
+        },
+        {
+          "step": 22,
+          "eventId": "fixture:22",
+          "action": "wander",
+          "targetId": null,
+          "legal": true,
+          "goalId": "event:fixture:2"
+        },
+        {
+          "step": 23,
+          "eventId": "fixture:23",
+          "action": "start_conversation",
+          "targetId": "p:1",
+          "legal": true,
+          "goalId": "event:fixture:2"
+        },
+        {
+          "step": 24,
+          "eventId": "fixture:24",
+          "action": "rest",
+          "targetId": null,
+          "legal": true,
+          "goalId": "event:fixture:2"
+        },
+        {
+          "step": 25,
+          "eventId": "fixture:25",
+          "action": "accept_invite",
+          "targetId": "p:2",
+          "legal": true,
+          "goalId": "event:fixture:2"
+        },
+        {
+          "step": 26,
+          "eventId": "fixture:26",
+          "action": "start_conversation",
+          "targetId": "p:1",
+          "legal": true,
+          "goalId": "event:fixture:2"
+        },
+        {
+          "step": 27,
+          "eventId": "fixture:27",
+          "action": "rest",
+          "targetId": null,
+          "legal": true,
+          "goalId": "event:fixture:2"
+        },
+        {
+          "step": 28,
+          "eventId": "fixture:28",
+          "action": "wander",
+          "targetId": null,
+          "legal": true,
+          "goalId": "event:fixture:2"
+        },
+        {
+          "step": 29,
+          "eventId": "fixture:29",
+          "action": "start_conversation",
+          "targetId": "p:2",
+          "legal": true,
+          "goalId": "event:fixture:10"
+        },
+        {
+          "step": 30,
+          "eventId": "fixture:30",
+          "action": "rest",
+          "targetId": null,
+          "legal": true,
+          "goalId": "event:fixture:10"
+        },
+        {
+          "step": 31,
+          "eventId": "fixture:31",
+          "action": "wander",
+          "targetId": null,
+          "legal": true,
+          "goalId": "event:fixture:10"
+        },
+        {
+          "step": 32,
+          "eventId": "fixture:32",
+          "action": "start_conversation",
+          "targetId": "p:1",
+          "legal": true,
+          "goalId": "event:fixture:10"
+        },
+        {
+          "step": 33,
+          "eventId": "fixture:33",
+          "action": "accept_invite",
+          "targetId": "p:1",
+          "legal": true,
+          "goalId": "event:fixture:10"
+        },
+        {
+          "step": 34,
+          "eventId": "fixture:34",
+          "action": "wander",
+          "targetId": null,
+          "legal": true,
+          "goalId": "event:fixture:10"
+        },
+        {
+          "step": 35,
+          "eventId": "fixture:35",
+          "action": "start_conversation",
+          "targetId": "p:1",
+          "legal": true,
+          "goalId": "event:fixture:10"
+        },
+        {
+          "step": 36,
+          "eventId": "fixture:36",
+          "action": "rest",
+          "targetId": null,
+          "legal": true,
+          "goalId": "event:fixture:10"
+        },
+        {
+          "step": 37,
+          "eventId": "fixture:37",
+          "action": "wander",
+          "targetId": null,
+          "legal": true,
+          "goalId": "event:fixture:18"
+        },
+        {
+          "step": 38,
+          "eventId": "fixture:38",
+          "action": "start_conversation",
+          "targetId": "p:1",
+          "legal": true,
+          "goalId": "event:fixture:18"
+        },
+        {
+          "step": 39,
+          "eventId": "fixture:39",
+          "action": "rest",
+          "targetId": null,
+          "legal": true,
+          "goalId": "event:fixture:18"
+        },
+        {
+          "step": 40,
+          "eventId": "fixture:40",
+          "action": "wander",
+          "targetId": null,
+          "legal": true,
+          "goalId": "event:fixture:18"
+        },
+        {
+          "step": 41,
+          "eventId": "fixture:41",
+          "action": "reject_invite",
+          "targetId": "p:3",
+          "legal": true,
+          "goalId": "event:fixture:18"
+        },
+        {
+          "step": 42,
+          "eventId": "fixture:42",
+          "action": "rest",
+          "targetId": null,
+          "legal": true,
+          "goalId": "event:fixture:18"
+        },
+        {
+          "step": 43,
+          "eventId": "fixture:43",
+          "action": "wander",
+          "targetId": null,
+          "legal": true,
+          "goalId": "event:fixture:18"
+        },
+        {
+          "step": 44,
+          "eventId": "fixture:44",
+          "action": "start_conversation",
+          "targetId": "p:2",
+          "legal": true,
+          "goalId": "event:fixture:18"
+        },
+        {
+          "step": 45,
+          "eventId": "fixture:45",
+          "action": "rest",
+          "targetId": null,
+          "legal": true,
+          "goalId": "event:fixture:20"
+        },
+        {
+          "step": 46,
+          "eventId": "fixture:46",
+          "action": "wander",
+          "targetId": null,
+          "legal": true,
+          "goalId": "event:fixture:20"
+        },
+        {
+          "step": 47,
+          "eventId": "fixture:47",
+          "action": "start_conversation",
+          "targetId": "p:1",
+          "legal": true,
+          "goalId": "event:fixture:20"
+        },
+        {
+          "step": 48,
+          "eventId": "fixture:48",
+          "action": "rest",
+          "targetId": null,
+          "legal": true,
+          "goalId": "event:fixture:20"
+        },
+        {
+          "step": 49,
+          "eventId": "fixture:49",
+          "action": "accept_invite",
+          "targetId": "p:2",
+          "legal": true,
+          "goalId": "event:fixture:20"
+        },
+        {
+          "step": 50,
+          "eventId": "fixture:50",
+          "action": "start_conversation",
+          "targetId": "p:1",
+          "legal": true,
+          "goalId": "event:fixture:50"
+        },
+        {
+          "step": 51,
+          "eventId": "fixture:51",
+          "action": "rest",
+          "targetId": null,
+          "legal": true,
+          "goalId": "event:fixture:50"
+        },
+        {
+          "step": 52,
+          "eventId": "fixture:52",
+          "action": "wander",
+          "targetId": null,
+          "legal": true,
+          "goalId": "event:fixture:52"
+        },
+        {
+          "step": 53,
+          "eventId": "fixture:53",
+          "action": "start_conversation",
+          "targetId": "p:1",
+          "legal": true,
+          "goalId": "event:fixture:50"
+        },
+        {
+          "step": 54,
+          "eventId": "fixture:54",
+          "action": "rest",
+          "targetId": null,
+          "legal": true,
+          "goalId": "event:fixture:50"
+        },
+        {
+          "step": 55,
+          "eventId": "fixture:55",
+          "action": "wander",
+          "targetId": null,
+          "legal": true,
+          "goalId": "event:fixture:50"
+        },
+        {
+          "step": 56,
+          "eventId": "fixture:56",
+          "action": "start_conversation",
+          "targetId": "p:1",
+          "legal": true,
+          "goalId": "event:fixture:50"
+        },
+        {
+          "step": 57,
+          "eventId": "fixture:57",
+          "action": "accept_invite",
+          "targetId": "p:1",
+          "legal": true,
+          "goalId": "event:fixture:50"
+        },
+        {
+          "step": 58,
+          "eventId": "fixture:58",
+          "action": "wander",
+          "targetId": null,
+          "legal": true,
+          "goalId": "event:fixture:50"
+        },
+        {
+          "step": 59,
+          "eventId": "fixture:59",
+          "action": "start_conversation",
+          "targetId": "p:2",
+          "legal": true,
+          "goalId": "event:fixture:50"
+        },
+        {
+          "step": 60,
+          "eventId": "fixture:60",
+          "action": "rest",
+          "targetId": null,
+          "legal": true,
+          "goalId": "event:fixture:60"
+        },
+        {
+          "step": 61,
+          "eventId": "fixture:61",
+          "action": "wander",
+          "targetId": null,
+          "legal": true,
+          "goalId": "event:fixture:50"
+        },
+        {
+          "step": 62,
+          "eventId": "fixture:62",
+          "action": "start_conversation",
+          "targetId": "p:1",
+          "legal": true,
+          "goalId": "event:fixture:50"
+        },
+        {
+          "step": 63,
+          "eventId": "fixture:63",
+          "action": "rest",
+          "targetId": null,
+          "legal": true,
+          "goalId": "event:fixture:50"
+        },
+        {
+          "step": 64,
+          "eventId": "fixture:64",
+          "action": "wander",
+          "targetId": null,
+          "legal": true,
+          "goalId": "event:fixture:50"
+        },
+        {
+          "step": 65,
+          "eventId": "fixture:65",
+          "action": "accept_invite",
+          "targetId": "p:3",
+          "legal": true,
+          "goalId": "event:fixture:50"
+        },
+        {
+          "step": 66,
+          "eventId": "fixture:66",
+          "action": "rest",
+          "targetId": null,
+          "legal": true,
+          "goalId": "event:fixture:50"
+        },
+        {
+          "step": 67,
+          "eventId": "fixture:67",
+          "action": "wander",
+          "targetId": null,
+          "legal": true,
+          "goalId": "event:fixture:50"
+        },
+        {
+          "step": 68,
+          "eventId": "fixture:68",
+          "action": "start_conversation",
+          "targetId": "p:1",
+          "legal": true,
+          "goalId": "event:fixture:68"
+        },
+        {
+          "step": 69,
+          "eventId": "fixture:69",
+          "action": "rest",
+          "targetId": null,
+          "legal": true,
+          "goalId": "event:fixture:50"
+        },
+        {
+          "step": 70,
+          "eventId": "fixture:70",
+          "action": "wander",
+          "targetId": null,
+          "legal": true,
+          "goalId": "event:fixture:50"
+        },
+        {
+          "step": 71,
+          "eventId": "fixture:71",
+          "action": "start_conversation",
+          "targetId": "p:1",
+          "legal": true,
+          "goalId": "event:fixture:50"
+        },
+        {
+          "step": 72,
+          "eventId": "fixture:72",
+          "action": "rest",
+          "targetId": null,
+          "legal": true,
+          "goalId": "event:fixture:50"
+        },
+        {
+          "step": 73,
+          "eventId": "fixture:73",
+          "action": "reject_invite",
+          "targetId": "p:2",
+          "legal": true,
+          "goalId": "event:fixture:50"
+        },
+        {
+          "step": 74,
+          "eventId": "fixture:74",
+          "action": "start_conversation",
+          "targetId": "p:2",
+          "legal": true,
+          "goalId": "event:fixture:50"
+        },
+        {
+          "step": 75,
+          "eventId": "fixture:75",
+          "action": "rest",
+          "targetId": null,
+          "legal": true,
+          "goalId": "event:fixture:50"
+        },
+        {
+          "step": 76,
+          "eventId": "fixture:76",
+          "action": "wander",
+          "targetId": null,
+          "legal": true,
+          "goalId": "event:fixture:50"
+        },
+        {
+          "step": 77,
+          "eventId": "fixture:77",
+          "action": "start_conversation",
+          "targetId": "p:1",
+          "legal": true,
+          "goalId": "event:fixture:58"
+        },
+        {
+          "step": 78,
+          "eventId": "fixture:78",
+          "action": "rest",
+          "targetId": null,
+          "legal": true,
+          "goalId": "event:fixture:58"
+        },
+        {
+          "step": 79,
+          "eventId": "fixture:79",
+          "action": "wander",
+          "targetId": null,
+          "legal": true,
+          "goalId": "event:fixture:58"
+        }
+      ],
+      "finalState": {
+        "version": 102,
+        "personality": {
+          "sociability": 0.4,
+          "caution": 0.32,
+          "curiosity": 0.86,
+          "cooperation": 0.27,
+          "stability": 0.59,
+          "selfInterest": 0.59,
+          "loyalty": 0.19
+        },
+        "relationships": [
+          {
+            "playerId": "p:2",
+            "trust": 0.04999999999999999,
+            "familiarity": 0.9999999999999999,
+            "affinity": 0,
+            "conflict": 0.6000000000000001,
+            "promises": [
+              {
+                "id": "promise:4",
+                "description": "Meet again",
+                "dueAt": 180000,
+                "status": "pending"
+              },
+              {
+                "id": "promise:28",
+                "description": "Meet again",
+                "dueAt": 660000,
+                "status": "pending"
+              },
+              {
+                "id": "promise:52",
+                "description": "Meet again",
+                "dueAt": 1140000,
+                "status": "pending"
+              },
+              {
+                "id": "promise:76",
+                "description": "Meet again",
+                "dueAt": 1620000,
+                "status": "pending"
+              }
+            ],
+            "updatedAt": 1680000
+          },
+          {
+            "playerId": "p:1",
+            "trust": 0.04999999999999999,
+            "familiarity": 1,
+            "affinity": 0,
+            "conflict": 0.6000000000000001,
+            "promises": [
+              {
+                "id": "promise:12",
+                "description": "Meet again",
+                "dueAt": 340000,
+                "status": "pending"
+              },
+              {
+                "id": "promise:36",
+                "description": "Meet again",
+                "dueAt": 820000,
+                "status": "pending"
+              },
+              {
+                "id": "promise:60",
+                "description": "Meet again",
+                "dueAt": 1300000,
+                "status": "pending"
+              }
+            ],
+            "updatedAt": 1660000
+          },
+          {
+            "playerId": "p:3",
+            "trust": 0,
+            "familiarity": 0.56,
+            "affinity": 0,
+            "conflict": 0.8,
+            "promises": [
+              {
+                "id": "promise:20",
+                "description": "Meet again",
+                "dueAt": 500000,
+                "status": "pending"
+              },
+              {
+                "id": "promise:44",
+                "description": "Meet again",
+                "dueAt": 980000,
+                "status": "pending"
+              },
+              {
+                "id": "promise:68",
+                "description": "Meet again",
+                "dueAt": 1460000,
+                "status": "pending"
+              }
+            ],
+            "updatedAt": 1640000
+          }
+        ],
+        "memories": [
+          {
+            "id": "fixture:60",
+            "at": 1300000,
+            "kind": "promise_due",
+            "targetId": "p:1",
+            "positive": true,
+            "promise": {
+              "id": "promise:60",
+              "description": "Meet again",
+              "dueAt": 1300000,
+              "status": "pending"
+            }
+          },
+          {
+            "id": "fixture:61",
+            "at": 1320000,
+            "kind": "goal_stalled",
+            "targetId": "p:2",
+            "positive": true
+          },
+          {
+            "id": "fixture:62",
+            "at": 1340000,
+            "kind": "relationship_changed",
+            "targetId": "p:3",
+            "positive": true
+          },
+          {
+            "id": "outcome:62",
+            "at": 1340000,
+            "kind": "relationship_changed",
+            "targetId": "p:1",
+            "positive": true
+          },
+          {
+            "id": "fixture:63",
+            "at": 1360000,
+            "kind": "encountered_known",
+            "targetId": "p:1",
+            "positive": true
+          },
+          {
+            "id": "fixture:64",
+            "at": 1380000,
+            "kind": "encountered_stranger",
+            "targetId": "p:2",
+            "positive": true
+          },
+          {
+            "id": "fixture:65",
+            "at": 1400000,
+            "kind": "invitation",
+            "targetId": "p:3",
+            "positive": true
+          },
+          {
+            "id": "outcome:65",
+            "at": 1400000,
+            "kind": "relationship_changed",
+            "targetId": "p:3",
+            "positive": true
+          },
+          {
+            "id": "fixture:66",
+            "at": 1420000,
+            "kind": "conflict",
+            "targetId": "p:1",
+            "positive": true
+          },
+          {
+            "id": "fixture:67",
+            "at": 1440000,
+            "kind": "rejected",
+            "targetId": "p:2",
+            "positive": true
+          },
+          {
+            "id": "fixture:68",
+            "at": 1460000,
+            "kind": "promise_due",
+            "targetId": "p:3",
+            "positive": true,
+            "promise": {
+              "id": "promise:68",
+              "description": "Meet again",
+              "dueAt": 1460000,
+              "status": "pending"
+            }
+          },
+          {
+            "id": "fixture:69",
+            "at": 1480000,
+            "kind": "goal_stalled",
+            "targetId": "p:1",
+            "positive": true
+          },
+          {
+            "id": "fixture:70",
+            "at": 1500000,
+            "kind": "relationship_changed",
+            "targetId": "p:2",
+            "positive": true
+          },
+          {
+            "id": "fixture:71",
+            "at": 1520000,
+            "kind": "encountered_known",
+            "targetId": "p:3",
+            "positive": true
+          },
+          {
+            "id": "fixture:72",
+            "at": 1540000,
+            "kind": "encountered_stranger",
+            "targetId": "p:1",
+            "positive": true
+          },
+          {
+            "id": "fixture:73",
+            "at": 1560000,
+            "kind": "invitation",
+            "targetId": "p:2",
+            "positive": true
+          },
+          {
+            "id": "fixture:74",
+            "at": 1580000,
+            "kind": "conflict",
+            "targetId": "p:3",
+            "positive": true
+          },
+          {
+            "id": "outcome:74",
+            "at": 1580000,
+            "kind": "relationship_changed",
+            "targetId": "p:2",
+            "positive": true
+          },
+          {
+            "id": "fixture:75",
+            "at": 1600000,
+            "kind": "rejected",
+            "targetId": "p:1",
+            "positive": true
+          },
+          {
+            "id": "fixture:76",
+            "at": 1620000,
+            "kind": "promise_due",
+            "targetId": "p:2",
+            "positive": true,
+            "promise": {
+              "id": "promise:76",
+              "description": "Meet again",
+              "dueAt": 1620000,
+              "status": "pending"
+            }
+          },
+          {
+            "id": "fixture:77",
+            "at": 1640000,
+            "kind": "goal_stalled",
+            "targetId": "p:3",
+            "positive": true
+          },
+          {
+            "id": "outcome:77",
+            "at": 1640000,
+            "kind": "relationship_changed",
+            "targetId": "p:1",
+            "positive": true
+          },
+          {
+            "id": "fixture:78",
+            "at": 1660000,
+            "kind": "relationship_changed",
+            "targetId": "p:1",
+            "positive": true
+          },
+          {
+            "id": "fixture:79",
+            "at": 1680000,
+            "kind": "encountered_known",
+            "targetId": "p:2",
+            "positive": true
+          }
+        ],
+        "energy": 0.96,
+        "stress": 0,
+        "goals": [
+          {
+            "id": "event:fixture:50",
+            "kind": "repair",
+            "priority": 0.55,
+            "inertia": 0.257,
+            "progress": 0,
+            "status": "active",
+            "createdAt": 1100000,
+            "expiresAt": 1700000,
+            "targetId": "p:3"
+          },
+          {
+            "id": "event:fixture:52",
+            "kind": "keep_promise",
+            "priority": 0.8,
+            "inertia": 0.257,
+            "progress": 0,
+            "status": "active",
+            "createdAt": 1140000,
+            "expiresAt": 1740000,
+            "targetId": "p:2"
+          },
+          {
+            "id": "event:fixture:58",
+            "kind": "repair",
+            "priority": 0.65,
+            "inertia": 0.457,
+            "progress": 0,
+            "status": "active",
+            "createdAt": 1260000,
+            "expiresAt": 1860000,
+            "targetId": "p:2"
+          },
+          {
+            "id": "event:fixture:60",
+            "kind": "keep_promise",
+            "priority": 0.8,
+            "inertia": 0.257,
+            "progress": 0,
+            "status": "active",
+            "createdAt": 1300000,
+            "expiresAt": 1900000,
+            "targetId": "p:1"
+          },
+          {
+            "id": "event:fixture:66",
+            "kind": "repair",
+            "priority": 0.65,
+            "inertia": 0.457,
+            "progress": 0,
+            "status": "active",
+            "createdAt": 1420000,
+            "expiresAt": 2020000,
+            "targetId": "p:1"
+          },
+          {
+            "id": "event:fixture:68",
+            "kind": "keep_promise",
+            "priority": 0.8,
+            "inertia": 0.257,
+            "progress": 0,
+            "status": "active",
+            "createdAt": 1460000,
+            "expiresAt": 2060000,
+            "targetId": "p:3"
+          }
+        ]
+      }
+    },
+    {
+      "mode": "mock",
+      "label": "Mock seeded utility perturbation",
+      "metrics": {
+        "decisions": 80,
+        "actionDistribution": {
+          "wander": 20,
+          "accept_invite": 1,
+          "repair_relationship": 22,
+          "rest": 16,
+          "reject_invite": 9,
+          "avoid_person": 12
+        },
+        "consecutiveActionTargetRepeats": 14,
+        "goalSwitches": 24,
+        "pointlessGoalSwitches": 0,
+        "successfulInteractions": 21,
+        "completedGoals": 11,
+        "decisionSuccessRate": 1,
+        "relationshipChanges": [
+          {
+            "playerId": "p:2",
+            "trustDelta": -0.45,
+            "affinityDelta": -0.5,
+            "familiarityDelta": 1,
+            "conflictDelta": 0.6000000000000001
+          },
+          {
+            "playerId": "p:1",
+            "trustDelta": -0.45,
+            "affinityDelta": -0.5,
+            "familiarityDelta": 1,
+            "conflictDelta": 0.6000000000000001
+          },
+          {
+            "playerId": "p:3",
+            "trustDelta": -0.5,
+            "affinityDelta": -0.5,
+            "familiarityDelta": 0.8,
+            "conflictDelta": 0.8
+          }
+        ],
+        "apiRequests": 0,
+        "apiCostUsd": 0,
+        "apiLatencyMs": null,
+        "invalidStateCount": 0
+      },
+      "trace": [
+        {
+          "step": 0,
+          "eventId": "fixture:0",
+          "action": "wander",
+          "targetId": null,
+          "legal": true,
+          "goalId": "initial:evaluation:ai-town-2026"
+        },
+        {
+          "step": 1,
+          "eventId": "fixture:1",
+          "action": "accept_invite",
+          "targetId": "p:2",
+          "legal": true,
+          "goalId": "initial:evaluation:ai-town-2026"
+        },
+        {
+          "step": 2,
+          "eventId": "fixture:2",
+          "action": "wander",
+          "targetId": null,
+          "legal": true,
+          "goalId": "event:fixture:2"
+        },
+        {
+          "step": 3,
+          "eventId": "fixture:3",
+          "action": "repair_relationship",
+          "targetId": "p:3",
+          "legal": true,
+          "goalId": "event:fixture:2"
+        },
+        {
+          "step": 4,
+          "eventId": "fixture:4",
+          "action": "repair_relationship",
+          "targetId": "p:2",
+          "legal": true,
+          "goalId": "event:fixture:4"
+        },
+        {
+          "step": 5,
+          "eventId": "fixture:5",
+          "action": "wander",
+          "targetId": null,
+          "legal": true,
+          "goalId": "initial:evaluation:ai-town-2026"
+        },
+        {
+          "step": 6,
+          "eventId": "fixture:6",
+          "action": "wander",
+          "targetId": null,
+          "legal": true,
+          "goalId": "initial:evaluation:ai-town-2026"
+        },
+        {
+          "step": 7,
+          "eventId": "fixture:7",
+          "action": "rest",
+          "targetId": null,
+          "legal": true,
+          "goalId": "event:fixture:2"
+        },
+        {
+          "step": 8,
+          "eventId": "fixture:8",
+          "action": "wander",
+          "targetId": null,
+          "legal": true,
+          "goalId": "event:fixture:2"
+        },
+        {
+          "step": 9,
+          "eventId": "fixture:9",
+          "action": "reject_invite",
+          "targetId": "p:1",
+          "legal": true,
+          "goalId": "event:fixture:2"
+        },
+        {
+          "step": 10,
+          "eventId": "fixture:10",
+          "action": "rest",
+          "targetId": null,
+          "legal": true,
+          "goalId": "event:fixture:10"
+        },
+        {
+          "step": 11,
+          "eventId": "fixture:11",
+          "action": "wander",
+          "targetId": null,
+          "legal": true,
+          "goalId": "event:fixture:10"
+        },
+        {
+          "step": 12,
+          "eventId": "fixture:12",
+          "action": "wander",
+          "targetId": null,
+          "legal": true,
+          "goalId": "event:fixture:12"
+        },
+        {
+          "step": 13,
+          "eventId": "fixture:13",
+          "action": "wander",
+          "targetId": null,
+          "legal": true,
+          "goalId": "event:fixture:10"
+        },
+        {
+          "step": 14,
+          "eventId": "fixture:14",
+          "action": "rest",
+          "targetId": null,
+          "legal": true,
+          "goalId": "event:fixture:10"
+        },
+        {
+          "step": 15,
+          "eventId": "fixture:15",
+          "action": "repair_relationship",
+          "targetId": "p:2",
+          "legal": true,
+          "goalId": "event:fixture:10"
+        },
+        {
+          "step": 16,
+          "eventId": "fixture:16",
+          "action": "repair_relationship",
+          "targetId": "p:2",
+          "legal": true,
+          "goalId": "event:fixture:10"
+        },
+        {
+          "step": 17,
+          "eventId": "fixture:17",
+          "action": "reject_invite",
+          "targetId": "p:3",
+          "legal": true,
+          "goalId": "event:fixture:10"
+        },
+        {
+          "step": 18,
+          "eventId": "fixture:18",
+          "action": "rest",
+          "targetId": null,
+          "legal": true,
+          "goalId": "event:fixture:10"
+        },
+        {
+          "step": 19,
+          "eventId": "fixture:19",
+          "action": "repair_relationship",
+          "targetId": "p:2",
+          "legal": true,
+          "goalId": "event:fixture:10"
+        },
+        {
+          "step": 20,
+          "eventId": "fixture:20",
+          "action": "repair_relationship",
+          "targetId": "p:3",
+          "legal": true,
+          "goalId": "event:fixture:20"
+        },
+        {
+          "step": 21,
+          "eventId": "fixture:21",
+          "action": "wander",
+          "targetId": null,
+          "legal": true,
+          "goalId": "event:fixture:18"
+        },
+        {
+          "step": 22,
+          "eventId": "fixture:22",
+          "action": "wander",
+          "targetId": null,
+          "legal": true,
+          "goalId": "event:fixture:18"
+        },
+        {
+          "step": 23,
+          "eventId": "fixture:23",
+          "action": "repair_relationship",
+          "targetId": "p:1",
+          "legal": true,
+          "goalId": "event:fixture:18"
+        },
+        {
+          "step": 24,
+          "eventId": "fixture:24",
+          "action": "rest",
+          "targetId": null,
+          "legal": true,
+          "goalId": "event:fixture:18"
+        },
+        {
+          "step": 25,
+          "eventId": "fixture:25",
+          "action": "reject_invite",
+          "targetId": "p:2",
+          "legal": true,
+          "goalId": "event:fixture:18"
+        },
+        {
+          "step": 26,
+          "eventId": "fixture:26",
+          "action": "repair_relationship",
+          "targetId": "p:1",
+          "legal": true,
+          "goalId": "event:fixture:18"
+        },
+        {
+          "step": 27,
+          "eventId": "fixture:27",
+          "action": "rest",
+          "targetId": null,
+          "legal": true,
+          "goalId": "event:fixture:18"
+        },
+        {
+          "step": 28,
+          "eventId": "fixture:28",
+          "action": "wander",
+          "targetId": null,
+          "legal": true,
+          "goalId": "event:fixture:28"
+        },
+        {
+          "step": 29,
+          "eventId": "fixture:29",
+          "action": "wander",
+          "targetId": null,
+          "legal": true,
+          "goalId": "event:fixture:18"
+        },
+        {
+          "step": 30,
+          "eventId": "fixture:30",
+          "action": "repair_relationship",
+          "targetId": "p:1",
+          "legal": true,
+          "goalId": "event:fixture:18"
+        },
+        {
+          "step": 31,
+          "eventId": "fixture:31",
+          "action": "wander",
+          "targetId": null,
+          "legal": true,
+          "goalId": "event:fixture:18"
+        },
+        {
+          "step": 32,
+          "eventId": "fixture:32",
+          "action": "wander",
+          "targetId": null,
+          "legal": true,
+          "goalId": "event:fixture:18"
+        },
+        {
+          "step": 33,
+          "eventId": "fixture:33",
+          "action": "reject_invite",
+          "targetId": "p:1",
+          "legal": true,
+          "goalId": "event:fixture:18"
+        },
+        {
+          "step": 34,
+          "eventId": "fixture:34",
+          "action": "rest",
+          "targetId": null,
+          "legal": true,
+          "goalId": "event:fixture:18"
+        },
+        {
+          "step": 35,
+          "eventId": "fixture:35",
+          "action": "repair_relationship",
+          "targetId": "p:1",
+          "legal": true,
+          "goalId": "event:fixture:18"
+        },
+        {
+          "step": 36,
+          "eventId": "fixture:36",
+          "action": "repair_relationship",
+          "targetId": "p:1",
+          "legal": true,
+          "goalId": "event:fixture:36"
+        },
+        {
+          "step": 37,
+          "eventId": "fixture:37",
+          "action": "rest",
+          "targetId": null,
+          "legal": true,
+          "goalId": "event:fixture:28"
+        },
+        {
+          "step": 38,
+          "eventId": "fixture:38",
+          "action": "avoid_person",
+          "targetId": "p:2",
+          "legal": true,
+          "goalId": "event:fixture:28"
+        },
+        {
+          "step": 39,
+          "eventId": "fixture:39",
+          "action": "repair_relationship",
+          "targetId": "p:2",
+          "legal": true,
+          "goalId": "event:fixture:28"
+        },
+        {
+          "step": 40,
+          "eventId": "fixture:40",
+          "action": "repair_relationship",
+          "targetId": "p:1",
+          "legal": true,
+          "goalId": "event:fixture:18"
+        },
+        {
+          "step": 41,
+          "eventId": "fixture:41",
+          "action": "reject_invite",
+          "targetId": "p:3",
+          "legal": true,
+          "goalId": "event:fixture:18"
+        },
+        {
+          "step": 42,
+          "eventId": "fixture:42",
+          "action": "rest",
+          "targetId": null,
+          "legal": true,
+          "goalId": "event:fixture:18"
+        },
+        {
+          "step": 43,
+          "eventId": "fixture:43",
+          "action": "wander",
+          "targetId": null,
+          "legal": true,
+          "goalId": "event:fixture:18"
+        },
+        {
+          "step": 44,
+          "eventId": "fixture:44",
+          "action": "repair_relationship",
+          "targetId": "p:3",
+          "legal": true,
+          "goalId": "event:fixture:44"
+        },
+        {
+          "step": 45,
+          "eventId": "fixture:45",
+          "action": "rest",
+          "targetId": null,
+          "legal": true,
+          "goalId": "event:fixture:44"
+        },
+        {
+          "step": 46,
+          "eventId": "fixture:46",
+          "action": "repair_relationship",
+          "targetId": "p:3",
+          "legal": true,
+          "goalId": "event:fixture:44"
+        },
+        {
+          "step": 47,
+          "eventId": "fixture:47",
+          "action": "wander",
+          "targetId": null,
+          "legal": true,
+          "goalId": "event:fixture:18"
+        },
+        {
+          "step": 48,
+          "eventId": "fixture:48",
+          "action": "wander",
+          "targetId": null,
+          "legal": true,
+          "goalId": "renew:64:1060000"
+        },
+        {
+          "step": 49,
+          "eventId": "fixture:49",
+          "action": "reject_invite",
+          "targetId": "p:2",
+          "legal": true,
+          "goalId": "renew:64:1060000"
+        },
+        {
+          "step": 50,
+          "eventId": "fixture:50",
+          "action": "avoid_person",
+          "targetId": "p:3",
+          "legal": true,
+          "goalId": "event:fixture:50"
+        },
+        {
+          "step": 51,
+          "eventId": "fixture:51",
+          "action": "rest",
+          "targetId": null,
+          "legal": true,
+          "goalId": "event:fixture:50"
+        },
+        {
+          "step": 52,
+          "eventId": "fixture:52",
+          "action": "repair_relationship",
+          "targetId": "p:2",
+          "legal": true,
+          "goalId": "event:fixture:52"
+        },
+        {
+          "step": 53,
+          "eventId": "fixture:53",
+          "action": "wander",
+          "targetId": null,
+          "legal": true,
+          "goalId": "renew:64:1060000"
+        },
+        {
+          "step": 54,
+          "eventId": "fixture:54",
+          "action": "wander",
+          "targetId": null,
+          "legal": true,
+          "goalId": "renew:64:1060000"
+        },
+        {
+          "step": 55,
+          "eventId": "fixture:55",
+          "action": "wander",
+          "targetId": null,
+          "legal": true,
+          "goalId": "renew:64:1060000"
+        },
+        {
+          "step": 56,
+          "eventId": "fixture:56",
+          "action": "rest",
+          "targetId": null,
+          "legal": true,
+          "goalId": "event:fixture:50"
+        },
+        {
+          "step": 57,
+          "eventId": "fixture:57",
+          "action": "reject_invite",
+          "targetId": "p:1",
+          "legal": true,
+          "goalId": "event:fixture:50"
+        },
+        {
+          "step": 58,
+          "eventId": "fixture:58",
+          "action": "avoid_person",
+          "targetId": "p:2",
+          "legal": true,
+          "goalId": "event:fixture:58"
+        },
+        {
+          "step": 59,
+          "eventId": "fixture:59",
+          "action": "rest",
+          "targetId": null,
+          "legal": true,
+          "goalId": "event:fixture:58"
+        },
+        {
+          "step": 60,
+          "eventId": "fixture:60",
+          "action": "repair_relationship",
+          "targetId": "p:1",
+          "legal": true,
+          "goalId": "event:fixture:60"
+        },
+        {
+          "step": 61,
+          "eventId": "fixture:61",
+          "action": "repair_relationship",
+          "targetId": "p:3",
+          "legal": true,
+          "goalId": "event:fixture:50"
+        },
+        {
+          "step": 62,
+          "eventId": "fixture:62",
+          "action": "avoid_person",
+          "targetId": "p:2",
+          "legal": true,
+          "goalId": "event:fixture:50"
+        },
+        {
+          "step": 63,
+          "eventId": "fixture:63",
+          "action": "avoid_person",
+          "targetId": "p:3",
+          "legal": true,
+          "goalId": "event:fixture:50"
+        },
+        {
+          "step": 64,
+          "eventId": "fixture:64",
+          "action": "avoid_person",
+          "targetId": "p:3",
+          "legal": true,
+          "goalId": "event:fixture:50"
+        },
+        {
+          "step": 65,
+          "eventId": "fixture:65",
+          "action": "reject_invite",
+          "targetId": "p:3",
+          "legal": true,
+          "goalId": "event:fixture:50"
+        },
+        {
+          "step": 66,
+          "eventId": "fixture:66",
+          "action": "rest",
+          "targetId": null,
+          "legal": true,
+          "goalId": "event:fixture:66"
+        },
+        {
+          "step": 67,
+          "eventId": "fixture:67",
+          "action": "avoid_person",
+          "targetId": "p:3",
+          "legal": true,
+          "goalId": "event:fixture:66"
+        },
+        {
+          "step": 68,
+          "eventId": "fixture:68",
+          "action": "repair_relationship",
+          "targetId": "p:3",
+          "legal": true,
+          "goalId": "event:fixture:68"
+        },
+        {
+          "step": 69,
+          "eventId": "fixture:69",
+          "action": "avoid_person",
+          "targetId": "p:2",
+          "legal": true,
+          "goalId": "event:fixture:66"
+        },
+        {
+          "step": 70,
+          "eventId": "fixture:70",
+          "action": "repair_relationship",
+          "targetId": "p:1",
+          "legal": true,
+          "goalId": "event:fixture:66"
+        },
+        {
+          "step": 71,
+          "eventId": "fixture:71",
+          "action": "rest",
+          "targetId": null,
+          "legal": true,
+          "goalId": "event:fixture:66"
+        },
+        {
+          "step": 72,
+          "eventId": "fixture:72",
+          "action": "repair_relationship",
+          "targetId": "p:1",
+          "legal": true,
+          "goalId": "event:fixture:66"
+        },
+        {
+          "step": 73,
+          "eventId": "fixture:73",
+          "action": "reject_invite",
+          "targetId": "p:2",
+          "legal": true,
+          "goalId": "event:fixture:66"
+        },
+        {
+          "step": 74,
+          "eventId": "fixture:74",
+          "action": "avoid_person",
+          "targetId": "p:3",
+          "legal": true,
+          "goalId": "event:fixture:66"
+        },
+        {
+          "step": 75,
+          "eventId": "fixture:75",
+          "action": "rest",
+          "targetId": null,
+          "legal": true,
+          "goalId": "event:fixture:66"
+        },
+        {
+          "step": 76,
+          "eventId": "fixture:76",
+          "action": "repair_relationship",
+          "targetId": "p:2",
+          "legal": true,
+          "goalId": "event:fixture:76"
+        },
+        {
+          "step": 77,
+          "eventId": "fixture:77",
+          "action": "avoid_person",
+          "targetId": "p:3",
+          "legal": true,
+          "goalId": "event:fixture:68"
+        },
+        {
+          "step": 78,
+          "eventId": "fixture:78",
+          "action": "avoid_person",
+          "targetId": "p:3",
+          "legal": true,
+          "goalId": "event:fixture:68"
+        },
+        {
+          "step": 79,
+          "eventId": "fixture:79",
+          "action": "avoid_person",
+          "targetId": "p:3",
+          "legal": true,
+          "goalId": "event:fixture:68"
+        }
+      ],
+      "finalState": {
+        "version": 101,
+        "personality": {
+          "sociability": 0.4,
+          "caution": 0.32,
+          "curiosity": 0.86,
+          "cooperation": 0.27,
+          "stability": 0.59,
+          "selfInterest": 0.59,
+          "loyalty": 0.19
+        },
+        "relationships": [
+          {
+            "playerId": "p:2",
+            "trust": 0.04999999999999999,
+            "familiarity": 1,
+            "affinity": 0,
+            "conflict": 0.6000000000000001,
+            "promises": [
+              {
+                "id": "promise:4",
+                "description": "Meet again",
+                "dueAt": 180000,
+                "status": "fulfilled"
+              },
+              {
+                "id": "promise:28",
+                "description": "Meet again",
+                "dueAt": 660000,
+                "status": "fulfilled"
+              },
+              {
+                "id": "promise:52",
+                "description": "Meet again",
+                "dueAt": 1140000,
+                "status": "fulfilled"
+              },
+              {
+                "id": "promise:76",
+                "description": "Meet again",
+                "dueAt": 1620000,
+                "status": "fulfilled"
+              }
+            ],
+            "updatedAt": 1680000
+          },
+          {
+            "playerId": "p:1",
+            "trust": 0.04999999999999999,
+            "familiarity": 1,
+            "affinity": 0,
+            "conflict": 0.6000000000000001,
+            "promises": [
+              {
+                "id": "promise:12",
+                "description": "Meet again",
+                "dueAt": 340000,
+                "status": "fulfilled"
+              },
+              {
+                "id": "promise:36",
+                "description": "Meet again",
+                "dueAt": 820000,
+                "status": "fulfilled"
+              },
+              {
+                "id": "promise:60",
+                "description": "Meet again",
+                "dueAt": 1300000,
+                "status": "fulfilled"
+              }
+            ],
+            "updatedAt": 1660000
+          },
+          {
+            "playerId": "p:3",
+            "trust": 0,
+            "familiarity": 0.8,
+            "affinity": 0,
+            "conflict": 0.8,
+            "promises": [
+              {
+                "id": "promise:20",
+                "description": "Meet again",
+                "dueAt": 500000,
+                "status": "fulfilled"
+              },
+              {
+                "id": "promise:44",
+                "description": "Meet again",
+                "dueAt": 980000,
+                "status": "fulfilled"
+              },
+              {
+                "id": "promise:68",
+                "description": "Meet again",
+                "dueAt": 1460000,
+                "status": "pending"
+              }
+            ],
+            "updatedAt": 1640000
+          }
+        ],
+        "memories": [
+          {
+            "id": "outcome:60",
+            "at": 1300000,
+            "kind": "relationship_changed",
+            "targetId": "p:1",
+            "positive": true,
+            "promise": {
+              "id": "promise:60",
+              "description": "Meet again",
+              "dueAt": 1300000,
+              "status": "fulfilled"
+            }
+          },
+          {
+            "id": "fixture:61",
+            "at": 1320000,
+            "kind": "goal_stalled",
+            "targetId": "p:2",
+            "positive": true
+          },
+          {
+            "id": "outcome:61",
+            "at": 1320000,
+            "kind": "relationship_changed",
+            "targetId": "p:3",
+            "positive": true
+          },
+          {
+            "id": "fixture:62",
+            "at": 1340000,
+            "kind": "relationship_changed",
+            "targetId": "p:3",
+            "positive": true
+          },
+          {
+            "id": "fixture:63",
+            "at": 1360000,
+            "kind": "encountered_known",
+            "targetId": "p:1",
+            "positive": true
+          },
+          {
+            "id": "fixture:64",
+            "at": 1380000,
+            "kind": "encountered_stranger",
+            "targetId": "p:2",
+            "positive": true
+          },
+          {
+            "id": "fixture:65",
+            "at": 1400000,
+            "kind": "invitation",
+            "targetId": "p:3",
+            "positive": true
+          },
+          {
+            "id": "fixture:66",
+            "at": 1420000,
+            "kind": "conflict",
+            "targetId": "p:1",
+            "positive": true
+          },
+          {
+            "id": "fixture:67",
+            "at": 1440000,
+            "kind": "rejected",
+            "targetId": "p:2",
+            "positive": true
+          },
+          {
+            "id": "fixture:68",
+            "at": 1460000,
+            "kind": "promise_due",
+            "targetId": "p:3",
+            "positive": true,
+            "promise": {
+              "id": "promise:68",
+              "description": "Meet again",
+              "dueAt": 1460000,
+              "status": "pending"
+            }
+          },
+          {
+            "id": "fixture:69",
+            "at": 1480000,
+            "kind": "goal_stalled",
+            "targetId": "p:1",
+            "positive": true
+          },
+          {
+            "id": "fixture:70",
+            "at": 1500000,
+            "kind": "relationship_changed",
+            "targetId": "p:2",
+            "positive": true
+          },
+          {
+            "id": "outcome:70",
+            "at": 1500000,
+            "kind": "relationship_changed",
+            "targetId": "p:1",
+            "positive": true
+          },
+          {
+            "id": "fixture:71",
+            "at": 1520000,
+            "kind": "encountered_known",
+            "targetId": "p:3",
+            "positive": true
+          },
+          {
+            "id": "fixture:72",
+            "at": 1540000,
+            "kind": "encountered_stranger",
+            "targetId": "p:1",
+            "positive": true
+          },
+          {
+            "id": "outcome:72",
+            "at": 1540000,
+            "kind": "relationship_changed",
+            "targetId": "p:1",
+            "positive": true
+          },
+          {
+            "id": "fixture:73",
+            "at": 1560000,
+            "kind": "invitation",
+            "targetId": "p:2",
+            "positive": true
+          },
+          {
+            "id": "fixture:74",
+            "at": 1580000,
+            "kind": "conflict",
+            "targetId": "p:3",
+            "positive": true
+          },
+          {
+            "id": "fixture:75",
+            "at": 1600000,
+            "kind": "rejected",
+            "targetId": "p:1",
+            "positive": true
+          },
+          {
+            "id": "fixture:76",
+            "at": 1620000,
+            "kind": "promise_due",
+            "targetId": "p:2",
+            "positive": true,
+            "promise": {
+              "id": "promise:76",
+              "description": "Meet again",
+              "dueAt": 1620000,
+              "status": "pending"
+            }
+          },
+          {
+            "id": "outcome:76",
+            "at": 1620000,
+            "kind": "relationship_changed",
+            "targetId": "p:2",
+            "positive": true,
+            "promise": {
+              "id": "promise:76",
+              "description": "Meet again",
+              "dueAt": 1620000,
+              "status": "fulfilled"
+            }
+          },
+          {
+            "id": "fixture:77",
+            "at": 1640000,
+            "kind": "goal_stalled",
+            "targetId": "p:3",
+            "positive": true
+          },
+          {
+            "id": "fixture:78",
+            "at": 1660000,
+            "kind": "relationship_changed",
+            "targetId": "p:1",
+            "positive": true
+          },
+          {
+            "id": "fixture:79",
+            "at": 1680000,
+            "kind": "encountered_known",
+            "targetId": "p:2",
+            "positive": true
+          }
+        ],
+        "energy": 0.6899999999999981,
+        "stress": 0.3999999999999998,
+        "goals": [
+          {
+            "id": "event:fixture:52",
+            "kind": "keep_promise",
+            "priority": 0.9,
+            "inertia": 0.457,
+            "progress": 1,
+            "status": "completed",
+            "createdAt": 1140000,
+            "expiresAt": 1740000,
+            "targetId": "p:2"
+          },
+          {
+            "id": "event:fixture:58",
+            "kind": "repair",
+            "priority": 0.55,
+            "inertia": 0.257,
+            "progress": 0,
+            "status": "active",
+            "createdAt": 1260000,
+            "expiresAt": 1860000,
+            "targetId": "p:2"
+          },
+          {
+            "id": "event:fixture:60",
+            "kind": "keep_promise",
+            "priority": 0.9,
+            "inertia": 0.457,
+            "progress": 1,
+            "status": "completed",
+            "createdAt": 1300000,
+            "expiresAt": 1900000,
+            "targetId": "p:1"
+          },
+          {
+            "id": "event:fixture:66",
+            "kind": "repair",
+            "priority": 0.55,
+            "inertia": 0.257,
+            "progress": 0,
+            "status": "active",
+            "createdAt": 1420000,
+            "expiresAt": 2020000,
+            "targetId": "p:1"
+          },
+          {
+            "id": "event:fixture:68",
+            "kind": "keep_promise",
+            "priority": 0.8,
+            "inertia": 0.257,
+            "progress": 0,
+            "status": "active",
+            "createdAt": 1460000,
+            "expiresAt": 2060000,
+            "targetId": "p:3"
+          },
+          {
+            "id": "event:fixture:76",
+            "kind": "keep_promise",
+            "priority": 0.9,
+            "inertia": 0.457,
+            "progress": 1,
+            "status": "completed",
+            "createdAt": 1620000,
+            "expiresAt": 2220000,
+            "targetId": "p:2"
+          }
+        ]
+      }
+    },
+    {
+      "mode": "hybrid",
+      "label": "Hybrid unavailable: deterministic utility fallback (no API)",
+      "metrics": {
+        "decisions": 80,
+        "actionDistribution": {
+          "wander": 26,
+          "accept_invite": 1,
+          "start_conversation": 1,
+          "rest": 16,
+          "repair_relationship": 17,
+          "reject_invite": 9,
+          "avoid_person": 10
+        },
+        "consecutiveActionTargetRepeats": 19,
+        "goalSwitches": 24,
+        "pointlessGoalSwitches": 0,
+        "successfulInteractions": 15,
+        "completedGoals": 10,
+        "decisionSuccessRate": 1,
+        "relationshipChanges": [
+          {
+            "playerId": "p:2",
+            "trustDelta": -0.45,
+            "affinityDelta": -0.5,
+            "familiarityDelta": 1,
+            "conflictDelta": 0.6000000000000001
+          },
+          {
+            "playerId": "p:1",
+            "trustDelta": -0.45,
+            "affinityDelta": -0.5,
+            "familiarityDelta": 1,
+            "conflictDelta": 0.6000000000000001
+          },
+          {
+            "playerId": "p:3",
+            "trustDelta": -0.5,
+            "affinityDelta": -0.5,
+            "familiarityDelta": 0.7200000000000001,
+            "conflictDelta": 0.8
+          }
+        ],
+        "apiRequests": 0,
+        "apiCostUsd": 0,
+        "apiLatencyMs": null,
+        "invalidStateCount": 0
+      },
+      "trace": [
+        {
+          "step": 0,
+          "eventId": "fixture:0",
+          "action": "wander",
+          "targetId": null,
+          "legal": true,
+          "goalId": "initial:evaluation:ai-town-2026"
+        },
+        {
+          "step": 1,
+          "eventId": "fixture:1",
+          "action": "accept_invite",
+          "targetId": "p:2",
+          "legal": true,
+          "goalId": "initial:evaluation:ai-town-2026"
+        },
+        {
+          "step": 2,
+          "eventId": "fixture:2",
+          "action": "start_conversation",
+          "targetId": "p:1",
+          "legal": true,
+          "goalId": "event:fixture:2"
+        },
+        {
+          "step": 3,
+          "eventId": "fixture:3",
+          "action": "rest",
+          "targetId": null,
+          "legal": true,
+          "goalId": "event:fixture:2"
+        },
+        {
+          "step": 4,
+          "eventId": "fixture:4",
+          "action": "repair_relationship",
+          "targetId": "p:2",
+          "legal": true,
+          "goalId": "event:fixture:4"
+        },
+        {
+          "step": 5,
+          "eventId": "fixture:5",
+          "action": "wander",
+          "targetId": null,
+          "legal": true,
+          "goalId": "initial:evaluation:ai-town-2026"
+        },
+        {
+          "step": 6,
+          "eventId": "fixture:6",
+          "action": "wander",
+          "targetId": null,
+          "legal": true,
+          "goalId": "initial:evaluation:ai-town-2026"
+        },
+        {
+          "step": 7,
+          "eventId": "fixture:7",
+          "action": "wander",
+          "targetId": null,
+          "legal": true,
+          "goalId": "initial:evaluation:ai-town-2026"
+        },
+        {
+          "step": 8,
+          "eventId": "fixture:8",
+          "action": "wander",
+          "targetId": null,
+          "legal": true,
+          "goalId": "event:fixture:2"
+        },
+        {
+          "step": 9,
+          "eventId": "fixture:9",
+          "action": "reject_invite",
+          "targetId": "p:1",
+          "legal": true,
+          "goalId": "event:fixture:2"
+        },
+        {
+          "step": 10,
+          "eventId": "fixture:10",
+          "action": "rest",
+          "targetId": null,
+          "legal": true,
+          "goalId": "event:fixture:10"
+        },
+        {
+          "step": 11,
+          "eventId": "fixture:11",
+          "action": "repair_relationship",
+          "targetId": "p:2",
+          "legal": true,
+          "goalId": "event:fixture:10"
+        },
+        {
+          "step": 12,
+          "eventId": "fixture:12",
+          "action": "repair_relationship",
+          "targetId": "p:1",
+          "legal": true,
+          "goalId": "event:fixture:12"
+        },
+        {
+          "step": 13,
+          "eventId": "fixture:13",
+          "action": "rest",
+          "targetId": null,
+          "legal": true,
+          "goalId": "event:fixture:2"
+        },
+        {
+          "step": 14,
+          "eventId": "fixture:14",
+          "action": "wander",
+          "targetId": null,
+          "legal": true,
+          "goalId": "event:fixture:2"
+        },
+        {
+          "step": 15,
+          "eventId": "fixture:15",
+          "action": "wander",
+          "targetId": null,
+          "legal": true,
+          "goalId": "event:fixture:2"
+        },
+        {
+          "step": 16,
+          "eventId": "fixture:16",
+          "action": "wander",
+          "targetId": null,
+          "legal": true,
+          "goalId": "event:fixture:2"
+        },
+        {
+          "step": 17,
+          "eventId": "fixture:17",
+          "action": "reject_invite",
+          "targetId": "p:3",
+          "legal": true,
+          "goalId": "event:fixture:2"
+        },
+        {
+          "step": 18,
+          "eventId": "fixture:18",
+          "action": "rest",
+          "targetId": null,
+          "legal": true,
+          "goalId": "event:fixture:18"
+        },
+        {
+          "step": 19,
+          "eventId": "fixture:19",
+          "action": "wander",
+          "targetId": null,
+          "legal": true,
+          "goalId": "event:fixture:18"
+        },
+        {
+          "step": 20,
+          "eventId": "fixture:20",
+          "action": "repair_relationship",
+          "targetId": "p:3",
+          "legal": true,
+          "goalId": "event:fixture:20"
+        },
+        {
+          "step": 21,
+          "eventId": "fixture:21",
+          "action": "wander",
+          "targetId": null,
+          "legal": true,
+          "goalId": "event:fixture:2"
+        },
+        {
+          "step": 22,
+          "eventId": "fixture:22",
+          "action": "wander",
+          "targetId": null,
+          "legal": true,
+          "goalId": "event:fixture:2"
+        },
+        {
+          "step": 23,
+          "eventId": "fixture:23",
+          "action": "rest",
+          "targetId": null,
+          "legal": true,
+          "goalId": "event:fixture:2"
+        },
+        {
+          "step": 24,
+          "eventId": "fixture:24",
+          "action": "wander",
+          "targetId": null,
+          "legal": true,
+          "goalId": "event:fixture:2"
+        },
+        {
+          "step": 25,
+          "eventId": "fixture:25",
+          "action": "reject_invite",
+          "targetId": "p:2",
+          "legal": true,
+          "goalId": "event:fixture:2"
+        },
+        {
+          "step": 26,
+          "eventId": "fixture:26",
+          "action": "wander",
+          "targetId": null,
+          "legal": true,
+          "goalId": "event:fixture:2"
+        },
+        {
+          "step": 27,
+          "eventId": "fixture:27",
+          "action": "rest",
+          "targetId": null,
+          "legal": true,
+          "goalId": "event:fixture:2"
+        },
+        {
+          "step": 28,
+          "eventId": "fixture:28",
+          "action": "wander",
+          "targetId": null,
+          "legal": true,
+          "goalId": "event:fixture:28"
+        },
+        {
+          "step": 29,
+          "eventId": "fixture:29",
+          "action": "repair_relationship",
+          "targetId": "p:2",
+          "legal": true,
+          "goalId": "event:fixture:28"
+        },
+        {
+          "step": 30,
+          "eventId": "fixture:30",
+          "action": "repair_relationship",
+          "targetId": "p:2",
+          "legal": true,
+          "goalId": "event:fixture:28"
+        },
+        {
+          "step": 31,
+          "eventId": "fixture:31",
+          "action": "wander",
+          "targetId": null,
+          "legal": true,
+          "goalId": "event:fixture:10"
+        },
+        {
+          "step": 32,
+          "eventId": "fixture:32",
+          "action": "rest",
+          "targetId": null,
+          "legal": true,
+          "goalId": "event:fixture:10"
+        },
+        {
+          "step": 33,
+          "eventId": "fixture:33",
+          "action": "reject_invite",
+          "targetId": "p:1",
+          "legal": true,
+          "goalId": "event:fixture:10"
+        },
+        {
+          "step": 34,
+          "eventId": "fixture:34",
+          "action": "wander",
+          "targetId": null,
+          "legal": true,
+          "goalId": "event:fixture:10"
+        },
+        {
+          "step": 35,
+          "eventId": "fixture:35",
+          "action": "wander",
+          "targetId": null,
+          "legal": true,
+          "goalId": "event:fixture:10"
+        },
+        {
+          "step": 36,
+          "eventId": "fixture:36",
+          "action": "repair_relationship",
+          "targetId": "p:1",
+          "legal": true,
+          "goalId": "event:fixture:36"
+        },
+        {
+          "step": 37,
+          "eventId": "fixture:37",
+          "action": "rest",
+          "targetId": null,
+          "legal": true,
+          "goalId": "event:fixture:18"
+        },
+        {
+          "step": 38,
+          "eventId": "fixture:38",
+          "action": "wander",
+          "targetId": null,
+          "legal": true,
+          "goalId": "event:fixture:18"
+        },
+        {
+          "step": 39,
+          "eventId": "fixture:39",
+          "action": "wander",
+          "targetId": null,
+          "legal": true,
+          "goalId": "event:fixture:18"
+        },
+        {
+          "step": 40,
+          "eventId": "fixture:40",
+          "action": "wander",
+          "targetId": null,
+          "legal": true,
+          "goalId": "event:fixture:18"
+        },
+        {
+          "step": 41,
+          "eventId": "fixture:41",
+          "action": "reject_invite",
+          "targetId": "p:3",
+          "legal": true,
+          "goalId": "event:fixture:18"
+        },
+        {
+          "step": 42,
+          "eventId": "fixture:42",
+          "action": "rest",
+          "targetId": null,
+          "legal": true,
+          "goalId": "event:fixture:18"
+        },
+        {
+          "step": 43,
+          "eventId": "fixture:43",
+          "action": "wander",
+          "targetId": null,
+          "legal": true,
+          "goalId": "event:fixture:18"
+        },
+        {
+          "step": 44,
+          "eventId": "fixture:44",
+          "action": "repair_relationship",
+          "targetId": "p:3",
+          "legal": true,
+          "goalId": "event:fixture:44"
+        },
+        {
+          "step": 45,
+          "eventId": "fixture:45",
+          "action": "repair_relationship",
+          "targetId": "p:3",
+          "legal": true,
+          "goalId": "event:fixture:44"
+        },
+        {
+          "step": 46,
+          "eventId": "fixture:46",
+          "action": "rest",
+          "targetId": null,
+          "legal": true,
+          "goalId": "event:fixture:18"
+        },
+        {
+          "step": 47,
+          "eventId": "fixture:47",
+          "action": "wander",
+          "targetId": null,
+          "legal": true,
+          "goalId": "event:fixture:18"
+        },
+        {
+          "step": 48,
+          "eventId": "fixture:48",
+          "action": "wander",
+          "targetId": null,
+          "legal": true,
+          "goalId": "renew:58:1060000"
+        },
+        {
+          "step": 49,
+          "eventId": "fixture:49",
+          "action": "reject_invite",
+          "targetId": "p:2",
+          "legal": true,
+          "goalId": "renew:58:1060000"
+        },
+        {
+          "step": 50,
+          "eventId": "fixture:50",
+          "action": "repair_relationship",
+          "targetId": "p:3",
+          "legal": true,
+          "goalId": "event:fixture:50"
+        },
+        {
+          "step": 51,
+          "eventId": "fixture:51",
+          "action": "rest",
+          "targetId": null,
+          "legal": true,
+          "goalId": "event:fixture:50"
+        },
+        {
+          "step": 52,
+          "eventId": "fixture:52",
+          "action": "repair_relationship",
+          "targetId": "p:2",
+          "legal": true,
+          "goalId": "event:fixture:52"
+        },
+        {
+          "step": 53,
+          "eventId": "fixture:53",
+          "action": "wander",
+          "targetId": null,
+          "legal": true,
+          "goalId": "renew:58:1060000"
+        },
+        {
+          "step": 54,
+          "eventId": "fixture:54",
+          "action": "wander",
+          "targetId": null,
+          "legal": true,
+          "goalId": "renew:58:1060000"
+        },
+        {
+          "step": 55,
+          "eventId": "fixture:55",
+          "action": "wander",
+          "targetId": null,
+          "legal": true,
+          "goalId": "renew:58:1060000"
+        },
+        {
+          "step": 56,
+          "eventId": "fixture:56",
+          "action": "avoid_person",
+          "targetId": "p:3",
+          "legal": true,
+          "goalId": "event:fixture:50"
+        },
+        {
+          "step": 57,
+          "eventId": "fixture:57",
+          "action": "reject_invite",
+          "targetId": "p:1",
+          "legal": true,
+          "goalId": "event:fixture:50"
+        },
+        {
+          "step": 58,
+          "eventId": "fixture:58",
+          "action": "rest",
+          "targetId": null,
+          "legal": true,
+          "goalId": "event:fixture:58"
+        },
+        {
+          "step": 59,
+          "eventId": "fixture:59",
+          "action": "repair_relationship",
+          "targetId": "p:2",
+          "legal": true,
+          "goalId": "event:fixture:58"
+        },
+        {
+          "step": 60,
+          "eventId": "fixture:60",
+          "action": "repair_relationship",
+          "targetId": "p:1",
+          "legal": true,
+          "goalId": "event:fixture:60"
+        },
+        {
+          "step": 61,
+          "eventId": "fixture:61",
+          "action": "rest",
+          "targetId": null,
+          "legal": true,
+          "goalId": "event:fixture:50"
+        },
+        {
+          "step": 62,
+          "eventId": "fixture:62",
+          "action": "avoid_person",
+          "targetId": "p:2",
+          "legal": true,
+          "goalId": "event:fixture:50"
+        },
+        {
+          "step": 63,
+          "eventId": "fixture:63",
+          "action": "avoid_person",
+          "targetId": "p:2",
+          "legal": true,
+          "goalId": "event:fixture:50"
+        },
+        {
+          "step": 64,
+          "eventId": "fixture:64",
+          "action": "avoid_person",
+          "targetId": "p:2",
+          "legal": true,
+          "goalId": "event:fixture:50"
+        },
+        {
+          "step": 65,
+          "eventId": "fixture:65",
+          "action": "reject_invite",
+          "targetId": "p:3",
+          "legal": true,
+          "goalId": "event:fixture:50"
+        },
+        {
+          "step": 66,
+          "eventId": "fixture:66",
+          "action": "rest",
+          "targetId": null,
+          "legal": true,
+          "goalId": "event:fixture:66"
+        },
+        {
+          "step": 67,
+          "eventId": "fixture:67",
+          "action": "repair_relationship",
+          "targetId": "p:1",
+          "legal": true,
+          "goalId": "event:fixture:66"
+        },
+        {
+          "step": 68,
+          "eventId": "fixture:68",
+          "action": "repair_relationship",
+          "targetId": "p:3",
+          "legal": true,
+          "goalId": "event:fixture:68"
+        },
+        {
+          "step": 69,
+          "eventId": "fixture:69",
+          "action": "avoid_person",
+          "targetId": "p:1",
+          "legal": true,
+          "goalId": "event:fixture:66"
+        },
+        {
+          "step": 70,
+          "eventId": "fixture:70",
+          "action": "repair_relationship",
+          "targetId": "p:1",
+          "legal": true,
+          "goalId": "event:fixture:66"
+        },
+        {
+          "step": 71,
+          "eventId": "fixture:71",
+          "action": "rest",
+          "targetId": null,
+          "legal": true,
+          "goalId": "event:fixture:66"
+        },
+        {
+          "step": 72,
+          "eventId": "fixture:72",
+          "action": "repair_relationship",
+          "targetId": "p:1",
+          "legal": true,
+          "goalId": "event:fixture:66"
+        },
+        {
+          "step": 73,
+          "eventId": "fixture:73",
+          "action": "reject_invite",
+          "targetId": "p:2",
+          "legal": true,
+          "goalId": "event:fixture:66"
+        },
+        {
+          "step": 74,
+          "eventId": "fixture:74",
+          "action": "avoid_person",
+          "targetId": "p:3",
+          "legal": true,
+          "goalId": "event:fixture:66"
+        },
+        {
+          "step": 75,
+          "eventId": "fixture:75",
+          "action": "avoid_person",
+          "targetId": "p:3",
+          "legal": true,
+          "goalId": "event:fixture:66"
+        },
+        {
+          "step": 76,
+          "eventId": "fixture:76",
+          "action": "avoid_person",
+          "targetId": "p:3",
+          "legal": true,
+          "goalId": "event:fixture:76"
+        },
+        {
+          "step": 77,
+          "eventId": "fixture:77",
+          "action": "rest",
+          "targetId": null,
+          "legal": true,
+          "goalId": "event:fixture:66"
+        },
+        {
+          "step": 78,
+          "eventId": "fixture:78",
+          "action": "avoid_person",
+          "targetId": "p:3",
+          "legal": true,
+          "goalId": "event:fixture:66"
+        },
+        {
+          "step": 79,
+          "eventId": "fixture:79",
+          "action": "avoid_person",
+          "targetId": "p:3",
+          "legal": true,
+          "goalId": "event:fixture:66"
+        }
+      ],
+      "finalState": {
+        "version": 95,
+        "personality": {
+          "sociability": 0.4,
+          "caution": 0.32,
+          "curiosity": 0.86,
+          "cooperation": 0.27,
+          "stability": 0.59,
+          "selfInterest": 0.59,
+          "loyalty": 0.19
+        },
+        "relationships": [
+          {
+            "playerId": "p:2",
+            "trust": 0.04999999999999999,
+            "familiarity": 1,
+            "affinity": 0,
+            "conflict": 0.6000000000000001,
+            "promises": [
+              {
+                "id": "promise:4",
+                "description": "Meet again",
+                "dueAt": 180000,
+                "status": "fulfilled"
+              },
+              {
+                "id": "promise:28",
+                "description": "Meet again",
+                "dueAt": 660000,
+                "status": "fulfilled"
+              },
+              {
+                "id": "promise:52",
+                "description": "Meet again",
+                "dueAt": 1140000,
+                "status": "fulfilled"
+              },
+              {
+                "id": "promise:76",
+                "description": "Meet again",
+                "dueAt": 1620000,
+                "status": "pending"
+              }
+            ],
+            "updatedAt": 1680000
+          },
+          {
+            "playerId": "p:1",
+            "trust": 0.04999999999999999,
+            "familiarity": 1,
+            "affinity": 0,
+            "conflict": 0.6000000000000001,
+            "promises": [
+              {
+                "id": "promise:12",
+                "description": "Meet again",
+                "dueAt": 340000,
+                "status": "fulfilled"
+              },
+              {
+                "id": "promise:36",
+                "description": "Meet again",
+                "dueAt": 820000,
+                "status": "fulfilled"
+              },
+              {
+                "id": "promise:60",
+                "description": "Meet again",
+                "dueAt": 1300000,
+                "status": "fulfilled"
+              }
+            ],
+            "updatedAt": 1660000
+          },
+          {
+            "playerId": "p:3",
+            "trust": 0,
+            "familiarity": 0.7200000000000001,
+            "affinity": 0,
+            "conflict": 0.8,
+            "promises": [
+              {
+                "id": "promise:20",
+                "description": "Meet again",
+                "dueAt": 500000,
+                "status": "fulfilled"
+              },
+              {
+                "id": "promise:44",
+                "description": "Meet again",
+                "dueAt": 980000,
+                "status": "fulfilled"
+              },
+              {
+                "id": "promise:68",
+                "description": "Meet again",
+                "dueAt": 1460000,
+                "status": "pending"
+              }
+            ],
+            "updatedAt": 1640000
+          }
+        ],
+        "memories": [
+          {
+            "id": "outcome:59",
+            "at": 1280000,
+            "kind": "relationship_changed",
+            "targetId": "p:2",
+            "positive": true
+          },
+          {
+            "id": "fixture:60",
+            "at": 1300000,
+            "kind": "promise_due",
+            "targetId": "p:1",
+            "positive": true,
+            "promise": {
+              "id": "promise:60",
+              "description": "Meet again",
+              "dueAt": 1300000,
+              "status": "pending"
+            }
+          },
+          {
+            "id": "outcome:60",
+            "at": 1300000,
+            "kind": "relationship_changed",
+            "targetId": "p:1",
+            "positive": true,
+            "promise": {
+              "id": "promise:60",
+              "description": "Meet again",
+              "dueAt": 1300000,
+              "status": "fulfilled"
+            }
+          },
+          {
+            "id": "fixture:61",
+            "at": 1320000,
+            "kind": "goal_stalled",
+            "targetId": "p:2",
+            "positive": true
+          },
+          {
+            "id": "fixture:62",
+            "at": 1340000,
+            "kind": "relationship_changed",
+            "targetId": "p:3",
+            "positive": true
+          },
+          {
+            "id": "fixture:63",
+            "at": 1360000,
+            "kind": "encountered_known",
+            "targetId": "p:1",
+            "positive": true
+          },
+          {
+            "id": "fixture:64",
+            "at": 1380000,
+            "kind": "encountered_stranger",
+            "targetId": "p:2",
+            "positive": true
+          },
+          {
+            "id": "fixture:65",
+            "at": 1400000,
+            "kind": "invitation",
+            "targetId": "p:3",
+            "positive": true
+          },
+          {
+            "id": "fixture:66",
+            "at": 1420000,
+            "kind": "conflict",
+            "targetId": "p:1",
+            "positive": true
+          },
+          {
+            "id": "fixture:67",
+            "at": 1440000,
+            "kind": "rejected",
+            "targetId": "p:2",
+            "positive": true
+          },
+          {
+            "id": "fixture:68",
+            "at": 1460000,
+            "kind": "promise_due",
+            "targetId": "p:3",
+            "positive": true,
+            "promise": {
+              "id": "promise:68",
+              "description": "Meet again",
+              "dueAt": 1460000,
+              "status": "pending"
+            }
+          },
+          {
+            "id": "fixture:69",
+            "at": 1480000,
+            "kind": "goal_stalled",
+            "targetId": "p:1",
+            "positive": true
+          },
+          {
+            "id": "fixture:70",
+            "at": 1500000,
+            "kind": "relationship_changed",
+            "targetId": "p:2",
+            "positive": true
+          },
+          {
+            "id": "outcome:70",
+            "at": 1500000,
+            "kind": "relationship_changed",
+            "targetId": "p:1",
+            "positive": true
+          },
+          {
+            "id": "fixture:71",
+            "at": 1520000,
+            "kind": "encountered_known",
+            "targetId": "p:3",
+            "positive": true
+          },
+          {
+            "id": "fixture:72",
+            "at": 1540000,
+            "kind": "encountered_stranger",
+            "targetId": "p:1",
+            "positive": true
+          },
+          {
+            "id": "outcome:72",
+            "at": 1540000,
+            "kind": "relationship_changed",
+            "targetId": "p:1",
+            "positive": true
+          },
+          {
+            "id": "fixture:73",
+            "at": 1560000,
+            "kind": "invitation",
+            "targetId": "p:2",
+            "positive": true
+          },
+          {
+            "id": "fixture:74",
+            "at": 1580000,
+            "kind": "conflict",
+            "targetId": "p:3",
+            "positive": true
+          },
+          {
+            "id": "fixture:75",
+            "at": 1600000,
+            "kind": "rejected",
+            "targetId": "p:1",
+            "positive": true
+          },
+          {
+            "id": "fixture:76",
+            "at": 1620000,
+            "kind": "promise_due",
+            "targetId": "p:2",
+            "positive": true,
+            "promise": {
+              "id": "promise:76",
+              "description": "Meet again",
+              "dueAt": 1620000,
+              "status": "pending"
+            }
+          },
+          {
+            "id": "fixture:77",
+            "at": 1640000,
+            "kind": "goal_stalled",
+            "targetId": "p:3",
+            "positive": true
+          },
+          {
+            "id": "fixture:78",
+            "at": 1660000,
+            "kind": "relationship_changed",
+            "targetId": "p:1",
+            "positive": true
+          },
+          {
+            "id": "fixture:79",
+            "at": 1680000,
+            "kind": "encountered_known",
+            "targetId": "p:2",
+            "positive": true
+          }
+        ],
+        "energy": 0.6899999999999981,
+        "stress": 0.3999999999999997,
+        "goals": [
+          {
+            "id": "event:fixture:52",
+            "kind": "keep_promise",
+            "priority": 0.9,
+            "inertia": 0.457,
+            "progress": 1,
+            "status": "completed",
+            "createdAt": 1140000,
+            "expiresAt": 1740000,
+            "targetId": "p:2"
+          },
+          {
+            "id": "event:fixture:58",
+            "kind": "repair",
+            "priority": 0.55,
+            "inertia": 0.257,
+            "progress": 0,
+            "status": "active",
+            "createdAt": 1260000,
+            "expiresAt": 1860000,
+            "targetId": "p:2"
+          },
+          {
+            "id": "event:fixture:60",
+            "kind": "keep_promise",
+            "priority": 0.9,
+            "inertia": 0.457,
+            "progress": 1,
+            "status": "completed",
+            "createdAt": 1300000,
+            "expiresAt": 1900000,
+            "targetId": "p:1"
+          },
+          {
+            "id": "event:fixture:66",
+            "kind": "repair",
+            "priority": 0.65,
+            "inertia": 0.457,
+            "progress": 0,
+            "status": "active",
+            "createdAt": 1420000,
+            "expiresAt": 2020000,
+            "targetId": "p:1"
+          },
+          {
+            "id": "event:fixture:68",
+            "kind": "keep_promise",
+            "priority": 0.8,
+            "inertia": 0.257,
+            "progress": 0,
+            "status": "active",
+            "createdAt": 1460000,
+            "expiresAt": 2060000,
+            "targetId": "p:3"
+          },
+          {
+            "id": "event:fixture:76",
+            "kind": "keep_promise",
+            "priority": 0.8,
+            "inertia": 0.257,
+            "progress": 0,
+            "status": "active",
+            "createdAt": 1620000,
+            "expiresAt": 2220000,
+            "targetId": "p:2"
+          }
+        ]
+      }
+    }
+  ],
+  "limitations": [
+    "Offline policy microbenchmark with synthetic consequences, not the live engine.",
+    "Classic uses an activity/wander/conversation adapter, not exact upstream timing or pathfinding.",
+    "Hybrid API is unavailable in this runner; all Hybrid decisions are utility fallback. Zero cost/requests do not estimate live Hybrid cost.",
+    "Decision success means fixture target legality, not successful live execution.",
+    "Relationship and goal outcomes include fixed external events and assumed consequences, not full live world causality.",
+    "Action repeats and pointless-switch counts are proxies, not proof of subjective naturalness. API latency is unmeasured (null)."
+  ]
+}

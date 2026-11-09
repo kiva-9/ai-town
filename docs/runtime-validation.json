@@ -1,0 +1,99 @@
+{
+  "validatedAt": "2026-11-09T09:39:20.947Z",
+  "deployment": "local self-hosted Convex, standard V8 runtime",
+  "dialogue": "mock",
+  "apiKeyConfigured": false,
+  "phases": [
+    {
+      "mode": "mock",
+      "epoch": 1,
+      "agents": 12,
+      "players": 12,
+      "moved": 6,
+      "engineRunning": true,
+      "engineBefore": 1794217160894,
+      "engineAfter": 1794217171998,
+      "generationBefore": 23,
+      "generationAfter": 33,
+      "requests": 0,
+      "cost": 0,
+      "queued": 0,
+      "running": 0
+    },
+    {
+      "mode": "classic",
+      "epoch": 2,
+      "agents": 12,
+      "players": 12,
+      "moved": 11,
+      "engineRunning": true,
+      "engineBefore": 1794217173054,
+      "engineAfter": 1794217184574,
+      "generationBefore": 35,
+      "generationAfter": 46,
+      "requests": 0,
+      "cost": 0,
+      "queued": 0,
+      "running": 0
+    },
+    {
+      "mode": "mock",
+      "epoch": 3,
+      "agents": 12,
+      "players": 12,
+      "moved": 11,
+      "engineRunning": true,
+      "engineBefore": 1794217184574,
+      "engineAfter": 1794217197134,
+      "generationBefore": 47,
+      "generationAfter": 59,
+      "requests": 0,
+      "cost": 0,
+      "queued": 0,
+      "running": 0
+    },
+    {
+      "mode": "hybrid",
+      "epoch": 4,
+      "agents": 12,
+      "players": 12,
+      "moved": 11,
+      "engineRunning": true,
+      "engineBefore": 1794217197134,
+      "engineAfter": 1794217208590,
+      "generationBefore": 60,
+      "generationAfter": 71,
+      "requests": 0,
+      "cost": 0,
+      "queued": 0,
+      "running": 0
+    },
+    {
+      "mode": "mock",
+      "epoch": 5,
+      "agents": 12,
+      "players": 12,
+      "moved": 10,
+      "engineRunning": true,
+      "engineBefore": 1794217209742,
+      "engineAfter": 1794217220926,
+      "generationBefore": 73,
+      "generationAfter": 83,
+      "requests": 0,
+      "cost": 0,
+      "queued": 0,
+      "running": 0
+    }
+  ],
+  "pauseResume": {
+    "pausedRunning": false,
+    "pausedTime": 1794217220926,
+    "stillTime": 1794217220926,
+    "resumedRunning": true,
+    "resumedTime": 1794217231551
+  },
+  "limitations": [
+    "Graphical browser interaction not verified; local runtime was stopped after this test.",
+    "Hybrid has no API key and therefore verifies local fallback, not live Decisions API."
+  ]
+}

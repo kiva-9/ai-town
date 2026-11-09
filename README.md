@@ -1,3 +1,44 @@
+# AI 小镇增强版 · AI Town Enhanced
+
+基于 [a16z-infra/ai-town](https://github.com/a16z-infra/ai-town) 的非官方增强版本，保留原版像素世界与 MIT 许可证。
+
+**12 位自主居民、稳定人格与持续目标、结构化社会关系、事件驱动 Decisions 决策、零费用 Mock 模式，以及完整中文游戏界面。**
+
+- [中文运行与部署指南](docs/GETTING_STARTED.zh-CN.md)
+- [实际测试结果与限制](docs/VALIDATION.md)
+- [固定种子实验结果](docs/evaluation-results/evaluation.md)
+
+中文只是现有人设和界面的翻译，不会复制一套居民；底层 ID 不变。支持中英界面切换，并适配中文输入法、系统中文字体、长文本和移动端布局。NPC 新对话/摘要/记忆默认中文，旧历史不被改写。
+
+真实 API 验证需要你自己的 Key、项目权限和已核实价格。目前交付不把 Mock 结果当作真实 API 成功，也不声称实验已经证明自然程度提升。
+
+---
+
+# AI Town Enhanced
+
+Unofficial enhancement of [a16z-infra/ai-town](https://github.com/a16z-infra/ai-town), preserving its original pixel world, movement, conversation system and MIT license.
+
+**12 residents, persistent personalities and goals, directed social memory, event-driven Decisions API selection, cost-free Mock mode and an in-game NPC inspector.**
+
+## Start here
+
+- [Setup and operating guide](docs/GETTING_STARTED.md)
+- [Architecture and limits](docs/HYBRID_ARCHITECTURE.md)
+- [Original-code audit](docs/UPSTREAM_AUDIT.md)
+- [Official Decisions contract](docs/DECISIONS_API.md)
+- [Reproducible evaluation](docs/EVALUATION.md)
+- [Actual validation results](docs/VALIDATION.md)
+
+Run `npm ci`, `npm test -- --runInBand`, `npm run build`, and `npm run evaluate:npcs` to verify the checkout without an API key. Follow setup for the real Convex-backed game. A live API check is opt-in with `npm run smoke:decisions`; no live API success is claimed without credentials and project access.
+
+**Modes:** Classic keeps upstream behavior, Hybrid combines utility policy with structured decisions, Mock uses reproducible offline decisions. For a fully no-cost playable run also enable the separately labeled mock dialogue fixture. Pricing must be explicitly configured before paid decisions can run.
+
+The experiment is a controlled synthetic policy comparison, not evidence that Hybrid is more natural. Full live API and natural-language evaluation still need an authorized configured provider.
+
+---
+
+## Original upstream README and credits
+
 # AI Town 🏠💻💌
 
 [Live Demo](https://www.convex.dev/ai-town)

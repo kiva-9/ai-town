@@ -1,0 +1,12 @@
+{
+  "font": "Noto Sans CJK SC Regular",
+  "uniqueChineseCharacters": 666,
+  "missingGlyphs": [],
+  "sources": [
+    "src/i18n.ts",
+    "src/editor/i18n.js",
+    "data/characters.ts",
+    "convex/npc/language.ts"
+  ],
+  "scope": "Static glyph coverage in this environment; not a graphical layout/browser test."
+}
