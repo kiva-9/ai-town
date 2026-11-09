@@ -26,6 +26,10 @@ import { insertInput } from './insertInput';
 export class Agent {
   id: GameId<'agents'>;
   playerId: GameId<'players'>;
+  npcStateVersion?: number;
+  npcAction?: { candidate: any; started: number; startX: number; startY: number; until?: number };
+  npcDecisionAt?: number;
+  npcEncounter?: string;
   toRemember?: GameId<'conversations'>;
   lastConversation?: number;
   lastInviteAttempt?: number;
@@ -44,6 +48,10 @@ export class Agent {
       serialized.toRemember !== undefined
         ? parseGameId('conversations', serialized.toRemember)
         : undefined;
+    this.npcStateVersion = serialized.npcStateVersion;
+    this.npcAction = serialized.npcAction;
+    this.npcDecisionAt = serialized.npcDecisionAt;
+    this.npcEncounter = serialized.npcEncounter;
     this.lastConversation = lastConversation;
     this.lastInviteAttempt = lastInviteAttempt;
     this.inProgressOperation = inProgressOperation;
@@ -53,6 +61,25 @@ export class Agent {
     const player = game.world.players.get(this.playerId);
     if (!player) {
       throw new Error(`Invalid player ID ${this.playerId}`);
+    }
+    if (this.npcAction) {
+      const action = this.npcAction;
+      const timed = action.until !== undefined;
+      const interrupted = !!game.world.playerConversation(player);
+      const finished = timed ? now >= action.until! : !player.pathfinding;
+      if (interrupted || finished || now - action.started > 120_000) {
+        const moved =
+          Math.hypot(player.position.x - action.startX, player.position.y - action.startY) >= 1;
+        game.scheduleOperation('npcActionCompleted', {
+          worldId: game.worldId,
+          agentId: this.id,
+          playerId: player.id,
+          candidate: action.candidate,
+          at: now,
+          completed: !interrupted && (timed ? now >= action.until! : moved),
+        });
+        delete this.npcAction;
+      }
     }
     if (this.inProgressOperation) {
       if (now < this.inProgressOperation.started + ACTION_TIMEOUT) {
@@ -71,11 +98,70 @@ export class Agent {
     if (doingActivity && (conversation || player.pathfinding)) {
       player.activity!.until = now;
     }
+    // Hybrid work is scheduled outside the high-frequency tick. Only events trigger it.
+    if (game.npcMode !== 'classic' && !this.toRemember) {
+      const nearby = [...game.world.players.values()]
+        .filter((p) => p.id !== player.id)
+        .map((p) => ({
+          playerId: p.id,
+          name: p.human ? 'visitor' : game.playerDescriptions.get(p.id)?.name,
+          available: !game.world.playerConversation(p),
+          distance: distance(player.position, p.position),
+        }))
+        .filter((p) => p.distance <= 8)
+        .sort((a, b) => a.distance - b.distance)
+        .slice(0, 8);
+      const nearest = nearby[0];
+      const invited = member?.status.kind === 'invited';
+      const elapsed = now - (this.npcDecisionAt ?? 0);
+      const newEncounter = nearest && nearest.playerId !== this.npcEncounter && elapsed >= 20_000;
+      const stalled = !conversation && !doingActivity && elapsed >= 60_000;
+      const socialCooldown =
+        this.lastConversation !== undefined && now - this.lastConversation < CONVERSATION_COOLDOWN;
+      if (
+        invited ||
+        (!conversation && !doingActivity && !socialCooldown && (newEncounter || stalled))
+      ) {
+        const other = invited
+          ? [...conversation!.participants.keys()].find((id) => id !== player.id)
+          : undefined;
+        const event = {
+          id: `${this.id}:${conversation?.id ?? nearest?.playerId ?? 'idle'}:${Math.floor(now / 20_000)}`,
+          kind: invited ? 'invitation' : newEncounter ? 'encountered_stranger' : 'goal_stalled',
+          at: now,
+          ...(other || nearest ? { targetId: other ?? nearest?.playerId } : {}),
+        };
+        this.npcDecisionAt = now;
+        this.npcEncounter = nearest?.playerId;
+        this.startOperation(game, now, 'agentNpcDecision', {
+          worldId: game.worldId,
+          agentId: this.id,
+          playerId: player.id,
+          event,
+          context: {
+            now,
+            nearby,
+            name: game.playerDescriptions.get(player.id)?.name ?? player.id,
+            ...(invited
+              ? { invitation: { playerId: other, conversationId: conversation!.id } }
+              : {}),
+          },
+        });
+        return;
+      }
+      // Preserve an executing goal. Normal conversation, memory and pathfinding stay upstream.
+      if (!conversation && !this.toRemember) return;
+    }
     // If we're not in a conversation, do something.
     // If we aren't doing an activity or moving, do something.
     // If we have been wandering but haven't thought about something to do for
     // a while, do something.
-    if (!conversation && !doingActivity && (!player.pathfinding || !recentlyAttemptedInvite)) {
+    if (
+      game.npcMode === 'classic' &&
+      !conversation &&
+      !doingActivity &&
+      (!player.pathfinding || !recentlyAttemptedInvite)
+    ) {
       this.startOperation(game, now, 'agentDoSomething', {
         worldId: game.worldId,
         player: player.serialize(),
@@ -259,6 +345,10 @@ export class Agent {
   serialize(): SerializedAgent {
     return {
       id: this.id,
+      npcStateVersion: this.npcStateVersion,
+      npcAction: this.npcAction,
+      npcDecisionAt: this.npcDecisionAt,
+      npcEncounter: this.npcEncounter,
       playerId: this.playerId,
       toRemember: this.toRemember,
       lastConversation: this.lastConversation,
@@ -269,6 +359,18 @@ export class Agent {
 }
 
 export const serializedAgent = {
+  npcStateVersion: v.optional(v.number()),
+  npcAction: v.optional(
+    v.object({
+      candidate: v.any(),
+      started: v.number(),
+      startX: v.number(),
+      startY: v.number(),
+      until: v.optional(v.number()),
+    }),
+  ),
+  npcDecisionAt: v.optional(v.number()),
+  npcEncounter: v.optional(v.string()),
   id: agentId,
   playerId: playerId,
   toRemember: v.optional(conversationId),
@@ -298,6 +400,18 @@ export async function runAgentOperation(ctx: MutationCtx, operation: string, arg
     case 'agentDoSomething':
       reference = internal.aiTown.agentOperations.agentDoSomething;
       break;
+    case 'agentNpcDecision':
+      reference = internal.aiTown.agentOperations.agentNpcDecision;
+      break;
+    case 'npcActionCompleted':
+      await ctx.runMutation(internal.npc.service.actionCompleted, args);
+      return;
+    case 'npcDecisionApplied':
+      await ctx.runMutation(internal.npc.service.executionAck, args);
+      return;
+    case 'npcSocialEvent':
+      await ctx.runMutation(internal.npc.service.recordEvent, args);
+      return;
     default:
       throw new Error(`Unknown operation: ${operation}`);
   }

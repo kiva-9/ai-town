@@ -1,3 +1,4 @@
+import { languageInstruction, localizedName, npcLanguage } from '../npc/language';
 import { v } from 'convex/values';
 import { ActionCtx, DatabaseReader, internalMutation, internalQuery } from '../_generated/server';
 import { Doc, Id } from '../_generated/dataModel';
@@ -39,7 +40,9 @@ export async function rememberConversation(
     return;
   }
 
+  const language = npcLanguage(process.env.NPC_LANGUAGE);
   const llmMessages: LLMMessage[] = [
+    { role: 'system', content: languageInstruction(language) },
     {
       role: 'user',
       content: `You are ${player.name}, and you just finished a conversation with ${otherPlayer.name}. I would
@@ -57,14 +60,16 @@ export async function rememberConversation(
       content: `${author.name} to ${recipient.name}: ${message.text}`,
     });
   }
-  llmMessages.push({ role: 'user', content: 'Summary:' });
+  llmMessages.push({ role: 'user', content: language === 'zh-CN' ? '摘要：' : 'Summary:' });
   const { content } = await chatCompletion({
     messages: llmMessages,
     max_tokens: 500,
   });
-  const description = `Conversation with ${otherPlayer.name} at ${new Date(
-    data.conversation._creationTime,
-  ).toLocaleString()}: ${content}`;
+  const timestamp = new Date(data.conversation._creationTime).toLocaleString(language);
+  const description =
+    language === 'zh-CN'
+      ? `在${timestamp}与${localizedName(otherPlayer.name)}的对话：${content}`
+      : `Conversation with ${otherPlayer.name} at ${timestamp}: ${content}`;
   const importance = await calculateImportance(description);
   const { embedding } = await fetchEmbedding(description);
   authors.delete(player.id as GameId<'players'>);
@@ -148,9 +153,15 @@ export const loadConversation = internalQuery({
       throw new Error(`Player description for ${otherPlayerId} not found`);
     }
     return {
-      player: { ...player, name: playerDescription.name },
+      player: {
+        ...player,
+        name: localizedName(playerDescription.name, npcLanguage(process.env.NPC_LANGUAGE)),
+      },
       conversation,
-      otherPlayer: { ...otherPlayer, name: otherPlayerDescription.name },
+      otherPlayer: {
+        ...otherPlayer,
+        name: localizedName(otherPlayerDescription.name, npcLanguage(process.env.NPC_LANGUAGE)),
+      },
     };
   },
 });
@@ -361,6 +372,7 @@ async function reflectOnMemories(
 
   const { content: reflection } = await chatCompletion({
     messages: [
+      { role: 'system', content: languageInstruction(npcLanguage(process.env.NPC_LANGUAGE)) },
       {
         role: 'user',
         content: prompt.join('\n'),
@@ -428,7 +440,7 @@ export const getReflectionMemories = internalQuery({
       .first();
 
     return {
-      name: playerDescription.name,
+      name: localizedName(playerDescription.name, npcLanguage(process.env.NPC_LANGUAGE)),
       memories,
       lastReflectionTs: lastReflection?._creationTime,
     };

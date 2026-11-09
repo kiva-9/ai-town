@@ -1,3 +1,9 @@
+import {
+  languageInstruction,
+  localizeCharacterText,
+  localizedName,
+  npcLanguage,
+} from '../npc/language';
 import { v } from 'convex/values';
 import { Id } from '../_generated/dataModel';
 import { ActionCtx, internalQuery } from '../_generated/server';
@@ -28,7 +34,9 @@ export async function startConversationMessage(
   );
   const embedding = await embeddingsCache.fetch(
     ctx,
-    `${player.name} is talking to ${otherPlayer.name}`,
+    npcLanguage(process.env.NPC_LANGUAGE) === 'zh-CN'
+      ? `${localizedName(player.name)}正在和${localizedName(otherPlayer.name)}聊天`
+      : `${player.name} is talking to ${otherPlayer.name}`,
   );
 
   const memories = await memory.searchMemories(
@@ -97,7 +105,9 @@ export async function continueConversationMessage(
   const started = new Date(conversation.created);
   const embedding = await embeddingsCache.fetch(
     ctx,
-    `What do you think about ${otherPlayer.name}?`,
+    npcLanguage(process.env.NPC_LANGUAGE) === 'zh-CN'
+      ? `你对${localizedName(otherPlayer.name)}有什么看法？`
+      : `What do you think about ${otherPlayer.name}?`,
   );
   const memories = await memory.searchMemories(ctx, player.id as GameId<'players'>, embedding, 3);
   const prompt = [
@@ -190,13 +200,16 @@ function agentPrompts(
   agent: { identity: string; plan: string } | null,
   otherAgent: { identity: string; plan: string } | null,
 ): string[] {
-  const prompt = [];
+  const language = npcLanguage(process.env.NPC_LANGUAGE);
+  const prompt = [languageInstruction(language)];
   if (agent) {
-    prompt.push(`About you: ${agent.identity}`);
-    prompt.push(`Your goals for the conversation: ${agent.plan}`);
+    prompt.push(`About you: ${localizeCharacterText(agent.identity, language)}`);
+    prompt.push(`Your goals for the conversation: ${localizeCharacterText(agent.plan, language)}`);
   }
   if (otherAgent) {
-    prompt.push(`About ${otherPlayer.name}: ${otherAgent.identity}`);
+    prompt.push(
+      `About ${otherPlayer.name}: ${localizeCharacterText(otherAgent.identity, language)}`,
+    );
   }
   return prompt;
 }
@@ -349,8 +362,14 @@ export const queryPromptData = internalQuery({
       }
     }
     return {
-      player: { name: playerDescription.name, ...player },
-      otherPlayer: { name: otherPlayerDescription.name, ...otherPlayer },
+      player: {
+        name: localizedName(playerDescription.name, npcLanguage(process.env.NPC_LANGUAGE)),
+        ...player,
+      },
+      otherPlayer: {
+        name: localizedName(otherPlayerDescription.name, npcLanguage(process.env.NPC_LANGUAGE)),
+        ...otherPlayer,
+      },
       conversation,
       agent: { identity: agentDescription.identity, plan: agentDescription.plan, ...agent },
       otherAgent: otherAgent && {

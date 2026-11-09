@@ -27,6 +27,8 @@ import { AgentDescription, serializedAgentDescription } from './agentDescription
 import { parseMap, serializeMap } from '../util/object';
 
 const gameState = v.object({
+  npcMode: v.optional(v.union(v.literal('classic'), v.literal('hybrid'), v.literal('mock'))),
+  npcEpoch: v.optional(v.number()),
   world: v.object(serializedWorld),
   playerDescriptions: v.array(v.object(serializedPlayerDescription)),
   agentDescriptions: v.array(v.object(serializedAgentDescription)),
@@ -50,6 +52,8 @@ export class Game extends AbstractGame {
   maxInputsPerStep = 32;
 
   world: World;
+  npcMode: 'classic' | 'hybrid' | 'mock';
+  npcEpoch: number;
 
   historicalLocations: Map<GameId<'players'>, HistoricalObject<Location>>;
 
@@ -69,6 +73,8 @@ export class Game extends AbstractGame {
   ) {
     super(engine);
 
+    this.npcMode = state.npcMode ?? 'classic';
+    this.npcEpoch = state.npcEpoch ?? 0;
     this.world = new World(state.world);
     delete this.world.historicalLocations;
 
@@ -133,9 +139,22 @@ export class Game extends AbstractGame {
       worldId: _mapWorldId,
       ...worldMap
     } = worldMapDoc;
+    const npcControl = await db
+      .query('npcControl')
+      .withIndex('key', (q) => q.eq('key', 'global'))
+      .unique();
+    const configuredMode =
+      process.env.NPC_DECISION_ENABLED === 'false' ? 'classic' : process.env.NPC_DECISION_MODE;
+    const npcMode =
+      process.env.NPC_DECISION_ENABLED === 'false'
+        ? 'classic'
+        : (npcControl?.mode ??
+          (configuredMode === 'classic' || configuredMode === 'hybrid' ? configuredMode : 'mock'));
     return {
       engine,
       gameState: {
+        npcMode,
+        npcEpoch: npcControl?.epoch ?? 0,
         world,
         playerDescriptions,
         agentDescriptions,

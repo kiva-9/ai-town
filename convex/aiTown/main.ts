@@ -136,6 +136,10 @@ export const sendInput = mutation({
     args: v.any(),
   },
   handler: async (ctx, args) => {
+    // New intelligence results are submitted only by internal server mutations.
+    if (['finishNpcDecision', 'npcStateUpdated', 'cancelNpcDecision'].includes(args.name)) {
+      throw new Error('This NPC input is internal-only.');
+    }
     return await insertInput(ctx, args.worldId, args.name as any, args.args);
   },
 });

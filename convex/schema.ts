@@ -3,6 +3,7 @@ import { v } from 'convex/values';
 import { agentTables } from './agent/schema';
 import { aiTownTables } from './aiTown/schema';
 import { conversationId, playerId } from './aiTown/ids';
+import { npcTables } from './npc/schema';
 import { engineTables } from './engine/schema';
 
 export default defineSchema({
@@ -21,6 +22,7 @@ export default defineSchema({
     .index('conversationId', ['worldId', 'conversationId'])
     .index('messageUuid', ['conversationId', 'messageUuid']),
 
+  ...npcTables,
   ...agentTables,
   ...aiTownTables,
   ...engineTables,
