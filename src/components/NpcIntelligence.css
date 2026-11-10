@@ -1,0 +1,160 @@
+.npc-intelligence {
+  margin: 0 0 1.5rem;
+  padding: 0.7rem;
+  border: 3px solid #b86f50;
+  background: #181425;
+  color: #ead4aa;
+  box-shadow: 4px 4px 0 #3f2832;
+  font:
+    14px/1.6 var(--font-body),
+    monospace;
+  overflow-wrap: anywhere;
+}
+.npc-intelligence summary {
+  cursor: pointer;
+  padding: 0.35rem 0;
+}
+.npc-intelligence summary strong {
+  margin-right: 0.5rem;
+}
+.npc-intelligence :is(summary, select):focus-visible {
+  outline: 2px solid #ead4aa;
+  outline-offset: 3px;
+}
+.npc-intelligence p {
+  margin: 0.5rem 0;
+}
+.npc-intelligence .npc-badge {
+  display: inline-block;
+  padding: 0.1rem 0.4rem;
+  background: #3a4466;
+  color: white;
+  font-size: 12px;
+  text-transform: uppercase;
+}
+.npc-intelligence .npc-subsection {
+  margin-top: 0.7rem;
+  border-top: 1px solid #743f39;
+  padding-top: 0.3rem;
+}
+.npc-intelligence .npc-mode {
+  display: flex;
+  align-items: center;
+  gap: 0.6rem;
+  justify-content: space-between;
+  margin-top: 0.7rem;
+}
+.npc-intelligence select {
+  background: #3a4466;
+  color: white;
+  padding: 0.25rem 1.8rem 0.25rem 0.4rem;
+  font: inherit;
+  border: 1px solid #8b9bb4;
+}
+.npc-intelligence select:disabled {
+  opacity: 0.65;
+  cursor: not-allowed;
+}
+.npc-intelligence .npc-muted {
+  color: #c0cbdc;
+  font-size: 12px;
+}
+.npc-intelligence .npc-status {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  margin: 0.8rem 0;
+  font-size: 12px;
+}
+.npc-intelligence .npc-meter {
+  display: grid;
+  grid-template-columns: minmax(85px, 1fr) minmax(40px, 1fr) 3.1em;
+  gap: 0.4rem;
+  align-items: center;
+}
+.npc-intelligence .npc-meter > span:first-child {
+  text-transform: capitalize;
+}
+.npc-intelligence .npc-meter > span:last-child {
+  text-align: right;
+}
+.npc-intelligence meter {
+  width: 100%;
+  height: 12px;
+  accent-color: #e4a672;
+}
+.npc-intelligence meter::-webkit-meter-bar {
+  border: 0;
+  border-radius: 0;
+  background: #3a4466;
+}
+.npc-intelligence meter::-webkit-meter-optimum-value {
+  background: #e4a672;
+}
+.npc-intelligence meter::-moz-meter-bar {
+  background: #e4a672;
+}
+.npc-intelligence .npc-facts {
+  display: grid;
+  grid-template-columns: minmax(80px, 1fr) minmax(70px, 1fr);
+  gap: 0.4rem;
+  margin: 0.6rem 0;
+}
+.npc-intelligence .npc-facts dd {
+  margin: 0;
+}
+.npc-intelligence .npc-facts dt {
+  color: #c0cbdc;
+}
+.npc-intelligence .npc-entry {
+  border-left: 2px solid #743f39;
+  margin: 0.6rem 0;
+  padding-left: 0.6rem;
+}
+.npc-intelligence .npc-list {
+  list-style: none;
+  padding: 0;
+  margin: 0.5rem 0;
+}
+.npc-intelligence .npc-list li {
+  margin: 0.6rem 0;
+}
+.npc-intelligence .npc-error {
+  color: #ffb6a6;
+}
+
+/* Keep the original pixel palette while allowing long Chinese/English labels to wrap. */
+.npc-intelligence,
+.npc-intelligence .npc-facts > *,
+.npc-intelligence .npc-meter > * {
+  min-width: 0;
+}
+.npc-intelligence .npc-mode,
+.npc-intelligence .npc-status {
+  flex-wrap: wrap;
+}
+.npc-intelligence select {
+  max-width: 100%;
+}
+.npc-intelligence .npc-original-label {
+  display: block;
+  color: #c0cbdc;
+  font-size: 12px;
+}
+.npc-intelligence .npc-recorded-text {
+  white-space: pre-wrap;
+}
+@media (max-width: 380px) {
+  .npc-intelligence {
+    padding: 0.5rem;
+  }
+  .npc-intelligence .npc-facts {
+    grid-template-columns: minmax(0, 1fr);
+  }
+  .npc-intelligence .npc-facts dd {
+    margin-bottom: 0.45rem;
+  }
+  .npc-intelligence .npc-meter {
+    grid-template-columns: minmax(64px, 1fr) minmax(24px, 1fr) 3.1em;
+  }
+}

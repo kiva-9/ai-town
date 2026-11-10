@@ -1,3 +1,5 @@
+// Register Pixi's official Canvas renderer for browsers without WebGL.
+import 'pixi.js-legacy';
 import React from 'react';
 import ReactDOM from 'react-dom/client';
 import Home from './App.tsx';

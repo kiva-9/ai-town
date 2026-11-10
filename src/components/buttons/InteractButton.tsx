@@ -1,3 +1,4 @@
+import { useI18n, errorMessage } from '../../i18n';
 import Button from './Button';
 import { toast } from 'react-toastify';
 import interactImg from '../../../assets/interact.svg';
@@ -11,6 +12,7 @@ import { waitForInput } from '../../hooks/sendInput';
 import { useServerGame } from '../../hooks/serverGame';
 
 export default function InteractButton() {
+  const { t } = useI18n();
   // const { isAuthenticated } = useConvexAuth();
   const worldStatus = useQuery(api.world.defaultWorldStatus);
   const worldId = worldStatus?.worldId;
@@ -30,7 +32,7 @@ export default function InteractButton() {
         inputId = await join({ worldId });
       } catch (e: any) {
         if (e instanceof ConvexError) {
-          toast.error(e.data);
+          toast.error(errorMessage(e));
           return;
         }
         throw e;
@@ -38,7 +40,7 @@ export default function InteractButton() {
       try {
         await waitForInput(convex, inputId);
       } catch (e: any) {
-        toast.error(e.message);
+        toast.error(errorMessage(e));
       }
     },
     [convex],
@@ -63,13 +65,13 @@ export default function InteractButton() {
   // if (!isAuthenticated || game === undefined) {
   //   return (
   //     <SignInButton>
-  //       <Button imgUrl={interactImg}>Interact</Button>
+  //       <Button imgUrl={interactImg}>{t("Interact")}</Button>
   //     </SignInButton>
   //   );
   // }
   return (
     <Button imgUrl={interactImg} onClick={joinOrLeaveGame}>
-      {isPlaying ? 'Leave' : 'Interact'}
+      {isPlaying ? t('Leave') : t('Interact')}
     </Button>
   );
 }

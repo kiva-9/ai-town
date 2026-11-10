@@ -1,5 +1,6 @@
+import { useI18n } from '../i18n';
 import { HistoricalTimeManager } from '@/hooks/useHistoricalTime';
-import { useEffect, useLayoutEffect, useRef, useState } from 'react';
+import { useEffect, useLayoutEffect, useState } from 'react';
 import uPlot, { AlignedData, Options } from 'uplot';
 
 const MAX_DATA_POINTS = 10000;
@@ -9,6 +10,7 @@ export function DebugTimeManager(props: {
   width: number;
   height: number;
 }) {
+  const { t, locale } = useI18n();
   const [plotElement, setPlotElement] = useState<HTMLDivElement | null>(null);
   const [plot, setPlot] = useState<uPlot>();
 
@@ -26,7 +28,7 @@ export function DebugTimeManager(props: {
           spanGaps: true,
           pxAlign: 0,
           points: { show: false },
-          label: 'Buffer health',
+          label: t('Buffer health'),
         },
       ],
       scales: {
@@ -50,7 +52,7 @@ export function DebugTimeManager(props: {
     const data: AlignedData = [[], []];
     const plot = new uPlot(opts, data, plotElement);
     setPlot(plot);
-  }, [plotElement, props.width, props.height]);
+  }, [plotElement, props.width, props.height, locale]);
 
   const timeManager = props.timeManager;
   const [intervals, setIntervals] = useState([...timeManager.intervals]);
@@ -86,9 +88,11 @@ export function DebugTimeManager(props: {
 
     intervalNode = (
       <div style={{ fontSize: '12px' }}>
-        {intervals.length} {intervals.length > 1 ? 'intervals' : 'interval'}:
+        {intervals.length} {t('intervals')}:
         <div style={{ fontSize: '9px', height: '48px' }}>
-          <p>Base: {toSeconds(baseAge)}s ago</p>
+          <p>
+            {t('Base:')} {toSeconds(baseAge)} {t('seconds ago')}
+          </p>
           {intervals.map((interval) => {
             const containsServerTs =
               timeManager.prevServerTs &&
@@ -96,7 +100,7 @@ export function DebugTimeManager(props: {
               timeManager.prevServerTs <= interval.endTs;
             let serverTs = null;
             if (containsServerTs) {
-              serverTs = ` (server: ${toSeconds((timeManager.prevServerTs ?? base) - base)})`;
+              serverTs = ` (${t('server')}: ${toSeconds((timeManager.prevServerTs ?? base) - base)})`;
             }
             return (
               <div
@@ -115,13 +119,21 @@ export function DebugTimeManager(props: {
   let statusNode: React.ReactNode | null = null;
   if (timeManager.latestEngineStatus) {
     const status = timeManager.latestEngineStatus;
-    let statusMsg = status.running ? 'Running' : 'Stopped';
+    const statusMsg = status.running ? t('Running') : t('Stopped');
     statusNode = (
       <div style={{ fontSize: '12px', paddingTop: '8px' }}>
-        <p>Generation number: {status.generationNumber}</p>
-        <p>Input number: {status.processedInputNumber}</p>
-        <p>Status: {statusMsg}</p>
-        <p>Client skew: {toSeconds(timeManager.clockSkew())}s</p>
+        <p>
+          {t('Generation number:')} {status.generationNumber}
+        </p>
+        <p>
+          {t('Input number:')} {status.processedInputNumber}
+        </p>
+        <p>
+          {t('Status:')} {statusMsg}
+        </p>
+        <p>
+          {t('Client skew:')} {toSeconds(timeManager.clockSkew())}s
+        </p>
       </div>
     );
   }
@@ -140,7 +152,7 @@ export function DebugTimeManager(props: {
         zIndex: 1,
       }}
     >
-      <div style={{ height: '20px', width: '100%', textAlign: 'center' }}>Engine stats</div>
+      <div style={{ height: '20px', width: '100%', textAlign: 'center' }}>{t('Engine stats')}</div>
       {statusNode}
       <div ref={setPlotElement} />
       {intervalNode}

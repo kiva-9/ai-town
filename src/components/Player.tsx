@@ -1,3 +1,4 @@
+import { useI18n } from '../i18n';
 import { Character } from './Character.tsx';
 import { orientationDegrees } from '../../convex/util/geometry.ts';
 import { characters } from '../../data/characters.ts';
@@ -29,6 +30,7 @@ export const Player = ({
   onClick: SelectElement;
   historicalTime?: number;
 }) => {
+  const { t } = useI18n();
   const playerCharacter = game.playerDescriptions.get(player.id)?.character;
   if (!playerCharacter) {
     throw new Error(`Player ${player.id} has no character`);
@@ -45,7 +47,7 @@ export const Player = ({
   if (!character) {
     if (!logged.has(playerCharacter)) {
       logged.add(playerCharacter);
-      toast.error(`Unknown character ${playerCharacter}`);
+      toast.error(t('Unknown character'));
     }
     return null;
   }

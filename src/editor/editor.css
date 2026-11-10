@@ -1,0 +1,18 @@
+body {
+  margin: 1rem;
+  color: #172337;
+  background: #f7f9fc;
+  font-family: system-ui, -apple-system, "PingFang SC", "Microsoft YaHei", "Noto Sans CJK SC", sans-serif;
+  line-height: 1.6;
+}
+header { display: flex; flex-wrap: wrap; align-items: center; gap: 0.75rem; margin-bottom: 1rem; }
+h1 { margin: 0; margin-right: auto; font-size: 1.4rem; }
+button, select, input { font: inherit; max-width: 100%; }
+button, select { padding: 0.3rem 0.7rem; }
+button, select, summary { cursor: pointer; }
+.tab { display: flex; flex-wrap: wrap; gap: 0.5rem; margin-bottom: 1rem; }
+.tabcontent { overflow: auto; }
+td { padding: 0.5rem; }
+details { margin: 1rem 0; max-width: 65rem; }
+canvas { display: block; }
+:focus-visible { outline: 3px solid #285ac9; outline-offset: 3px; }

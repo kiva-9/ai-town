@@ -13,11 +13,11 @@
 }
 
 .font-display {
-  font-family: 'Upheaval Pro', 'sans-serif';
+  font-family: var(--font-display);
 }
 
 .font-body {
-  font-family: 'VCR OSD Mono', 'monospace';
+  font-family: var(--font-body);
 }
 
 .font-system {
@@ -25,6 +25,9 @@
 }
 
 :root {
+  --font-cjk: 'Noto Sans CJK SC', 'Noto Sans SC', 'PingFang SC', 'Microsoft YaHei', 'WenQuanYi Micro Hei', system-ui, sans-serif;
+  --font-display: 'Upheaval Pro', var(--font-cjk);
+  --font-body: 'VCR OSD Mono', var(--font-cjk);
   --foreground-rgb: 0, 0, 0;
   --background-start-rgb: 214, 219, 220;
   --background-end-rgb: 255, 255, 255;
@@ -182,4 +185,23 @@ p[contenteditable='true']:empty::before {
 
 .shape-top-left-corner {
   clip-path: polygon(0 0, 100% 0, 0 100%);
+}
+
+/* Chinese glyphs use local CJK-capable fonts; preserve the original pixel frames and art. */
+html[lang='zh-CN'] {
+  --font-display: var(--font-cjk);
+  --font-body: var(--font-cjk);
+}
+html[lang='zh-CN'] body { line-height: 1.55; }
+html[lang='zh-CN'] .game-title { letter-spacing: 0.04em; }
+html[lang='zh-CN'] .button { min-height: 44px; height: auto; }
+html[lang='zh-CN'] .button span { transform: none; line-height: 1.35; }
+html[lang='zh-CN'] p,
+html[lang='zh-CN'] details,
+html[lang='zh-CN'] .bubble { overflow-wrap: anywhere; word-break: normal; line-break: strict; }
+html[lang='zh-CN'] .desc p { line-height: 1.6; }
+@media (max-width: 640px) {
+  html[lang='zh-CN'] .desc { border-width: 32px; }
+  html[lang='zh-CN'] .button { font-size: 15px; }
+  html[lang='zh-CN'] .game-frame { border-width: 22px; }
 }

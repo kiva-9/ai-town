@@ -1,3 +1,4 @@
+import { mockDialogue } from '../npc/language';
 import { v } from 'convex/values';
 import { internalAction } from '../_generated/server';
 import { WorldMap, serializedWorldMap } from './worldMap';
@@ -24,13 +25,14 @@ export const agentRememberConversation = internalAction({
     operationId: v.string(),
   },
   handler: async (ctx, args) => {
-    await rememberConversation(
-      ctx,
-      args.worldId,
-      args.agentId as GameId<'agents'>,
-      args.playerId as GameId<'players'>,
-      args.conversationId as GameId<'conversations'>,
-    );
+    if (process.env.NPC_DIALOGUE_MOCK !== 'true')
+      await rememberConversation(
+        ctx,
+        args.worldId,
+        args.agentId as GameId<'agents'>,
+        args.playerId as GameId<'players'>,
+        args.conversationId as GameId<'conversations'>,
+      );
     await sleep(Math.random() * 1000);
     await ctx.runMutation(api.aiTown.main.sendInput, {
       worldId: args.worldId,
@@ -69,13 +71,21 @@ export const agentGenerateMessage = internalAction({
       default:
         assertNever(args.type);
     }
-    const text = await completionFn(
-      ctx,
-      args.worldId,
-      args.conversationId as GameId<'conversations'>,
-      args.playerId as GameId<'players'>,
-      args.otherPlayerId as GameId<'players'>,
-    );
+    // Explicit offline dialogue fixtures keep the actual game playable without an LLM service.
+    // The original model/vector-memory path remains unchanged when this flag is off.
+    const text =
+      process.env.NPC_DIALOGUE_MOCK === 'true'
+        ? mockDialogue(
+            args.type,
+            (await ctx.runQuery(api.npc.service.languageSettings, {})).language,
+          )
+        : await completionFn(
+            ctx,
+            args.worldId,
+            args.conversationId as GameId<'conversations'>,
+            args.playerId as GameId<'players'>,
+            args.otherPlayerId as GameId<'players'>,
+          );
 
     await ctx.runMutation(internal.aiTown.agent.agentSendMessage, {
       worldId: args.worldId,
@@ -176,3 +186,18 @@ function wanderDestination(worldMap: WorldMap) {
     y: 1 + Math.floor(Math.random() * (worldMap.height - 2)),
   };
 }
+
+// Durable queue admission is asynchronous and never blocks the simulation tick.
+export const agentNpcDecision = internalAction({
+  args: {
+    worldId: v.id('worlds'),
+    agentId,
+    playerId,
+    operationId: v.string(),
+    event: v.any(),
+    context: v.any(),
+  },
+  handler: async (ctx, args) => {
+    await ctx.runMutation(internal.npc.service.enqueue, args);
+  },
+});

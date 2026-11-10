@@ -187,6 +187,23 @@ export class Conversation {
         )}`,
       );
     }
+    const rejectedPlayerId = [...this.participants.keys()].find((id) => id !== player.id);
+    const rejectedAgent = [...game.world.agents.values()].find(
+      (a) => a.playerId === rejectedPlayerId,
+    );
+    if (game.npcMode !== 'classic' && rejectedAgent && rejectedPlayerId)
+      game.scheduleOperation('npcSocialEvent', {
+        worldId: game.worldId,
+        agentId: rejectedAgent.id,
+        playerId: rejectedPlayerId,
+        event: {
+          id: `rejected:${this.id}:${rejectedPlayerId}`,
+          kind: 'rejected',
+          targetId: player.id,
+          at: now,
+          summary: 'A conversation invitation was declined.',
+        },
+      });
     this.stop(game, now);
   }
 
@@ -195,6 +212,24 @@ export class Conversation {
     for (const [playerId, member] of this.participants.entries()) {
       const agent = [...game.world.agents.values()].find((a) => a.playerId === playerId);
       if (agent) {
+        if (game.npcMode !== 'classic' && this.numMessages >= 2) {
+          const otherId = [...this.participants.keys()].find((id) => id !== playerId);
+          game.scheduleOperation('npcSocialEvent', {
+            worldId: game.worldId,
+            agentId: agent.id,
+            playerId,
+            event: {
+              id: `conversation:${this.id}:${playerId}`,
+              kind: 'relationship_changed',
+              targetId: otherId,
+              at: now,
+              positive: true,
+              magnitude: Math.min(1, this.numMessages / 6),
+              summary:
+                'Completed a shared conversation. This records contact, not inferred sentiment.',
+            },
+          });
+        }
         agent.lastConversation = now;
         agent.toRemember = this.id;
       }

@@ -1,0 +1,158 @@
+{
+  "validatedAt": "2026-11-09T09:48:33.779Z",
+  "canonicalBefore": [
+    {
+      "playerId": "p:0",
+      "name": "Lucky"
+    },
+    {
+      "playerId": "p:10",
+      "name": "Mira"
+    },
+    {
+      "playerId": "p:12",
+      "name": "Theo"
+    },
+    {
+      "playerId": "p:14",
+      "name": "June"
+    },
+    {
+      "playerId": "p:16",
+      "name": "Arun"
+    },
+    {
+      "playerId": "p:18",
+      "name": "Nora"
+    },
+    {
+      "playerId": "p:2",
+      "name": "Bob"
+    },
+    {
+      "playerId": "p:20",
+      "name": "Felix"
+    },
+    {
+      "playerId": "p:22",
+      "name": "Iris"
+    },
+    {
+      "playerId": "p:4",
+      "name": "Stella"
+    },
+    {
+      "playerId": "p:6",
+      "name": "Alice"
+    },
+    {
+      "playerId": "p:8",
+      "name": "Pete"
+    }
+  ],
+  "phases": [
+    {
+      "language": "zh-CN",
+      "newMatchingMessages": 5,
+      "samples": [
+        {
+          "author": "p:18",
+          "conversationId": "c:147",
+          "text": "【模拟对话】能一起聊一会儿真好。我还想继续四处看看。"
+        },
+        {
+          "author": "p:0",
+          "conversationId": "c:119",
+          "text": "【模拟对话】能一起聊一会儿真好。我还想继续四处看看。"
+        },
+        {
+          "author": "p:8",
+          "conversationId": "c:166",
+          "text": "【模拟对话】你好！今天在小镇里有什么新发现吗？"
+        }
+      ],
+      "agents": 12,
+      "players": 12,
+      "requests": 0,
+      "cost": 0
+    },
+    {
+      "language": "en",
+      "newMatchingMessages": 7,
+      "samples": [
+        {
+          "author": "p:20",
+          "conversationId": "c:166",
+          "text": "[Mock dialogue] It is good to spend a little time together. I will keep exploring."
+        },
+        {
+          "author": "p:18",
+          "conversationId": "c:147",
+          "text": "[Mock dialogue] Thanks for talking. I will see you around town!"
+        },
+        {
+          "author": "p:2",
+          "conversationId": "c:119",
+          "text": "[Mock dialogue] It is good to spend a little time together. I will keep exploring."
+        }
+      ],
+      "agents": 12,
+      "players": 12,
+      "requests": 0,
+      "cost": 0
+    }
+  ],
+  "restoredLanguage": "zh-CN",
+  "canonicalAfter": [
+    {
+      "playerId": "p:0",
+      "name": "Lucky"
+    },
+    {
+      "playerId": "p:10",
+      "name": "Mira"
+    },
+    {
+      "playerId": "p:12",
+      "name": "Theo"
+    },
+    {
+      "playerId": "p:14",
+      "name": "June"
+    },
+    {
+      "playerId": "p:16",
+      "name": "Arun"
+    },
+    {
+      "playerId": "p:18",
+      "name": "Nora"
+    },
+    {
+      "playerId": "p:2",
+      "name": "Bob"
+    },
+    {
+      "playerId": "p:20",
+      "name": "Felix"
+    },
+    {
+      "playerId": "p:22",
+      "name": "Iris"
+    },
+    {
+      "playerId": "p:4",
+      "name": "Stella"
+    },
+    {
+      "playerId": "p:6",
+      "name": "Alice"
+    },
+    {
+      "playerId": "p:8",
+      "name": "Pete"
+    }
+  ],
+  "canonicalUnchanged": true,
+  "graphicalBrowserVerified": false
+}
