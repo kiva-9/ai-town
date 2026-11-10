@@ -1,6 +1,28 @@
-# Architecture
+# AI Town architecture
 
-This documents dives into the high-level architecture of AI Town and its different layers. We'll
+[Project overview](README.en.md) · [中文首页](README.md) · [Hybrid NPC design](docs/HYBRID_ARCHITECTURE.md)
+
+## Enhanced fork: start here
+
+The original world engine described below is retained. This fork adds a separate layer in
+`convex/npc/`: persistent personalities and goals, directed relationships, bounded event memory,
+legal utility candidates, a durable decision queue and a validated Decisions API client. Its tables
+are `npcControl`, `npcStates` and `npcJobs`; new serialized agent fields are optional for old worlds.
+
+NPC actions still go through ordered engine inputs. Asynchronous selection does not modify the world
+directly: operation IDs, state versions, policy epochs, expiry and current target conditions are
+checked before applying a result. See [Hybrid NPC architecture](docs/HYBRID_ARCHITECTURE.md) for the
+full scheduling, memory, budget and security boundaries.
+
+The frontend adds an NPC inspector and per-browser Chinese/English localization. Shared NPC
+language is controlled separately, affecting future dialogue and memory generation. Classic bypasses
+the new decision policy, while the explicit Mock dialogue flag is independent of policy mode.
+[Validation](docs/VALIDATION.md) distinguishes offline and local-world checks from unverified live
+model behavior.
+
+## Original engine architecture
+
+This document dives into the high-level architecture of AI Town and its different layers. We'll
 first start with a brief overview and then go in-depth on each component. The overview should
 be sufficient for forking AI Town and changing game or agent behavior. Read on to the deep dives
 if you're interested or running up against the engine's limitations.
@@ -56,13 +78,14 @@ AI Town's data model has a few concepts:
 
 ### Schema
 
-There are three main categories of tables:
+There are four main categories of tables in this fork:
 
 1. Engine tables (`convex/engine/schema.ts`) for maintaining engine-internal state.
 2. Game tables (`convex/aiTown/schema.ts`) for game state. To keep game state small and efficient to
    read and write, we store AI Town's data model across a few tables. See `convex/aiTown/schema.ts` for an overview.
 3. Agent tables (`convex/agent/schema.ts`) for agent state. Agents can freely read and write to these tables
    within their actions.
+4. NPC policy tables (`convex/npc/schema.ts`) for persistent state, shared controls and durable jobs.
 
 ### Inputs (`convex/aiTown/inputs.ts`)
 
@@ -229,7 +252,7 @@ waits for the engine to process them and return their outcome.
 
 ## Agent architecture (`convex/agent`)
 
-### The agent loop (`convex/game/agents.ts`)
+### The agent loop (`convex/aiTown/agent.ts`)
 
 Agents will execute any game state changes, and schedule operations to do anything that requires
 a long-lived request or accessing non-game tables. The flow generally is:
@@ -249,7 +272,7 @@ a long-lived request or accessing non-game tables. The flow generally is:
    is trying to do one thing at a time.
 8. `Agent.tick` then can observe the new game state and continue to make decisions.
 
-### Conversations (`convex/agent/conversations.ts`)
+### Conversations (`convex/agent/conversation.ts`)
 
 The agent code calls into the conversation layer which implements the prompt engineering for
 injecting personality and memories into the GPT responses. It has functions for starting a

@@ -1,5 +1,6 @@
 {
   "name": "ai-town",
+  "description": "AI Town Enhanced: persistent hybrid NPCs, social memory, and Chinese/English interfaces.",
   "version": "0.0.0",
   "private": true,
   "scripts": {

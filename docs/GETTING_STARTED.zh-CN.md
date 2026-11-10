@@ -2,14 +2,15 @@
 
 这是 AI Town 的非官方增强版本，保留原版像素地图、移动、碰撞、对话和向量记忆。首次创建世界会生成 12 位居民。已有居民只添加中文译名和资料译文，不会创建另一套中文角色；所有底层 ID 保持不变。
 
-## 无 API Key 的完整本地体验
+[项目首页](../README.md) · [English](GETTING_STARTED.md) · [文档索引](README.md)
 
-需要 Node.js 20/22、npm，以及允许运行本地 Convex 后端的电脑。
+## 无模型 API Key 的本地 Mock 体验
+
+需要 Node.js 20/22、npm，以及允许运行本地 Convex 后端的电脑。克隆默认 `main` 分支即可。以下同时启用 Mock 决策和 Mock 对话，避免模型 API 调用；自行使用云托管等服务仍可能产生费用。
 
 ```sh
 git clone https://github.com/kiva-9/ai-town.git
 cd ai-town
-git checkout feature/hybrid-npc-intelligence
 npm ci
 ```
 
@@ -33,6 +34,12 @@ npm run dev:frontend
 打开 Vite 输出的地址，通常是 http://localhost:5173/ai-town/ 。点击居民即可查看人格、目标、情绪状态、关系、重要事件和最近决策。模拟对话有明确的“【模拟对话】”标记，不会产生 OpenAI 费用。
 
 本地 Convex 自动生成的 `.env.local` 需要包含正确的 `VITE_CONVEX_URL`。服务器密钥绝不能使用 `VITE_` 前缀，也不能提交 Git。
+
+## 本地后端无法启动时
+
+可参考[上游 Docker Compose / 自托管说明](UPSTREAM_README.md#using-docker-compose-with-self-hosted-convex)。托管 Convex 云项目也是可选方案，可能产生服务费用；本仓库不自动创建云资源。
+
+验收环境的 CLI 自动端口探测曾失败，后来使用官方自托管后端和显式端口完成本地运行。这是该环境的限制，不是必须使用第三方 fork。见 [VALIDATION.md](VALIDATION.md)。Docker/Fly.io/Vercel 的公开生产部署未在本次验收中测试。
 
 ## 中文和英文
 
@@ -63,18 +70,18 @@ npm run dev:frontend
 
 费用上限采用保守预约金额进行请求准入，不是供应商保证的硬性账单上限。建议同时配置 OpenAI 项目预算。暂停世界会阻止新决策，但已经发出的请求无法撤销费用。
 
-要启用真正的自然语言对话和向量记忆，请按原版 README 配置 LLM/embedding，再关闭 `NPC_DIALOGUE_MOCK`。如果 Ollama 负责聊天、OpenAI 只负责 Decisions，应显式设置 `LLM_PROVIDER=ollama`。如使用原版 OpenAI 聊天，初始化向量数据前先按上游要求配置 embedding 维数，不要直接修改已有向量库。
+要启用真正的自然语言对话和向量记忆，请按[上游 LLM 参考](UPSTREAM_README.md#connect-an-llm)配置 LLM/embedding，再关闭 `NPC_DIALOGUE_MOCK`。如果 Ollama 负责聊天、OpenAI 只负责 Decisions，应显式设置 `LLM_PROVIDER=ollama`。如使用原版 OpenAI 聊天，初始化向量数据前先按上游要求配置 embedding 维数，不要直接修改已有向量库。
 
 ## 测试和复现实验
 
 ```sh
-npm test -- --runInBand
-npm run build
-npm run lint
+npm run check
 npm run evaluate:npcs -- --seed 42 --steps 120 --out evaluation-output
 ```
 
 实验输出 JSON 和 Markdown，固定初始状态与事件序列。没有真实 API 时 Hybrid 明确标注为传统回退，不会据此宣称自然程度优于原版。
+
+`npm run check` 包含 Jest、编辑器语言测试、TypeScript/Vite 构建和 ESLint。CI 还会生成离线实验报告，不部署应用，也不使用模型密钥。
 
 真实接口冒烟测试需单独设置 `NPC_LIVE_SMOKE=1`、私有服务器密钥和已核实的单价，再运行 `npm run smoke:decisions`。它不在 CI 中自动执行。
 

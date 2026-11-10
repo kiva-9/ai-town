@@ -1,5 +1,11 @@
 # Hybrid NPC intelligence
 
+[Project overview](../README.en.md) · [World engine architecture](../ARCHITECTURE.md) · [Setup](GETTING_STARTED.md)
+
+## Current status
+
+Merged into `main`. Offline tests and local Mock-backed world checks are recorded in [VALIDATION.md](VALIDATION.md); no successful live Decisions call or real LLM quality evaluation is claimed. The original engine and the enhancements share one world, not separate Chinese and English populations.
+
 ## Four layers
 
 1. **World engine:** original paths, collision, conversations and ordered input execution.
