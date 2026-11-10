@@ -1,17 +1,18 @@
 # Run AI Town Enhanced
 
+[Project overview](../README.en.md) · [简体中文](GETTING_STARTED.zh-CN.md) · [Documentation](README.md)
+
 ## Requirements
 
-Node.js 20 or 22, npm, and a normal local environment that permits a local Convex backend. No OpenAI account or API key is needed for Mock. Keep the original MIT license and credits.
+Node.js 20 or 22, npm, and a normal local environment that permits a local Convex backend. No model API key is needed when both Mock decisions and Mock dialogue are enabled. Hosting charges may still apply if you choose a cloud service. Keep the original MIT license and credits. The default `main` branch contains the enhancements.
 
 ```sh
 git clone https://github.com/kiva-9/ai-town.git
 cd ai-town
-git checkout feature/hybrid-npc-intelligence
 npm ci
 ```
 
-## Cost-free, real Convex-backed game
+## Local Convex-backed game with Mock decisions and dialogue
 
 In terminal 1, start an account-free local development backend. This downloads the official Convex binary, deploys your functions, and writes local-only configuration:
 
@@ -42,7 +43,7 @@ The interface defaults to Simplified Chinese and stores its selection in the bro
 
 ### Alternative backend
 
-Use the original README's Docker Compose/self-hosted Convex instructions if your local CLI cannot start a backend. A managed cloud Convex project is also supported, but is optional and may have usage charges. No cloud service is provisioned by this repository.
+Use the [upstream Docker Compose/self-hosted reference](UPSTREAM_README.md#using-docker-compose-with-self-hosted-convex) if your local CLI cannot start a backend. A managed cloud Convex project is also supported, but is optional and may have usage charges. No cloud service is provisioned by this repository.
 
 In the development sandbox used for validation, automatic port detection was unavailable. An official self-hosted backend with explicit ports and the standard Convex action runtime was successfully used instead. This is an environment limitation, not a requirement to use a third-party fork. Details are in `VALIDATION.md`.
 
@@ -68,16 +69,16 @@ It makes one small request with Choice, Predicate and Score, no retries, and pri
 
 ### Real dialogue and vector memory
 
-Disable `NPC_DIALOGUE_MOCK` only after configuring the original LLM/embedding provider following the upstream README. Decisions and dialogue have separate responsibilities and costs. If you use Ollama for dialogue while supplying an OpenAI decision key, explicitly set `LLM_PROVIDER=ollama` so the original auto-detection does not switch providers. For original OpenAI dialogue, follow upstream's embedding-dimension instructions **before initializing vector data**; do not silently change dimensions in an existing database.
+Disable `NPC_DIALOGUE_MOCK` only after configuring the original LLM/embedding provider using the [upstream LLM reference](UPSTREAM_README.md#connect-an-llm). Decisions and dialogue have separate responsibilities and costs. If you use Ollama for dialogue while supplying an OpenAI decision key, explicitly set `LLM_PROVIDER=ollama` so the original auto-detection does not switch providers. For original OpenAI dialogue, follow upstream's embedding-dimension instructions **before initializing vector data**; do not silently change dimensions in an existing database.
 
 ## Verify and compare
 
 ```sh
-npm test -- --runInBand
-npm run build
-npm run lint
+npm run check
 npm run evaluate:npcs -- --seed 42 --steps 120 --out evaluation-output
 ```
+
+`npm run check` includes Jest, editor language tests, TypeScript/Vite build and ESLint. CI also generates the offline evaluation report; it does not deploy the app or require model keys.
 
 The last command writes JSON and Markdown with repeatable initial state/events. Its Hybrid strategy is explicitly labeled utility fallback when no live provider is supplied. It does not claim to prove subjective naturalness or emulate the full rendered world. See `EVALUATION.md`.
 
